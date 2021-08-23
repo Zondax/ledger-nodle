@@ -52,10 +52,6 @@ typedef struct {
 } pd_Period_V3_t;
 
 typedef struct {
-    uint8_t value;
-} pd_ProxyType_V3_t;
-
-typedef struct {
     pd_u32_t dependency_id;
     uint8_t weight;
     pd_bool_t is_exclusive;
@@ -67,22 +63,12 @@ typedef struct {
 } pd_Timepoint_V3_t;
 
 typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_TupleAccountIdData_V3_t;
+    pd_Call_t call;
+} pd_Amendment_V3_t;
 
 typedef struct {
-    // https://github.com/paritytech/substrate/blob/effe489951d1edab9d34846b1eefdfaf9511dab9/frame/identity/src/lib.rs#L276
-    pd_VecTupleDataData_t additional;
-    pd_Data_t display;
-    pd_Data_t legal;
-    pd_Data_t web;
-    pd_Data_t riot;
-    pd_Data_t email;
-    pd_Optionu8_array_20_t pgp_fingerprint;
-    pd_Data_t image;
-    pd_Data_t twitter;
-} pd_IdentityInfo_V3_t;
+    pd_Hash_t hash;
+} pd_CodeHash_V3_t;
 
 typedef struct {
     uint8_t value;
@@ -114,13 +100,11 @@ typedef struct {
 } pd_Priority_V3_t;
 
 typedef struct {
-    uint32_t value;
-} pd_AccountIndex_V3_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_Amendment_V3_t;
+    pd_BlockNumber_t start;
+    pd_BlockNumber_t period;
+    uint32_t period_count;
+    pd_Balance_t balance;
+} pd_VestingScheduleOf_V3_t;
 
 typedef struct {
     // TODO: Not implemented
@@ -129,17 +113,7 @@ typedef struct {
 
 typedef struct {
     const uint8_t* _ptr;
-} pd_CallHashOf_V3_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
 } pd_CertificateId_V3_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_CodeHash_V3_t;
 
 typedef compactInt_t pd_CompactMemberCount_V3_t;
 
@@ -147,24 +121,12 @@ typedef compactInt_t pd_CompactMoment_V3_t;
 
 typedef compactInt_t pd_CompactProposalIndex_V3_t;
 
-typedef compactInt_t pd_CompactRegistrarIndex_V3_t;
-
 typedef compactInt_t pd_CompactWeight_V3_t;
 
 typedef struct {
     // TODO: Not implemented
     uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
 } pd_GrandpaEquivocationProof_V3_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_IdentityFields_V3_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_IdentityJudgement_V3_t;
 
 typedef struct {
     // TODO: Not implemented
@@ -190,17 +152,8 @@ typedef struct {
 } pd_OptionPeriod_V3_t;
 
 typedef struct {
-    uint8_t some;
-    pd_ProxyType_V3_t contained;
-} pd_OptionProxyType_V3_t;
-
-typedef struct {
     uint32_t value;
 } pd_Perbill_V3_t;
-
-typedef struct {
-    uint32_t value;
-} pd_RegistrarIndex_V3_t;
 
 typedef struct {
     // TODO: Not implemented
@@ -228,17 +181,6 @@ typedef struct {
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
 } pd_VecKey_V3_t;
-
-typedef struct {
-    uint64_t _len;
-    const uint8_t* _ptr;
-    uint64_t _lenBuffer;
-} pd_VecTupleAccountIdData_V3_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_VestingScheduleOf_V3_t;
 
 typedef struct {
     uint64_t value;
