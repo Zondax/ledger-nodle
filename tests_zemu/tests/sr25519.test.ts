@@ -100,6 +100,7 @@ describe('SR25519', function () {
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true, 1)
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
+
       await sim.compareSnapshotsAndAccept('.', 's-show_address_reject_sr25519', 3, 2)
 
       const resp = await respRequest
