@@ -30,7 +30,7 @@ const defaultOptions = {
   ...DEFAULT_START_OPTIONS,
   logging: true,
   custom: `-s "${APP_SEED}"`,
-  X11: true,
+  X11: false,
 }
 
 jest.setTimeout(60000)
@@ -71,7 +71,7 @@ describe('SR25519', function () {
 
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true, 1)
       // Wait until we are not in the main menu
-      await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
+      await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot(), 15000)
 
       await sim.compareSnapshotsAndAccept('.', 's-show_address_sr25519', 2)
 
@@ -100,6 +100,7 @@ describe('SR25519', function () {
       const respRequest = app.getAddress(0x80000000, 0x80000000, 0x80000000, true, 1)
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
+
       await sim.compareSnapshotsAndAccept('.', 's-show_address_reject_sr25519', 3, 2)
 
       const resp = await respRequest
@@ -131,7 +132,7 @@ describe('SR25519', function () {
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
-      await sim.compareSnapshotsAndAccept('.', 's-sign_basic_normal', 5)
+      await sim.compareSnapshotsAndAccept('.', 's-sign_basic_normal', 4)
 
       const signatureResponse = await signatureRequest
       console.log(signatureResponse)
@@ -179,7 +180,7 @@ describe('SR25519', function () {
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
-      await sim.compareSnapshotsAndAccept('.', 's-sign_basic_expert', 12)
+      await sim.compareSnapshotsAndAccept('.', 's-sign_basic_expert', 10)
 
       const signatureResponse = await signatureRequest
       console.log(signatureResponse)
@@ -273,7 +274,7 @@ describe('SR25519', function () {
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
-      await sim.compareSnapshotsAndAccept('.', 's-sign_large_other', 7)
+      await sim.compareSnapshotsAndAccept('.', 's-sign_large_other', 6)
 
       const signatureResponse = await signatureRequest
       console.log(signatureResponse)

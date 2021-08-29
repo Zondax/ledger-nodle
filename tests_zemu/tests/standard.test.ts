@@ -169,7 +169,7 @@ describe('Standard', function () {
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
-      await sim.compareSnapshotsAndAccept('.', `${m.prefix.toLowerCase()}-sign_basic_normal`, 5)
+      await sim.compareSnapshotsAndAccept('.', `${m.prefix.toLowerCase()}-sign_basic_normal`, 4)
 
       const signatureResponse = await signatureRequest
       console.log(signatureResponse)
@@ -216,7 +216,7 @@ describe('Standard', function () {
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
-      await sim.compareSnapshotsAndAccept('.', `${m.prefix.toLowerCase()}-sign_basic_expert`, m.name === 'nanos' ? 12 : 12)
+      await sim.compareSnapshotsAndAccept('.', `${m.prefix.toLowerCase()}-sign_basic_expert`, m.name === 'nanos' ? 10 : 10)
 
       const signatureResponse = await signatureRequest
       console.log(signatureResponse)
@@ -257,7 +257,7 @@ describe('Standard', function () {
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
-      await sim.compareSnapshotsAndAccept('.', `${m.prefix.toLowerCase()}-sign_large_other`, m.name === 'nanos' ? 7 : 8)
+      await sim.compareSnapshotsAndAccept('.', `${m.prefix.toLowerCase()}-sign_large_other`, m.name === 'nanos' ? 6 : 7)
 
       const signatureResponse = await signatureRequest
       console.log(signatureResponse)
