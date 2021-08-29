@@ -117,86 +117,6 @@ typedef struct {
     pd_Signature_V3_t _signature;
 } pd_imonline_heartbeat_V3_t;
 
-#define PD_CALL_FINANCIALCOMMITTEE_SET_MEMBERS_V3 0
-typedef struct {
-    pd_VecAccountId_V3_t new_members;
-    pd_OptionAccountId_V3_t prime;
-    pd_MemberCount_V3_t old_count;
-} pd_financialcommittee_set_members_V3_t;
-
-#define PD_CALL_FINANCIALCOMMITTEE_EXECUTE_V3 1
-typedef struct {
-    pd_Proposal_t proposal;
-    pd_Compactu32_t length_bound;
-} pd_financialcommittee_execute_V3_t;
-
-#define PD_CALL_FINANCIALCOMMITTEE_PROPOSE_V3 2
-typedef struct {
-    pd_CompactMemberCount_V3_t threshold;
-    pd_Proposal_t proposal;
-    pd_Compactu32_t length_bound;
-} pd_financialcommittee_propose_V3_t;
-
-#define PD_CALL_FINANCIALCOMMITTEE_VOTE_V3 3
-typedef struct {
-    pd_Hash_t proposal;
-    pd_CompactProposalIndex_V3_t index;
-    pd_bool_t approve;
-} pd_financialcommittee_vote_V3_t;
-
-#define PD_CALL_FINANCIALCOMMITTEE_CLOSE_V3 4
-typedef struct {
-    pd_Hash_t proposal_hash;
-    pd_CompactProposalIndex_V3_t index;
-    pd_CompactWeight_V3_t proposal_weight_bound;
-    pd_Compactu32_t length_bound;
-} pd_financialcommittee_close_V3_t;
-
-#define PD_CALL_FINANCIALCOMMITTEE_DISAPPROVE_PROPOSAL_V3 5
-typedef struct {
-    pd_Hash_t proposal_hash;
-} pd_financialcommittee_disapprove_proposal_V3_t;
-
-#define PD_CALL_ROOTCOMMITTEE_SET_MEMBERS_V3 0
-typedef struct {
-    pd_VecAccountId_V3_t new_members;
-    pd_OptionAccountId_V3_t prime;
-    pd_MemberCount_V3_t old_count;
-} pd_rootcommittee_set_members_V3_t;
-
-#define PD_CALL_ROOTCOMMITTEE_EXECUTE_V3 1
-typedef struct {
-    pd_Proposal_t proposal;
-    pd_Compactu32_t length_bound;
-} pd_rootcommittee_execute_V3_t;
-
-#define PD_CALL_ROOTCOMMITTEE_PROPOSE_V3 2
-typedef struct {
-    pd_CompactMemberCount_V3_t threshold;
-    pd_Proposal_t proposal;
-    pd_Compactu32_t length_bound;
-} pd_rootcommittee_propose_V3_t;
-
-#define PD_CALL_ROOTCOMMITTEE_VOTE_V3 3
-typedef struct {
-    pd_Hash_t proposal;
-    pd_CompactProposalIndex_V3_t index;
-    pd_bool_t approve;
-} pd_rootcommittee_vote_V3_t;
-
-#define PD_CALL_ROOTCOMMITTEE_CLOSE_V3 4
-typedef struct {
-    pd_Hash_t proposal_hash;
-    pd_CompactProposalIndex_V3_t index;
-    pd_CompactWeight_V3_t proposal_weight_bound;
-    pd_Compactu32_t length_bound;
-} pd_rootcommittee_close_V3_t;
-
-#define PD_CALL_ROOTCOMMITTEE_DISAPPROVE_PROPOSAL_V3 5
-typedef struct {
-    pd_Hash_t proposal_hash;
-} pd_rootcommittee_disapprove_proposal_V3_t;
-
 #define PD_CALL_SCHEDULER_SCHEDULE_V3 0
 typedef struct {
     pd_BlockNumber_t when;
@@ -300,18 +220,6 @@ typedef union {
     pd_grandpa_note_stalled_V3_t grandpa_note_stalled_V3;
     pd_authorship_set_uncles_V3_t authorship_set_uncles_V3;
     pd_imonline_heartbeat_V3_t imonline_heartbeat_V3;
-    pd_financialcommittee_set_members_V3_t financialcommittee_set_members_V3;
-    pd_financialcommittee_execute_V3_t financialcommittee_execute_V3;
-    pd_financialcommittee_propose_V3_t financialcommittee_propose_V3;
-    pd_financialcommittee_vote_V3_t financialcommittee_vote_V3;
-    pd_financialcommittee_close_V3_t financialcommittee_close_V3;
-    pd_financialcommittee_disapprove_proposal_V3_t financialcommittee_disapprove_proposal_V3;
-    pd_rootcommittee_set_members_V3_t rootcommittee_set_members_V3;
-    pd_rootcommittee_execute_V3_t rootcommittee_execute_V3;
-    pd_rootcommittee_propose_V3_t rootcommittee_propose_V3;
-    pd_rootcommittee_vote_V3_t rootcommittee_vote_V3;
-    pd_rootcommittee_close_V3_t rootcommittee_close_V3;
-    pd_rootcommittee_disapprove_proposal_V3_t rootcommittee_disapprove_proposal_V3;
     pd_scheduler_schedule_V3_t scheduler_schedule_V3;
     pd_scheduler_cancel_V3_t scheduler_cancel_V3;
     pd_scheduler_schedule_named_V3_t scheduler_schedule_named_V3;
@@ -520,6 +428,46 @@ typedef struct {
 typedef struct {
 } pd_technicalmembership_clear_prime_V3_t;
 
+#define PD_CALL_FINANCIALCOMMITTEE_SET_MEMBERS_V3 0
+typedef struct {
+    pd_VecAccountId_V3_t new_members;
+    pd_OptionAccountId_V3_t prime;
+    pd_MemberCount_V3_t old_count;
+} pd_financialcommittee_set_members_V3_t;
+
+#define PD_CALL_FINANCIALCOMMITTEE_EXECUTE_V3 1
+typedef struct {
+    pd_Proposal_t proposal;
+    pd_Compactu32_t length_bound;
+} pd_financialcommittee_execute_V3_t;
+
+#define PD_CALL_FINANCIALCOMMITTEE_PROPOSE_V3 2
+typedef struct {
+    pd_CompactMemberCount_V3_t threshold;
+    pd_Proposal_t proposal;
+    pd_Compactu32_t length_bound;
+} pd_financialcommittee_propose_V3_t;
+
+#define PD_CALL_FINANCIALCOMMITTEE_VOTE_V3 3
+typedef struct {
+    pd_Hash_t proposal;
+    pd_CompactProposalIndex_V3_t index;
+    pd_bool_t approve;
+} pd_financialcommittee_vote_V3_t;
+
+#define PD_CALL_FINANCIALCOMMITTEE_CLOSE_V3 4
+typedef struct {
+    pd_Hash_t proposal_hash;
+    pd_CompactProposalIndex_V3_t index;
+    pd_CompactWeight_V3_t proposal_weight_bound;
+    pd_Compactu32_t length_bound;
+} pd_financialcommittee_close_V3_t;
+
+#define PD_CALL_FINANCIALCOMMITTEE_DISAPPROVE_PROPOSAL_V3 5
+typedef struct {
+    pd_Hash_t proposal_hash;
+} pd_financialcommittee_disapprove_proposal_V3_t;
+
 #define PD_CALL_FINANCIALMEMBERSHIP_ADD_MEMBER_V3 0
 typedef struct {
     pd_AccountId_V3_t who;
@@ -554,6 +502,46 @@ typedef struct {
 #define PD_CALL_FINANCIALMEMBERSHIP_CLEAR_PRIME_V3 6
 typedef struct {
 } pd_financialmembership_clear_prime_V3_t;
+
+#define PD_CALL_ROOTCOMMITTEE_SET_MEMBERS_V3 0
+typedef struct {
+    pd_VecAccountId_V3_t new_members;
+    pd_OptionAccountId_V3_t prime;
+    pd_MemberCount_V3_t old_count;
+} pd_rootcommittee_set_members_V3_t;
+
+#define PD_CALL_ROOTCOMMITTEE_EXECUTE_V3 1
+typedef struct {
+    pd_Proposal_t proposal;
+    pd_Compactu32_t length_bound;
+} pd_rootcommittee_execute_V3_t;
+
+#define PD_CALL_ROOTCOMMITTEE_PROPOSE_V3 2
+typedef struct {
+    pd_CompactMemberCount_V3_t threshold;
+    pd_Proposal_t proposal;
+    pd_Compactu32_t length_bound;
+} pd_rootcommittee_propose_V3_t;
+
+#define PD_CALL_ROOTCOMMITTEE_VOTE_V3 3
+typedef struct {
+    pd_Hash_t proposal;
+    pd_CompactProposalIndex_V3_t index;
+    pd_bool_t approve;
+} pd_rootcommittee_vote_V3_t;
+
+#define PD_CALL_ROOTCOMMITTEE_CLOSE_V3 4
+typedef struct {
+    pd_Hash_t proposal_hash;
+    pd_CompactProposalIndex_V3_t index;
+    pd_CompactWeight_V3_t proposal_weight_bound;
+    pd_Compactu32_t length_bound;
+} pd_rootcommittee_close_V3_t;
+
+#define PD_CALL_ROOTCOMMITTEE_DISAPPROVE_PROPOSAL_V3 5
+typedef struct {
+    pd_Hash_t proposal_hash;
+} pd_rootcommittee_disapprove_proposal_V3_t;
 
 #define PD_CALL_ROOTMEMBERSHIP_ADD_MEMBER_V3 0
 typedef struct {
@@ -833,6 +821,12 @@ typedef union {
     pd_technicalmembership_change_key_V3_t technicalmembership_change_key_V3;
     pd_technicalmembership_set_prime_V3_t technicalmembership_set_prime_V3;
     pd_technicalmembership_clear_prime_V3_t technicalmembership_clear_prime_V3;
+    pd_financialcommittee_set_members_V3_t financialcommittee_set_members_V3;
+    pd_financialcommittee_execute_V3_t financialcommittee_execute_V3;
+    pd_financialcommittee_propose_V3_t financialcommittee_propose_V3;
+    pd_financialcommittee_vote_V3_t financialcommittee_vote_V3;
+    pd_financialcommittee_close_V3_t financialcommittee_close_V3;
+    pd_financialcommittee_disapprove_proposal_V3_t financialcommittee_disapprove_proposal_V3;
     pd_financialmembership_add_member_V3_t financialmembership_add_member_V3;
     pd_financialmembership_remove_member_V3_t financialmembership_remove_member_V3;
     pd_financialmembership_swap_member_V3_t financialmembership_swap_member_V3;
@@ -840,6 +834,12 @@ typedef union {
     pd_financialmembership_change_key_V3_t financialmembership_change_key_V3;
     pd_financialmembership_set_prime_V3_t financialmembership_set_prime_V3;
     pd_financialmembership_clear_prime_V3_t financialmembership_clear_prime_V3;
+    pd_rootcommittee_set_members_V3_t rootcommittee_set_members_V3;
+    pd_rootcommittee_execute_V3_t rootcommittee_execute_V3;
+    pd_rootcommittee_propose_V3_t rootcommittee_propose_V3;
+    pd_rootcommittee_vote_V3_t rootcommittee_vote_V3;
+    pd_rootcommittee_close_V3_t rootcommittee_close_V3;
+    pd_rootcommittee_disapprove_proposal_V3_t rootcommittee_disapprove_proposal_V3;
     pd_rootmembership_add_member_V3_t rootmembership_add_member_V3;
     pd_rootmembership_remove_member_V3_t rootmembership_remove_member_V3;
     pd_rootmembership_swap_member_V3_t rootmembership_swap_member_V3;

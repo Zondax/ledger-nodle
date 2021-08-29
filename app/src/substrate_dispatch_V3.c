@@ -1099,22 +1099,22 @@ parser_error_t _readMethod_V3(
         CHECK_ERROR(_readMethod_technicalmembership_clear_prime_V3(c, &method->nested.technicalmembership_clear_prime_V3))
         break;
     case 4352: /* module 17 call 0 */
-        CHECK_ERROR(_readMethod_financialcommittee_set_members_V3(c, &method->basic.financialcommittee_set_members_V3))
+        CHECK_ERROR(_readMethod_financialcommittee_set_members_V3(c, &method->nested.financialcommittee_set_members_V3))
         break;
     case 4353: /* module 17 call 1 */
-        CHECK_ERROR(_readMethod_financialcommittee_execute_V3(c, &method->basic.financialcommittee_execute_V3))
+        CHECK_ERROR(_readMethod_financialcommittee_execute_V3(c, &method->nested.financialcommittee_execute_V3))
         break;
     case 4354: /* module 17 call 2 */
-        CHECK_ERROR(_readMethod_financialcommittee_propose_V3(c, &method->basic.financialcommittee_propose_V3))
+        CHECK_ERROR(_readMethod_financialcommittee_propose_V3(c, &method->nested.financialcommittee_propose_V3))
         break;
     case 4355: /* module 17 call 3 */
-        CHECK_ERROR(_readMethod_financialcommittee_vote_V3(c, &method->basic.financialcommittee_vote_V3))
+        CHECK_ERROR(_readMethod_financialcommittee_vote_V3(c, &method->nested.financialcommittee_vote_V3))
         break;
     case 4356: /* module 17 call 4 */
-        CHECK_ERROR(_readMethod_financialcommittee_close_V3(c, &method->basic.financialcommittee_close_V3))
+        CHECK_ERROR(_readMethod_financialcommittee_close_V3(c, &method->nested.financialcommittee_close_V3))
         break;
     case 4357: /* module 17 call 5 */
-        CHECK_ERROR(_readMethod_financialcommittee_disapprove_proposal_V3(c, &method->basic.financialcommittee_disapprove_proposal_V3))
+        CHECK_ERROR(_readMethod_financialcommittee_disapprove_proposal_V3(c, &method->nested.financialcommittee_disapprove_proposal_V3))
         break;
     case 4608: /* module 18 call 0 */
         CHECK_ERROR(_readMethod_financialmembership_add_member_V3(c, &method->nested.financialmembership_add_member_V3))
@@ -1138,22 +1138,22 @@ parser_error_t _readMethod_V3(
         CHECK_ERROR(_readMethod_financialmembership_clear_prime_V3(c, &method->nested.financialmembership_clear_prime_V3))
         break;
     case 4864: /* module 19 call 0 */
-        CHECK_ERROR(_readMethod_rootcommittee_set_members_V3(c, &method->basic.rootcommittee_set_members_V3))
+        CHECK_ERROR(_readMethod_rootcommittee_set_members_V3(c, &method->nested.rootcommittee_set_members_V3))
         break;
     case 4865: /* module 19 call 1 */
-        CHECK_ERROR(_readMethod_rootcommittee_execute_V3(c, &method->basic.rootcommittee_execute_V3))
+        CHECK_ERROR(_readMethod_rootcommittee_execute_V3(c, &method->nested.rootcommittee_execute_V3))
         break;
     case 4866: /* module 19 call 2 */
-        CHECK_ERROR(_readMethod_rootcommittee_propose_V3(c, &method->basic.rootcommittee_propose_V3))
+        CHECK_ERROR(_readMethod_rootcommittee_propose_V3(c, &method->nested.rootcommittee_propose_V3))
         break;
     case 4867: /* module 19 call 3 */
-        CHECK_ERROR(_readMethod_rootcommittee_vote_V3(c, &method->basic.rootcommittee_vote_V3))
+        CHECK_ERROR(_readMethod_rootcommittee_vote_V3(c, &method->nested.rootcommittee_vote_V3))
         break;
     case 4868: /* module 19 call 4 */
-        CHECK_ERROR(_readMethod_rootcommittee_close_V3(c, &method->basic.rootcommittee_close_V3))
+        CHECK_ERROR(_readMethod_rootcommittee_close_V3(c, &method->nested.rootcommittee_close_V3))
         break;
     case 4869: /* module 19 call 5 */
-        CHECK_ERROR(_readMethod_rootcommittee_disapprove_proposal_V3(c, &method->basic.rootcommittee_disapprove_proposal_V3))
+        CHECK_ERROR(_readMethod_rootcommittee_disapprove_proposal_V3(c, &method->nested.rootcommittee_disapprove_proposal_V3))
         break;
     case 5120: /* module 20 call 0 */
         CHECK_ERROR(_readMethod_rootmembership_add_member_V3(c, &method->nested.rootmembership_add_member_V3))
@@ -3533,17 +3533,17 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* financialcommittee_set_members_V3 - new_members */;
             return _toStringVecAccountId_V3(
-                &m->basic.financialcommittee_set_members_V3.new_members,
+                &m->nested.financialcommittee_set_members_V3.new_members,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* financialcommittee_set_members_V3 - prime */;
             return _toStringOptionAccountId_V3(
-                &m->basic.financialcommittee_set_members_V3.prime,
+                &m->nested.financialcommittee_set_members_V3.prime,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* financialcommittee_set_members_V3 - old_count */;
             return _toStringMemberCount_V3(
-                &m->basic.financialcommittee_set_members_V3.old_count,
+                &m->nested.financialcommittee_set_members_V3.old_count,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3553,12 +3553,12 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* financialcommittee_execute_V3 - proposal */;
             return _toStringProposal(
-                &m->basic.financialcommittee_execute_V3.proposal,
+                &m->nested.financialcommittee_execute_V3.proposal,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* financialcommittee_execute_V3 - length_bound */;
             return _toStringCompactu32(
-                &m->basic.financialcommittee_execute_V3.length_bound,
+                &m->nested.financialcommittee_execute_V3.length_bound,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3568,17 +3568,17 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* financialcommittee_propose_V3 - threshold */;
             return _toStringCompactMemberCount_V3(
-                &m->basic.financialcommittee_propose_V3.threshold,
+                &m->nested.financialcommittee_propose_V3.threshold,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* financialcommittee_propose_V3 - proposal */;
             return _toStringProposal(
-                &m->basic.financialcommittee_propose_V3.proposal,
+                &m->nested.financialcommittee_propose_V3.proposal,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* financialcommittee_propose_V3 - length_bound */;
             return _toStringCompactu32(
-                &m->basic.financialcommittee_propose_V3.length_bound,
+                &m->nested.financialcommittee_propose_V3.length_bound,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3588,17 +3588,17 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* financialcommittee_vote_V3 - proposal */;
             return _toStringHash(
-                &m->basic.financialcommittee_vote_V3.proposal,
+                &m->nested.financialcommittee_vote_V3.proposal,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* financialcommittee_vote_V3 - index */;
             return _toStringCompactProposalIndex_V3(
-                &m->basic.financialcommittee_vote_V3.index,
+                &m->nested.financialcommittee_vote_V3.index,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* financialcommittee_vote_V3 - approve */;
             return _toStringbool(
-                &m->basic.financialcommittee_vote_V3.approve,
+                &m->nested.financialcommittee_vote_V3.approve,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3608,22 +3608,22 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* financialcommittee_close_V3 - proposal_hash */;
             return _toStringHash(
-                &m->basic.financialcommittee_close_V3.proposal_hash,
+                &m->nested.financialcommittee_close_V3.proposal_hash,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* financialcommittee_close_V3 - index */;
             return _toStringCompactProposalIndex_V3(
-                &m->basic.financialcommittee_close_V3.index,
+                &m->nested.financialcommittee_close_V3.index,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* financialcommittee_close_V3 - proposal_weight_bound */;
             return _toStringCompactWeight_V3(
-                &m->basic.financialcommittee_close_V3.proposal_weight_bound,
+                &m->nested.financialcommittee_close_V3.proposal_weight_bound,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 3: /* financialcommittee_close_V3 - length_bound */;
             return _toStringCompactu32(
-                &m->basic.financialcommittee_close_V3.length_bound,
+                &m->nested.financialcommittee_close_V3.length_bound,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3633,7 +3633,7 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* financialcommittee_disapprove_proposal_V3 - proposal_hash */;
             return _toStringHash(
-                &m->basic.financialcommittee_disapprove_proposal_V3.proposal_hash,
+                &m->nested.financialcommittee_disapprove_proposal_V3.proposal_hash,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3713,17 +3713,17 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* rootcommittee_set_members_V3 - new_members */;
             return _toStringVecAccountId_V3(
-                &m->basic.rootcommittee_set_members_V3.new_members,
+                &m->nested.rootcommittee_set_members_V3.new_members,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* rootcommittee_set_members_V3 - prime */;
             return _toStringOptionAccountId_V3(
-                &m->basic.rootcommittee_set_members_V3.prime,
+                &m->nested.rootcommittee_set_members_V3.prime,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* rootcommittee_set_members_V3 - old_count */;
             return _toStringMemberCount_V3(
-                &m->basic.rootcommittee_set_members_V3.old_count,
+                &m->nested.rootcommittee_set_members_V3.old_count,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3733,12 +3733,12 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* rootcommittee_execute_V3 - proposal */;
             return _toStringProposal(
-                &m->basic.rootcommittee_execute_V3.proposal,
+                &m->nested.rootcommittee_execute_V3.proposal,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* rootcommittee_execute_V3 - length_bound */;
             return _toStringCompactu32(
-                &m->basic.rootcommittee_execute_V3.length_bound,
+                &m->nested.rootcommittee_execute_V3.length_bound,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3748,17 +3748,17 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* rootcommittee_propose_V3 - threshold */;
             return _toStringCompactMemberCount_V3(
-                &m->basic.rootcommittee_propose_V3.threshold,
+                &m->nested.rootcommittee_propose_V3.threshold,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* rootcommittee_propose_V3 - proposal */;
             return _toStringProposal(
-                &m->basic.rootcommittee_propose_V3.proposal,
+                &m->nested.rootcommittee_propose_V3.proposal,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* rootcommittee_propose_V3 - length_bound */;
             return _toStringCompactu32(
-                &m->basic.rootcommittee_propose_V3.length_bound,
+                &m->nested.rootcommittee_propose_V3.length_bound,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3768,17 +3768,17 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* rootcommittee_vote_V3 - proposal */;
             return _toStringHash(
-                &m->basic.rootcommittee_vote_V3.proposal,
+                &m->nested.rootcommittee_vote_V3.proposal,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* rootcommittee_vote_V3 - index */;
             return _toStringCompactProposalIndex_V3(
-                &m->basic.rootcommittee_vote_V3.index,
+                &m->nested.rootcommittee_vote_V3.index,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* rootcommittee_vote_V3 - approve */;
             return _toStringbool(
-                &m->basic.rootcommittee_vote_V3.approve,
+                &m->nested.rootcommittee_vote_V3.approve,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3788,22 +3788,22 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* rootcommittee_close_V3 - proposal_hash */;
             return _toStringHash(
-                &m->basic.rootcommittee_close_V3.proposal_hash,
+                &m->nested.rootcommittee_close_V3.proposal_hash,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* rootcommittee_close_V3 - index */;
             return _toStringCompactProposalIndex_V3(
-                &m->basic.rootcommittee_close_V3.index,
+                &m->nested.rootcommittee_close_V3.index,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* rootcommittee_close_V3 - proposal_weight_bound */;
             return _toStringCompactWeight_V3(
-                &m->basic.rootcommittee_close_V3.proposal_weight_bound,
+                &m->nested.rootcommittee_close_V3.proposal_weight_bound,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 3: /* rootcommittee_close_V3 - length_bound */;
             return _toStringCompactu32(
-                &m->basic.rootcommittee_close_V3.length_bound,
+                &m->nested.rootcommittee_close_V3.length_bound,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3813,7 +3813,7 @@ parser_error_t _getMethod_ItemValue_V3(
         switch (itemIdx) {
         case 0: /* rootcommittee_disapprove_proposal_V3 - proposal_hash */;
             return _toStringHash(
-                &m->basic.rootcommittee_disapprove_proposal_V3.proposal_hash,
+                &m->nested.rootcommittee_disapprove_proposal_V3.proposal_hash,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -4668,18 +4668,6 @@ bool _getMethod_IsNestingSupported_V3(uint8_t moduleIdx, uint8_t callIdx)
     case 2048: // ImOnline:Heartbeat
     case 3072: // Session:Set keys
     case 3073: // Session:Purge keys
-    case 4352: // FinancialCommittee:Set members
-    case 4353: // FinancialCommittee:Execute
-    case 4354: // FinancialCommittee:Propose
-    case 4355: // FinancialCommittee:Vote
-    case 4356: // FinancialCommittee:Close
-    case 4357: // FinancialCommittee:Disapprove proposal
-    case 4864: // RootCommittee:Set members
-    case 4865: // RootCommittee:Execute
-    case 4866: // RootCommittee:Propose
-    case 4867: // RootCommittee:Vote
-    case 4868: // RootCommittee:Close
-    case 4869: // RootCommittee:Disapprove proposal
     case 5376: // Scheduler:Schedule
     case 5377: // Scheduler:Cancel
     case 5378: // Scheduler:Schedule named
