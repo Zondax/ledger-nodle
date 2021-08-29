@@ -129,12 +129,12 @@ Empty
 
 | Name        | Light | XL | Nesting | Arguments | 
 | :---------- |:------------:|:--------:|:--------:|:--------|
-|set_members |    | :heavy_check_mark: |   | `Vec<AccountId>` new_members <br/>`Option<AccountId>` prime <br/>`MemberCount` old_count <br/> | 
-|execute |    | :heavy_check_mark: |   | `Proposal` proposal <br/>`Compact<u32>` length_bound <br/> | 
-|propose |    | :heavy_check_mark: |   | `Compact<MemberCount>` threshold <br/>`Proposal` proposal <br/>`Compact<u32>` length_bound <br/> | 
-|vote |    | :heavy_check_mark: |   | `Hash` proposal <br/>`Compact<ProposalIndex>` index <br/>`bool` approve <br/> | 
-|close |    | :heavy_check_mark: |   | `Hash` proposal_hash <br/>`Compact<ProposalIndex>` index <br/>`Compact<Weight>` proposal_weight_bound <br/>`Compact<u32>` length_bound <br/> | 
-|disapprove_proposal |    | :heavy_check_mark: |   | `Hash` proposal_hash <br/> | 
+|set_members |    | :heavy_check_mark: | :heavy_check_mark: | `Vec<AccountId>` new_members <br/>`Option<AccountId>` prime <br/>`MemberCount` old_count <br/> | 
+|execute |    | :heavy_check_mark: | :heavy_check_mark: | `Proposal` proposal <br/>`Compact<u32>` length_bound <br/> | 
+|propose |    | :heavy_check_mark: | :heavy_check_mark: | `Compact<MemberCount>` threshold <br/>`Proposal` proposal <br/>`Compact<u32>` length_bound <br/> | 
+|vote |    | :heavy_check_mark: | :heavy_check_mark: | `Hash` proposal <br/>`Compact<ProposalIndex>` index <br/>`bool` approve <br/> | 
+|close |    | :heavy_check_mark: | :heavy_check_mark: | `Hash` proposal_hash <br/>`Compact<ProposalIndex>` index <br/>`Compact<Weight>` proposal_weight_bound <br/>`Compact<u32>` length_bound <br/> | 
+|disapprove_proposal |    | :heavy_check_mark: | :heavy_check_mark: | `Hash` proposal_hash <br/> | 
 
 ## FinancialMembership
 
@@ -152,12 +152,12 @@ Empty
 
 | Name        | Light | XL | Nesting | Arguments | 
 | :---------- |:------------:|:--------:|:--------:|:--------|
-|set_members |    | :heavy_check_mark: |   | `Vec<AccountId>` new_members <br/>`Option<AccountId>` prime <br/>`MemberCount` old_count <br/> | 
-|execute |    | :heavy_check_mark: |   | `Proposal` proposal <br/>`Compact<u32>` length_bound <br/> | 
-|propose |    | :heavy_check_mark: |   | `Compact<MemberCount>` threshold <br/>`Proposal` proposal <br/>`Compact<u32>` length_bound <br/> | 
-|vote |    | :heavy_check_mark: |   | `Hash` proposal <br/>`Compact<ProposalIndex>` index <br/>`bool` approve <br/> | 
-|close |    | :heavy_check_mark: |   | `Hash` proposal_hash <br/>`Compact<ProposalIndex>` index <br/>`Compact<Weight>` proposal_weight_bound <br/>`Compact<u32>` length_bound <br/> | 
-|disapprove_proposal |    | :heavy_check_mark: |   | `Hash` proposal_hash <br/> | 
+|set_members |    | :heavy_check_mark: | :heavy_check_mark: | `Vec<AccountId>` new_members <br/>`Option<AccountId>` prime <br/>`MemberCount` old_count <br/> | 
+|execute |    | :heavy_check_mark: | :heavy_check_mark: | `Proposal` proposal <br/>`Compact<u32>` length_bound <br/> | 
+|propose |    | :heavy_check_mark: | :heavy_check_mark: | `Compact<MemberCount>` threshold <br/>`Proposal` proposal <br/>`Compact<u32>` length_bound <br/> | 
+|vote |    | :heavy_check_mark: | :heavy_check_mark: | `Hash` proposal <br/>`Compact<ProposalIndex>` index <br/>`bool` approve <br/> | 
+|close |    | :heavy_check_mark: | :heavy_check_mark: | `Hash` proposal_hash <br/>`Compact<ProposalIndex>` index <br/>`Compact<Weight>` proposal_weight_bound <br/>`Compact<u32>` length_bound <br/> | 
+|disapprove_proposal |    | :heavy_check_mark: | :heavy_check_mark: | `Hash` proposal_hash <br/> | 
 
 ## RootMembership
 
@@ -186,7 +186,7 @@ Empty
 
 | Name        | Light | XL | Nesting | Arguments | 
 | :---------- |:------------:|:--------:|:--------:|:--------|
-|propose |    |   |   | `Amendment` amendment <br/> | 
+|propose |    | :heavy_check_mark: | :heavy_check_mark: | `Amendment` amendment <br/> | 
 |veto |    | :heavy_check_mark: | :heavy_check_mark: | `u64` amendment_id <br/> | 
 
 ## Mandate
@@ -224,7 +224,7 @@ Empty
 | Name        | Light | XL | Nesting | Arguments | 
 | :---------- |:------------:|:--------:|:--------:|:--------|
 |claim |    | :heavy_check_mark: | :heavy_check_mark: |  | 
-|add_vesting_schedule |    |   |   | `LookupSource` dest <br/>`VestingScheduleOf` schedule <br/> | 
+|add_vesting_schedule |    | :heavy_check_mark: | :heavy_check_mark: | `LookupSource` dest <br/>`VestingScheduleOf` schedule <br/> | 
 |cancel_all_vesting_schedules |    | :heavy_check_mark: | :heavy_check_mark: | `LookupSource` who <br/>`LookupSource` funds_collector <br/>`bool` limit_to_free_balance <br/> | 
 
 ## Utility
