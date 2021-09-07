@@ -52,7 +52,7 @@ typedef enum {
 
 #define COIN_AMOUNT_DECIMAL_PLACES          12
 
-#define COIN_GENESIS_HASH                   "0000000000000000000000000000000000000000000000000000000000000000"
+#define COIN_GENESIS_HASH                   "a3d114c2b8d0627c1aa9b134eafcf7d05ca561fdc19fb388bb9457f81809fb23"
 #define COIN_NAME                           "Nodle"
 #define COIN_TICKER                         "NODL"
 
