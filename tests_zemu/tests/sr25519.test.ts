@@ -274,7 +274,7 @@ describe('SR25519', function () {
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
-      await sim.compareSnapshotsAndAccept('.', 's-sign_large_other', 6)
+      await sim.compareSnapshotsAndAccept('.', 's-sign_large_other', 5)
 
       const signatureResponse = await signatureRequest
       console.log(signatureResponse)
