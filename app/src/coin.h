@@ -21,6 +21,8 @@ extern "C" {
 
 #define CLA                  0x98
 
+#define COIN_ADDR_TYPE       37
+
 #define HDPATH_LEN_DEFAULT   5
 #define HDPATH_0_DEFAULT     (0x80000000 | 0x2c)
 #define HDPATH_1_DEFAULT     (0x80000000 | 0x3eb)       // 1003 - Nodle
@@ -44,17 +46,17 @@ typedef enum {
 } key_kind_e;
 
 // Coin Specific
-#define PK_ADDRESS_TYPE                     37
+#define PK_ADDRESS_TYPE                     COIN_ADDR_TYPE
 #define SUPPORTED_TX_VERSION_CURRENT        LEDGER_MAJOR_VERSION
 #define SUPPORTED_TX_VERSION_PREVIOUS       (LEDGER_MAJOR_VERSION - 1)
 #define SUPPORTED_SPEC_VERSION              (LEDGER_MINOR_VERSION + 0)
-#define SUPPORTED_MINIMUM_SPEC_VERSION      52
+#define SUPPORTED_MINIMUM_SPEC_VERSION      55
 
-#define COIN_AMOUNT_DECIMAL_PLACES          12
+#define COIN_AMOUNT_DECIMAL_PLACES          11
 
 #define COIN_GENESIS_HASH                   "a3d114c2b8d0627c1aa9b134eafcf7d05ca561fdc19fb388bb9457f81809fb23"
 #define COIN_NAME                           "Nodle"
-#define COIN_TICKER                         "NODL"
+#define COIN_TICKER                         "NODL "
 
 #define COIN_SECRET_REQUIRED_CLICKS         0
 
