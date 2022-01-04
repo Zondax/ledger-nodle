@@ -29,7 +29,7 @@ parser_error_t _readMethod(
     case 3:
         return _readMethod_V3(c, moduleIdx, callIdx, &method->V3);
     default:
-        return parser_not_supported;
+        return parser_tx_version_not_supported;
     }
 }
 
@@ -39,7 +39,7 @@ uint8_t _getMethod_NumItems(uint32_t transactionVersion, uint8_t moduleIdx, uint
     case 3:
         return _getMethod_NumItems_V3(moduleIdx, callIdx);
     default:
-        return parser_not_supported;
+        return parser_tx_version_not_supported;
     }
 }
 
@@ -82,7 +82,7 @@ parser_error_t _getMethod_ItemValue(uint32_t transactionVersion, pd_Method_t* m,
         return _getMethod_ItemValue_V3(&m->V3, moduleIdx, callIdx, itemIdx, outValue,
             outValueLen, pageIdx, pageCount);
     default:
-        return parser_not_supported;
+        return parser_tx_version_not_supported;
     }
 }
 

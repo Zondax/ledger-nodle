@@ -29,22 +29,15 @@ extern "C" {
 #define PD_CALL_SYSTEM_V3 0
 #define PD_CALL_TIMESTAMP_V3 1
 #define PD_CALL_BALANCES_V3 2
-#define PD_CALL_RANDOMNESSCOLLECTIVEFLIP_V3 4
-#define PD_CALL_BABE_V3 5
 #define PD_CALL_GRANDPA_V3 6
-#define PD_CALL_AUTHORSHIP_V3 7
-#define PD_CALL_IMONLINE_V3 8
-#define PD_CALL_OFFENCES_V3 9
 #define PD_CALL_VALIDATORSSET_V3 10
 #define PD_CALL_SESSION_V3 12
-#define PD_CALL_AUTHORITYDISCOVERY_V3 14
 #define PD_CALL_TECHNICALCOMMITTEE_V3 15
 #define PD_CALL_TECHNICALMEMBERSHIP_V3 16
 #define PD_CALL_FINANCIALCOMMITTEE_V3 17
 #define PD_CALL_FINANCIALMEMBERSHIP_V3 18
 #define PD_CALL_ROOTCOMMITTEE_V3 19
 #define PD_CALL_ROOTMEMBERSHIP_V3 20
-#define PD_CALL_SCHEDULER_V3 21
 #define PD_CALL_AMENDMENTS_V3 22
 #define PD_CALL_MANDATE_V3 23
 #define PD_CALL_COMPANYRESERVE_V3 24
@@ -76,96 +69,11 @@ typedef struct {
     pd_CompactMoment_V3_t now;
 } pd_timestamp_set_V3_t;
 
-#define PD_CALL_BABE_REPORT_EQUIVOCATION_V3 0
-typedef struct {
-    pd_BabeEquivocationProof_V3_t equivocation_proof;
-    pd_KeyOwnerProof_V3_t key_owner_proof;
-} pd_babe_report_equivocation_V3_t;
-
-#define PD_CALL_BABE_REPORT_EQUIVOCATION_UNSIGNED_V3 1
-typedef struct {
-    pd_BabeEquivocationProof_V3_t equivocation_proof;
-    pd_KeyOwnerProof_V3_t key_owner_proof;
-} pd_babe_report_equivocation_unsigned_V3_t;
-
-#define PD_CALL_GRANDPA_REPORT_EQUIVOCATION_V3 0
-typedef struct {
-    pd_GrandpaEquivocationProof_V3_t equivocation_proof;
-    pd_KeyOwnerProof_V3_t key_owner_proof;
-} pd_grandpa_report_equivocation_V3_t;
-
-#define PD_CALL_GRANDPA_REPORT_EQUIVOCATION_UNSIGNED_V3 1
-typedef struct {
-    pd_GrandpaEquivocationProof_V3_t equivocation_proof;
-    pd_KeyOwnerProof_V3_t key_owner_proof;
-} pd_grandpa_report_equivocation_unsigned_V3_t;
-
 #define PD_CALL_GRANDPA_NOTE_STALLED_V3 2
 typedef struct {
     pd_BlockNumber_t delay;
     pd_BlockNumber_t best_finalized_block_number;
 } pd_grandpa_note_stalled_V3_t;
-
-#define PD_CALL_AUTHORSHIP_SET_UNCLES_V3 0
-typedef struct {
-    pd_VecHeader_t new_uncles;
-} pd_authorship_set_uncles_V3_t;
-
-#define PD_CALL_IMONLINE_HEARTBEAT_V3 0
-typedef struct {
-    pd_Heartbeat_t heartbeat;
-    pd_Signature_V3_t _signature;
-} pd_imonline_heartbeat_V3_t;
-
-#define PD_CALL_SCHEDULER_SCHEDULE_V3 0
-typedef struct {
-    pd_BlockNumber_t when;
-    pd_OptionPeriod_V3_t maybe_periodic;
-    pd_Priority_V3_t priority;
-    pd_Call_t call;
-} pd_scheduler_schedule_V3_t;
-
-#define PD_CALL_SCHEDULER_CANCEL_V3 1
-typedef struct {
-    pd_BlockNumber_t when;
-    pd_u32_t index;
-} pd_scheduler_cancel_V3_t;
-
-#define PD_CALL_SCHEDULER_SCHEDULE_NAMED_V3 2
-typedef struct {
-    pd_Bytes_t id;
-    pd_BlockNumber_t when;
-    pd_OptionPeriod_V3_t maybe_periodic;
-    pd_Priority_V3_t priority;
-    pd_Call_t call;
-} pd_scheduler_schedule_named_V3_t;
-
-#define PD_CALL_SCHEDULER_CANCEL_NAMED_V3 3
-typedef struct {
-    pd_Bytes_t id;
-} pd_scheduler_cancel_named_V3_t;
-
-#define PD_CALL_SCHEDULER_SCHEDULE_AFTER_V3 4
-typedef struct {
-    pd_BlockNumber_t after;
-    pd_OptionPeriod_V3_t maybe_periodic;
-    pd_Priority_V3_t priority;
-    pd_Call_t call;
-} pd_scheduler_schedule_after_V3_t;
-
-#define PD_CALL_SCHEDULER_SCHEDULE_NAMED_AFTER_V3 5
-typedef struct {
-    pd_Bytes_t id;
-    pd_BlockNumber_t after;
-    pd_OptionPeriod_V3_t maybe_periodic;
-    pd_Priority_V3_t priority;
-    pd_Call_t call;
-} pd_scheduler_schedule_named_after_V3_t;
-
-#define PD_CALL_CONTRACTS_UPDATE_SCHEDULE_V3 0
-typedef struct {
-    pd_Schedule_V3_t schedule;
-} pd_contracts_update_schedule_V3_t;
 
 #define PD_CALL_CONTRACTS_CALL_V3 1
 typedef struct {
@@ -213,20 +121,7 @@ typedef union {
     pd_session_purge_keys_V3_t session_purge_keys_V3;
 #ifdef SUBSTRATE_PARSER_FULL
     pd_timestamp_set_V3_t timestamp_set_V3;
-    pd_babe_report_equivocation_V3_t babe_report_equivocation_V3;
-    pd_babe_report_equivocation_unsigned_V3_t babe_report_equivocation_unsigned_V3;
-    pd_grandpa_report_equivocation_V3_t grandpa_report_equivocation_V3;
-    pd_grandpa_report_equivocation_unsigned_V3_t grandpa_report_equivocation_unsigned_V3;
     pd_grandpa_note_stalled_V3_t grandpa_note_stalled_V3;
-    pd_authorship_set_uncles_V3_t authorship_set_uncles_V3;
-    pd_imonline_heartbeat_V3_t imonline_heartbeat_V3;
-    pd_scheduler_schedule_V3_t scheduler_schedule_V3;
-    pd_scheduler_cancel_V3_t scheduler_cancel_V3;
-    pd_scheduler_schedule_named_V3_t scheduler_schedule_named_V3;
-    pd_scheduler_cancel_named_V3_t scheduler_cancel_named_V3;
-    pd_scheduler_schedule_after_V3_t scheduler_schedule_after_V3;
-    pd_scheduler_schedule_named_after_V3_t scheduler_schedule_named_after_V3;
-    pd_contracts_update_schedule_V3_t contracts_update_schedule_V3;
     pd_contracts_call_V3_t contracts_call_V3;
     pd_contracts_instantiate_with_code_V3_t contracts_instantiate_with_code_V3;
     pd_contracts_instantiate_V3_t contracts_instantiate_V3;
@@ -282,27 +177,6 @@ typedef struct {
 typedef struct {
     pd_Bytes_t code;
 } pd_system_set_code_without_checks_V3_t;
-
-#define PD_CALL_SYSTEM_SET_CHANGES_TRIE_CONFIG_V3 5
-typedef struct {
-    pd_OptionChangesTrieConfiguration_V3_t changes_trie_config;
-} pd_system_set_changes_trie_config_V3_t;
-
-#define PD_CALL_SYSTEM_SET_STORAGE_V3 6
-typedef struct {
-    pd_VecKeyValue_V3_t items;
-} pd_system_set_storage_V3_t;
-
-#define PD_CALL_SYSTEM_KILL_STORAGE_V3 7
-typedef struct {
-    pd_VecKey_V3_t keys;
-} pd_system_kill_storage_V3_t;
-
-#define PD_CALL_SYSTEM_KILL_PREFIX_V3 8
-typedef struct {
-    pd_Key_V3_t prefix;
-    pd_u32_t _subkeys;
-} pd_system_kill_prefix_V3_t;
 
 #define PD_CALL_BALANCES_SET_BALANCE_V3 1
 typedef struct {
@@ -658,11 +532,11 @@ typedef struct {
     pd_bool_t limit_to_free_balance;
 } pd_vesting_cancel_all_vesting_schedules_V3_t;
 
-#define PD_CALL_UTILITY_AS_DERIVATIVE_V3 1
+#define PD_CALL_VESTING_OVERWRITE_VESTING_SCHEDULES_V3 3
 typedef struct {
-    pd_u16_t index;
-    pd_Call_t call;
-} pd_utility_as_derivative_V3_t;
+    pd_LookupSource_V3_t who;
+    pd_VecVestingScheduleOf_V3_t new_schedules;
+} pd_vesting_overwrite_vesting_schedules_V3_t;
 
 #define PD_CALL_MULTISIG_AS_MULTI_THRESHOLD_1_V3 0
 typedef struct {
@@ -685,7 +559,7 @@ typedef struct {
     pd_u16_t threshold;
     pd_VecAccountId_V3_t other_signatories;
     pd_OptionTimepoint_V3_t maybe_timepoint;
-    pd_u8_array_32_V3_t call_hash;
+    pd_H256_t call_hash;
     pd_Weight_V3_t max_weight;
 } pd_multisig_approve_as_multi_V3_t;
 
@@ -694,7 +568,7 @@ typedef struct {
     pd_u16_t threshold;
     pd_VecAccountId_V3_t other_signatories;
     pd_Timepoint_V3_t timepoint;
-    pd_u8_array_32_V3_t call_hash;
+    pd_H256_t call_hash;
 } pd_multisig_cancel_as_multi_V3_t;
 
 #define PD_CALL_PKITCR_APPLY_V3 0
@@ -795,10 +669,6 @@ typedef union {
     pd_system_set_heap_pages_V3_t system_set_heap_pages_V3;
     pd_system_set_code_V3_t system_set_code_V3;
     pd_system_set_code_without_checks_V3_t system_set_code_without_checks_V3;
-    pd_system_set_changes_trie_config_V3_t system_set_changes_trie_config_V3;
-    pd_system_set_storage_V3_t system_set_storage_V3;
-    pd_system_kill_storage_V3_t system_kill_storage_V3;
-    pd_system_kill_prefix_V3_t system_kill_prefix_V3;
     pd_balances_set_balance_V3_t balances_set_balance_V3;
     pd_balances_force_transfer_V3_t balances_force_transfer_V3;
     pd_validatorsset_add_member_V3_t validatorsset_add_member_V3;
@@ -862,7 +732,7 @@ typedef union {
     pd_vesting_claim_V3_t vesting_claim_V3;
     pd_vesting_add_vesting_schedule_V3_t vesting_add_vesting_schedule_V3;
     pd_vesting_cancel_all_vesting_schedules_V3_t vesting_cancel_all_vesting_schedules_V3;
-    pd_utility_as_derivative_V3_t utility_as_derivative_V3;
+    pd_vesting_overwrite_vesting_schedules_V3_t vesting_overwrite_vesting_schedules_V3;
     pd_multisig_as_multi_threshold_1_V3_t multisig_as_multi_threshold_1_V3;
     pd_multisig_as_multi_V3_t multisig_as_multi_V3;
     pd_multisig_approve_as_multi_V3_t multisig_approve_as_multi_V3;

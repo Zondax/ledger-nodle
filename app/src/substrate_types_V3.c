@@ -21,6 +21,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <zxformat.h>
 #include <zxmacros.h>
 
 parser_error_t _readCompactMemberCount_V3(parser_context_t* c, pd_CompactMemberCount_V3_t* v)
@@ -196,10 +197,6 @@ parser_error_t _readWeight_V3(parser_context_t* c, pd_Weight_V3_t* v)
     return _readUInt64(c, &v->value);
 }
 
-parser_error_t _readu8_array_32_V3(parser_context_t* c, pd_u8_array_32_V3_t* v) {
-    GEN_DEF_READARRAY(32)
-}
-
 parser_error_t _readVecAccountId_V3(parser_context_t* c, pd_VecAccountId_V3_t* v) {
     GEN_DEF_READVECTOR(AccountId_V3)
 }
@@ -210,6 +207,10 @@ parser_error_t _readVecKeyValue_V3(parser_context_t* c, pd_VecKeyValue_V3_t* v) 
 
 parser_error_t _readVecKey_V3(parser_context_t* c, pd_VecKey_V3_t* v) {
     GEN_DEF_READVECTOR(Key_V3)
+}
+
+parser_error_t _readVecVestingScheduleOf_V3(parser_context_t* c, pd_VecVestingScheduleOf_V3_t* v) {
+    GEN_DEF_READVECTOR(VestingScheduleOf_V3)
 }
 
 parser_error_t _readOptionAccountId_V3(parser_context_t* c, pd_OptionAccountId_V3_t* v)
@@ -259,7 +260,7 @@ parser_error_t _toStringCompactMemberCount_V3(
     uint8_t pageIdx,
     uint8_t* pageCount)
 {
-    return _toStringCompactInt(v, 0, 0, "", outValue, outValueLen, pageIdx, pageCount);
+    return _toStringCompactInt(v, 0, "", "", outValue, outValueLen, pageIdx, pageCount);
 }
 
 parser_error_t _toStringCompactMoment_V3(
@@ -269,7 +270,7 @@ parser_error_t _toStringCompactMoment_V3(
     uint8_t pageIdx,
     uint8_t* pageCount)
 {
-    return _toStringCompactInt(v, 0, 0, "", outValue, outValueLen, pageIdx, pageCount);
+    return _toStringCompactInt(v, 0, "", "", outValue, outValueLen, pageIdx, pageCount);
 }
 
 parser_error_t _toStringCompactProposalIndex_V3(
@@ -279,7 +280,7 @@ parser_error_t _toStringCompactProposalIndex_V3(
     uint8_t pageIdx,
     uint8_t* pageCount)
 {
-    return _toStringCompactInt(v, 0, 0, "", outValue, outValueLen, pageIdx, pageCount);
+    return _toStringCompactInt(v, 0, "", "", outValue, outValueLen, pageIdx, pageCount);
 }
 
 parser_error_t _toStringCompactWeight_V3(
@@ -289,7 +290,7 @@ parser_error_t _toStringCompactWeight_V3(
     uint8_t pageIdx,
     uint8_t* pageCount)
 {
-    return _toStringCompactInt(v, 0, 0, "", outValue, outValueLen, pageIdx, pageCount);
+    return _toStringCompactInt(v, 0, "", "", outValue, outValueLen, pageIdx, pageCount);
 }
 
 parser_error_t _toStringAccountId_V3(
@@ -381,7 +382,7 @@ parser_error_t _toStringCompactAccountIndex_V3(
     uint8_t pageIdx,
     uint8_t* pageCount)
 {
-    return _toStringCompactInt(&v->value, 0, 0, "", outValue, outValueLen, pageIdx, pageCount);
+    return _toStringCompactInt(&v->value, 0, "", "", outValue, outValueLen, pageIdx, pageCount);
 }
 
 parser_error_t _toStringGrandpaEquivocationProof_V3(
@@ -501,9 +502,9 @@ parser_error_t _toStringPerbill_V3(
 {
     char bufferUI[100];
     char ratioBuffer[80];
-    MEMSET(outValue, 0, outValueLen);
-    MEMSET(ratioBuffer, 0, sizeof(ratioBuffer));
-    MEMSET(bufferUI, 0, sizeof(bufferUI));
+    memset(outValue, 0, outValueLen);
+    memset(ratioBuffer, 0, sizeof(ratioBuffer));
+    memset(bufferUI, 0, sizeof(bufferUI));
     *pageCount = 1;
 
     if (fpuint64_to_str(ratioBuffer, sizeof(ratioBuffer), v->value, 7) == 0) {
@@ -712,15 +713,6 @@ parser_error_t _toStringWeight_V3(
     return _toStringu64(&v->value, outValue, outValueLen, pageIdx, pageCount);
 }
 
-parser_error_t _toStringu8_array_32_V3(
-    const pd_u8_array_32_V3_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount) {
-    GEN_DEF_TOSTRING_ARRAY(32)
-}
-
 parser_error_t _toStringVecAccountId_V3(
     const pd_VecAccountId_V3_t* v,
     char* outValue,
@@ -749,6 +741,16 @@ parser_error_t _toStringVecKey_V3(
     uint8_t* pageCount)
 {
     GEN_DEF_TOSTRING_VECTOR(Key_V3);
+}
+
+parser_error_t _toStringVecVestingScheduleOf_V3(
+    const pd_VecVestingScheduleOf_V3_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    GEN_DEF_TOSTRING_VECTOR(VestingScheduleOf_V3);
 }
 
 parser_error_t _toStringOptionAccountId_V3(

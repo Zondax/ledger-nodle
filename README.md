@@ -1,14 +1,16 @@
 # Ledger Nodle App
+
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CircleCI](https://circleci.com/gh/Zondax/ledger-nodle.svg?style=shield)](https://circleci.com/gh/Zondax/ledger-nodle)
 
--------------------
+---
 
 ![zondax](docs/zondax.jpg)
 
 _Please visit our website at [zondax.ch](zondax.ch)_
 
-------------------
+---
+
 This project contains the Nodle app (https://nodle.network/) for Ledger Nano S and X.
 
 - Ledger Nano S/X BOLOS app
@@ -25,8 +27,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-
-# Nodle  3.53.x
+# Nodle  3.55.x
 
 ## System
 
@@ -254,6 +255,7 @@ Empty
 |claim |    | :heavy_check_mark: | :heavy_check_mark: |  | 
 |add_vesting_schedule |    | :heavy_check_mark: | :heavy_check_mark: | `LookupSource` dest <br/>`VestingScheduleOf` schedule <br/> | 
 |cancel_all_vesting_schedules |    | :heavy_check_mark: | :heavy_check_mark: | `LookupSource` who <br/>`LookupSource` funds_collector <br/>`bool` limit_to_free_balance <br/> | 
+|overwrite_vesting_schedules |    | :heavy_check_mark: | :heavy_check_mark: | `LookupSource` who <br/>`Vec<VestingScheduleOf>` new_schedules <br/> | 
 
 ## Utility
 

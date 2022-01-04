@@ -59,9 +59,9 @@ parser_error_t _readTimepoint_V3(parser_context_t* c, pd_Timepoint_V3_t* v);
 parser_error_t _readVecAccountId_V3(parser_context_t* c, pd_VecAccountId_V3_t* v);
 parser_error_t _readVecKeyValue_V3(parser_context_t* c, pd_VecKeyValue_V3_t* v);
 parser_error_t _readVecKey_V3(parser_context_t* c, pd_VecKey_V3_t* v);
+parser_error_t _readVecVestingScheduleOf_V3(parser_context_t* c, pd_VecVestingScheduleOf_V3_t* v);
 parser_error_t _readVestingScheduleOf_V3(parser_context_t* c, pd_VestingScheduleOf_V3_t* v);
 parser_error_t _readWeight_V3(parser_context_t* c, pd_Weight_V3_t* v);
-parser_error_t _readu8_array_32_V3(parser_context_t* c, pd_u8_array_32_V3_t* v);
 
 // toString functions
 parser_error_t _toStringAccountId_V3(
@@ -295,6 +295,13 @@ parser_error_t _toStringVecKey_V3(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
+parser_error_t _toStringVecVestingScheduleOf_V3(
+    const pd_VecVestingScheduleOf_V3_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
 parser_error_t _toStringVestingScheduleOf_V3(
     const pd_VestingScheduleOf_V3_t* v,
     char* outValue,
@@ -304,13 +311,6 @@ parser_error_t _toStringVestingScheduleOf_V3(
 
 parser_error_t _toStringWeight_V3(
     const pd_Weight_V3_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringu8_array_32_V3(
-    const pd_u8_array_32_V3_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,

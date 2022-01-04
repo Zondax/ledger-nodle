@@ -360,6 +360,7 @@ static const char* STR_ME_REVOKE_SLOT = "Revoke slot";
 static const char* STR_ME_REVOKE_CHILD = "Revoke child";
 static const char* STR_ME_TOGGLE = "Toggle";
 static const char* STR_ME_ALLOCATE = "Allocate";
+static const char* STR_ME_OVERWRITE_VESTING_SCHEDULES = "Overwrite vesting schedules";
 
 // Items names
 static const char* STR_IT__ratio = "Ratio";
@@ -547,6 +548,7 @@ static const char* STR_IT_supporting = "Supporting";
 static const char* STR_IT_certificate_id = "Certificate id";
 static const char* STR_IT_root = "Root";
 static const char* STR_IT_child = "Child";
+static const char* STR_IT_new_schedules = "New schedules";
 
 #ifdef __cplusplus
 }
