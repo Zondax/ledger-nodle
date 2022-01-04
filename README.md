@@ -1,7 +1,7 @@
 # Ledger Nodle App
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![CircleCI](https://circleci.com/gh/Zondax/ledger-nodle.svg?style=shield)](https://circleci.com/gh/Zondax/ledger-nodle)
+[![GithubActions](https://github.com/zondax/ledger-nodle/actions/workflows/main.yml/badge.svg)](https://github.com/Zondax/ledger-nodle/blob/main/.github/workflows/main.yaml)
 
 ---
 
