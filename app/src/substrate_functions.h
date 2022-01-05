@@ -43,6 +43,7 @@ parser_error_t _readBalanceOf(parser_context_t* c, pd_BalanceOf_t* v);
 parser_error_t _readProposal(parser_context_t* c, pd_Proposal_t* v);
 parser_error_t _readVecCall(parser_context_t* c, pd_VecCall_t* v);
 parser_error_t _readCompactBalanceOf(parser_context_t* c, pd_CompactBalanceOf_t* v);
+parser_error_t _readH256(parser_context_t* c, pd_H256_t* v);
 parser_error_t _readHeartbeat(parser_context_t* c, pd_Heartbeat_t* v);
 parser_error_t _readVecHeader(parser_context_t* c, pd_VecHeader_t* v);
 
@@ -92,6 +93,13 @@ parser_error_t _toStringBlockNumber(
 
 parser_error_t _toStringCompactu32(
     const pd_Compactu32_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringCompactu64(
+    const pd_Compactu64_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -155,6 +163,13 @@ parser_error_t _toStringVecCall(
 
 parser_error_t _toStringCompactBalanceOf(
     const pd_CompactBalanceOf_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringH256(
+    const pd_H256_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,

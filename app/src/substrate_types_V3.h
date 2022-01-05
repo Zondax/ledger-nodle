@@ -63,6 +63,13 @@ typedef struct {
 } pd_Timepoint_V3_t;
 
 typedef struct {
+    pd_BlockNumber_t start;
+    pd_BlockNumber_t period;
+    uint32_t period_count;
+    pd_Balance_t balance;
+} pd_VestingScheduleOf_V3_t;
+
+typedef struct {
     pd_Call_t call;
 } pd_Amendment_V3_t;
 
@@ -100,11 +107,10 @@ typedef struct {
 } pd_Priority_V3_t;
 
 typedef struct {
-    pd_BlockNumber_t start;
-    pd_BlockNumber_t period;
-    uint32_t period_count;
-    pd_Balance_t balance;
-} pd_VestingScheduleOf_V3_t;
+    uint64_t _len;
+    const uint8_t* _ptr;
+    uint64_t _lenBuffer;
+} pd_VecVestingScheduleOf_V3_t;
 
 typedef struct {
     // TODO: Not implemented
@@ -185,10 +191,6 @@ typedef struct {
 typedef struct {
     uint64_t value;
 } pd_Weight_V3_t;
-
-typedef struct {
-    const uint8_t* _ptr;
-} pd_u8_array_32_V3_t;
 
 #ifdef __cplusplus
 }

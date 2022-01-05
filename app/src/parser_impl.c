@@ -15,6 +15,7 @@
 ********************************************************************************/
 
 #include <zxmacros.h>
+#include <zxformat.h>
 #include "parser_impl.h"
 #include "parser_txdef.h"
 #include "coin.h"
@@ -83,6 +84,8 @@ const char *parser_getErrorDescription(parser_error_t err) {
             return "Unexpected unparsed bytes";
         case parser_print_not_supported:
             return "Value cannot be printed";
+        case parser_tx_nesting_not_supported:
+            return "Call nesting not supported";
         case parser_tx_nesting_limit_reached:
             return "Max nested calls reached";
     case parser_tx_call_vec_too_large:
@@ -186,7 +189,7 @@ parser_error_t _getValue(const compactInt_t *c, uint64_t *v) {
 
 parser_error_t _toStringCompactInt(const compactInt_t *c,
                                    uint8_t decimalPlaces,
-                                   char postfix,
+                                   char postfix[],
                                    char prefix[],
                                    char *outValue, uint16_t outValueLen,
                                    uint8_t pageIdx, uint8_t *pageCount) {
@@ -216,23 +219,8 @@ parser_error_t _toStringCompactInt(const compactInt_t *c,
         return parser_unexpected_value;
     }
 
-    // Add prefix
-    if (strlen(prefix) > 0) {
-        size_t size = strlen(bufferUI) + strlen(prefix) + 2;
-        char _tmpBuffer[200];
-        MEMZERO(_tmpBuffer, sizeof(_tmpBuffer));
-        strcat(_tmpBuffer, prefix);
-        strcat(_tmpBuffer, " ");
-        strcat(_tmpBuffer, bufferUI);
-        // print length: strlen(value) + strlen(prefix) + strlen(" ") + strlen("\0")
-        MEMZERO(bufferUI, sizeof(bufferUI));
-        snprintf(bufferUI, size, "%s", _tmpBuffer);
-    }
-
-    // Add postfix
-    if (postfix > 32 && postfix < 127) {
-        const uint16_t p = strlen(bufferUI);
-        bufferUI[p] = postfix;
+    if (z_str3join(bufferUI, sizeof(bufferUI), prefix, postfix) != zxerr_ok) {
+        return parser_unexpected_buffer_end;
     }
 
     pageString(outValue, outValueLen, bufferUI, pageIdx, pageCount);
@@ -258,6 +246,8 @@ parser_error_t _readEra(parser_context_t *c, pd_ExtrinsicEra_t *v) {
     //  https://github.com/paritytech/substrate/blob/fc3adc87dc806237eb7371c1d21055eea1702be0/core/sr-primitives/src/generic/era.rs#L117
 
     v->type = eEraImmortal;
+    v->period = 0;
+    v->phase = 0;
 
     uint8_t first;
     CHECK_ERROR(_readUInt8(c, &first));
@@ -324,7 +314,7 @@ parser_error_t _toStringCompactBalance(const pd_CompactBalance_t *v,
 parser_error_t _checkVersions(parser_context_t *c) {
     // Methods are not length delimited so in order to retrieve the specVersion
     // it is necessary to parse from the back.
-    // The transaction is expect to end in
+    // The transaction is expected to end in
     // [4 bytes] specVersion
     // [4 bytes] transactionVersion
     // [32 bytes] genesisHash

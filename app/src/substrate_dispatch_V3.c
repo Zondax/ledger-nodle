@@ -99,35 +99,6 @@ __Z_INLINE parser_error_t _readMethod_system_set_code_without_checks_V3(
     return parser_ok;
 }
 
-__Z_INLINE parser_error_t _readMethod_system_set_changes_trie_config_V3(
-    parser_context_t* c, pd_system_set_changes_trie_config_V3_t* m)
-{
-    CHECK_ERROR(_readOptionChangesTrieConfiguration_V3(c, &m->changes_trie_config))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_system_set_storage_V3(
-    parser_context_t* c, pd_system_set_storage_V3_t* m)
-{
-    CHECK_ERROR(_readVecKeyValue_V3(c, &m->items))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_system_kill_storage_V3(
-    parser_context_t* c, pd_system_kill_storage_V3_t* m)
-{
-    CHECK_ERROR(_readVecKey_V3(c, &m->keys))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_system_kill_prefix_V3(
-    parser_context_t* c, pd_system_kill_prefix_V3_t* m)
-{
-    CHECK_ERROR(_readKey_V3(c, &m->prefix))
-    CHECK_ERROR(_readu32(c, &m->_subkeys))
-    return parser_ok;
-}
-
 __Z_INLINE parser_error_t _readMethod_timestamp_set_V3(
     parser_context_t* c, pd_timestamp_set_V3_t* m)
 {
@@ -153,58 +124,11 @@ __Z_INLINE parser_error_t _readMethod_balances_force_transfer_V3(
     return parser_ok;
 }
 
-__Z_INLINE parser_error_t _readMethod_babe_report_equivocation_V3(
-    parser_context_t* c, pd_babe_report_equivocation_V3_t* m)
-{
-    CHECK_ERROR(_readBabeEquivocationProof_V3(c, &m->equivocation_proof))
-    CHECK_ERROR(_readKeyOwnerProof_V3(c, &m->key_owner_proof))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_babe_report_equivocation_unsigned_V3(
-    parser_context_t* c, pd_babe_report_equivocation_unsigned_V3_t* m)
-{
-    CHECK_ERROR(_readBabeEquivocationProof_V3(c, &m->equivocation_proof))
-    CHECK_ERROR(_readKeyOwnerProof_V3(c, &m->key_owner_proof))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_grandpa_report_equivocation_V3(
-    parser_context_t* c, pd_grandpa_report_equivocation_V3_t* m)
-{
-    CHECK_ERROR(_readGrandpaEquivocationProof_V3(c, &m->equivocation_proof))
-    CHECK_ERROR(_readKeyOwnerProof_V3(c, &m->key_owner_proof))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_grandpa_report_equivocation_unsigned_V3(
-    parser_context_t* c, pd_grandpa_report_equivocation_unsigned_V3_t* m)
-{
-    CHECK_ERROR(_readGrandpaEquivocationProof_V3(c, &m->equivocation_proof))
-    CHECK_ERROR(_readKeyOwnerProof_V3(c, &m->key_owner_proof))
-    return parser_ok;
-}
-
 __Z_INLINE parser_error_t _readMethod_grandpa_note_stalled_V3(
     parser_context_t* c, pd_grandpa_note_stalled_V3_t* m)
 {
     CHECK_ERROR(_readBlockNumber(c, &m->delay))
     CHECK_ERROR(_readBlockNumber(c, &m->best_finalized_block_number))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_authorship_set_uncles_V3(
-    parser_context_t* c, pd_authorship_set_uncles_V3_t* m)
-{
-    CHECK_ERROR(_readVecHeader(c, &m->new_uncles))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_imonline_heartbeat_V3(
-    parser_context_t* c, pd_imonline_heartbeat_V3_t* m)
-{
-    CHECK_ERROR(_readHeartbeat(c, &m->heartbeat))
-    CHECK_ERROR(_readSignature_V3(c, &m->_signature))
     return parser_ok;
 }
 
@@ -560,63 +484,6 @@ __Z_INLINE parser_error_t _readMethod_rootmembership_clear_prime_V3(
     return parser_ok;
 }
 
-__Z_INLINE parser_error_t _readMethod_scheduler_schedule_V3(
-    parser_context_t* c, pd_scheduler_schedule_V3_t* m)
-{
-    CHECK_ERROR(_readBlockNumber(c, &m->when))
-    CHECK_ERROR(_readOptionPeriod_V3(c, &m->maybe_periodic))
-    CHECK_ERROR(_readPriority_V3(c, &m->priority))
-    CHECK_ERROR(_readCall(c, &m->call))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_scheduler_cancel_V3(
-    parser_context_t* c, pd_scheduler_cancel_V3_t* m)
-{
-    CHECK_ERROR(_readBlockNumber(c, &m->when))
-    CHECK_ERROR(_readu32(c, &m->index))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_scheduler_schedule_named_V3(
-    parser_context_t* c, pd_scheduler_schedule_named_V3_t* m)
-{
-    CHECK_ERROR(_readBytes(c, &m->id))
-    CHECK_ERROR(_readBlockNumber(c, &m->when))
-    CHECK_ERROR(_readOptionPeriod_V3(c, &m->maybe_periodic))
-    CHECK_ERROR(_readPriority_V3(c, &m->priority))
-    CHECK_ERROR(_readCall(c, &m->call))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_scheduler_cancel_named_V3(
-    parser_context_t* c, pd_scheduler_cancel_named_V3_t* m)
-{
-    CHECK_ERROR(_readBytes(c, &m->id))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_scheduler_schedule_after_V3(
-    parser_context_t* c, pd_scheduler_schedule_after_V3_t* m)
-{
-    CHECK_ERROR(_readBlockNumber(c, &m->after))
-    CHECK_ERROR(_readOptionPeriod_V3(c, &m->maybe_periodic))
-    CHECK_ERROR(_readPriority_V3(c, &m->priority))
-    CHECK_ERROR(_readCall(c, &m->call))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_scheduler_schedule_named_after_V3(
-    parser_context_t* c, pd_scheduler_schedule_named_after_V3_t* m)
-{
-    CHECK_ERROR(_readBytes(c, &m->id))
-    CHECK_ERROR(_readBlockNumber(c, &m->after))
-    CHECK_ERROR(_readOptionPeriod_V3(c, &m->maybe_periodic))
-    CHECK_ERROR(_readPriority_V3(c, &m->priority))
-    CHECK_ERROR(_readCall(c, &m->call))
-    return parser_ok;
-}
-
 __Z_INLINE parser_error_t _readMethod_amendments_propose_V3(
     parser_context_t* c, pd_amendments_propose_V3_t* m)
 {
@@ -727,11 +594,11 @@ __Z_INLINE parser_error_t _readMethod_vesting_cancel_all_vesting_schedules_V3(
     return parser_ok;
 }
 
-__Z_INLINE parser_error_t _readMethod_utility_as_derivative_V3(
-    parser_context_t* c, pd_utility_as_derivative_V3_t* m)
+__Z_INLINE parser_error_t _readMethod_vesting_overwrite_vesting_schedules_V3(
+    parser_context_t* c, pd_vesting_overwrite_vesting_schedules_V3_t* m)
 {
-    CHECK_ERROR(_readu16(c, &m->index))
-    CHECK_ERROR(_readCall(c, &m->call))
+    CHECK_ERROR(_readLookupSource_V3(c, &m->who))
+    CHECK_ERROR(_readVecVestingScheduleOf_V3(c, &m->new_schedules))
     return parser_ok;
 }
 
@@ -761,7 +628,7 @@ __Z_INLINE parser_error_t _readMethod_multisig_approve_as_multi_V3(
     CHECK_ERROR(_readu16(c, &m->threshold))
     CHECK_ERROR(_readVecAccountId_V3(c, &m->other_signatories))
     CHECK_ERROR(_readOptionTimepoint_V3(c, &m->maybe_timepoint))
-    CHECK_ERROR(_readu8_array_32_V3(c, &m->call_hash))
+    CHECK_ERROR(_readH256(c, &m->call_hash))
     CHECK_ERROR(_readWeight_V3(c, &m->max_weight))
     return parser_ok;
 }
@@ -772,14 +639,7 @@ __Z_INLINE parser_error_t _readMethod_multisig_cancel_as_multi_V3(
     CHECK_ERROR(_readu16(c, &m->threshold))
     CHECK_ERROR(_readVecAccountId_V3(c, &m->other_signatories))
     CHECK_ERROR(_readTimepoint_V3(c, &m->timepoint))
-    CHECK_ERROR(_readu8_array_32_V3(c, &m->call_hash))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_contracts_update_schedule_V3(
-    parser_context_t* c, pd_contracts_update_schedule_V3_t* m)
-{
-    CHECK_ERROR(_readSchedule_V3(c, &m->schedule))
+    CHECK_ERROR(_readH256(c, &m->call_hash))
     return parser_ok;
 }
 
@@ -996,18 +856,6 @@ parser_error_t _readMethod_V3(
     case 4: /* module 0 call 4 */
         CHECK_ERROR(_readMethod_system_set_code_without_checks_V3(c, &method->nested.system_set_code_without_checks_V3))
         break;
-    case 5: /* module 0 call 5 */
-        CHECK_ERROR(_readMethod_system_set_changes_trie_config_V3(c, &method->nested.system_set_changes_trie_config_V3))
-        break;
-    case 6: /* module 0 call 6 */
-        CHECK_ERROR(_readMethod_system_set_storage_V3(c, &method->nested.system_set_storage_V3))
-        break;
-    case 7: /* module 0 call 7 */
-        CHECK_ERROR(_readMethod_system_kill_storage_V3(c, &method->nested.system_kill_storage_V3))
-        break;
-    case 8: /* module 0 call 8 */
-        CHECK_ERROR(_readMethod_system_kill_prefix_V3(c, &method->nested.system_kill_prefix_V3))
-        break;
     case 256: /* module 1 call 0 */
         CHECK_ERROR(_readMethod_timestamp_set_V3(c, &method->basic.timestamp_set_V3))
         break;
@@ -1017,26 +865,8 @@ parser_error_t _readMethod_V3(
     case 514: /* module 2 call 2 */
         CHECK_ERROR(_readMethod_balances_force_transfer_V3(c, &method->nested.balances_force_transfer_V3))
         break;
-    case 1280: /* module 5 call 0 */
-        CHECK_ERROR(_readMethod_babe_report_equivocation_V3(c, &method->basic.babe_report_equivocation_V3))
-        break;
-    case 1281: /* module 5 call 1 */
-        CHECK_ERROR(_readMethod_babe_report_equivocation_unsigned_V3(c, &method->basic.babe_report_equivocation_unsigned_V3))
-        break;
-    case 1536: /* module 6 call 0 */
-        CHECK_ERROR(_readMethod_grandpa_report_equivocation_V3(c, &method->basic.grandpa_report_equivocation_V3))
-        break;
-    case 1537: /* module 6 call 1 */
-        CHECK_ERROR(_readMethod_grandpa_report_equivocation_unsigned_V3(c, &method->basic.grandpa_report_equivocation_unsigned_V3))
-        break;
     case 1538: /* module 6 call 2 */
         CHECK_ERROR(_readMethod_grandpa_note_stalled_V3(c, &method->basic.grandpa_note_stalled_V3))
-        break;
-    case 1792: /* module 7 call 0 */
-        CHECK_ERROR(_readMethod_authorship_set_uncles_V3(c, &method->basic.authorship_set_uncles_V3))
-        break;
-    case 2048: /* module 8 call 0 */
-        CHECK_ERROR(_readMethod_imonline_heartbeat_V3(c, &method->basic.imonline_heartbeat_V3))
         break;
     case 2560: /* module 10 call 0 */
         CHECK_ERROR(_readMethod_validatorsset_add_member_V3(c, &method->nested.validatorsset_add_member_V3))
@@ -1176,24 +1006,6 @@ parser_error_t _readMethod_V3(
     case 5126: /* module 20 call 6 */
         CHECK_ERROR(_readMethod_rootmembership_clear_prime_V3(c, &method->nested.rootmembership_clear_prime_V3))
         break;
-    case 5376: /* module 21 call 0 */
-        CHECK_ERROR(_readMethod_scheduler_schedule_V3(c, &method->basic.scheduler_schedule_V3))
-        break;
-    case 5377: /* module 21 call 1 */
-        CHECK_ERROR(_readMethod_scheduler_cancel_V3(c, &method->basic.scheduler_cancel_V3))
-        break;
-    case 5378: /* module 21 call 2 */
-        CHECK_ERROR(_readMethod_scheduler_schedule_named_V3(c, &method->basic.scheduler_schedule_named_V3))
-        break;
-    case 5379: /* module 21 call 3 */
-        CHECK_ERROR(_readMethod_scheduler_cancel_named_V3(c, &method->basic.scheduler_cancel_named_V3))
-        break;
-    case 5380: /* module 21 call 4 */
-        CHECK_ERROR(_readMethod_scheduler_schedule_after_V3(c, &method->basic.scheduler_schedule_after_V3))
-        break;
-    case 5381: /* module 21 call 5 */
-        CHECK_ERROR(_readMethod_scheduler_schedule_named_after_V3(c, &method->basic.scheduler_schedule_named_after_V3))
-        break;
     case 5632: /* module 22 call 0 */
         CHECK_ERROR(_readMethod_amendments_propose_V3(c, &method->nested.amendments_propose_V3))
         break;
@@ -1239,8 +1051,8 @@ parser_error_t _readMethod_V3(
     case 6914: /* module 27 call 2 */
         CHECK_ERROR(_readMethod_vesting_cancel_all_vesting_schedules_V3(c, &method->nested.vesting_cancel_all_vesting_schedules_V3))
         break;
-    case 7169: /* module 28 call 1 */
-        CHECK_ERROR(_readMethod_utility_as_derivative_V3(c, &method->nested.utility_as_derivative_V3))
+    case 6915: /* module 27 call 3 */
+        CHECK_ERROR(_readMethod_vesting_overwrite_vesting_schedules_V3(c, &method->nested.vesting_overwrite_vesting_schedules_V3))
         break;
     case 7424: /* module 29 call 0 */
         CHECK_ERROR(_readMethod_multisig_as_multi_threshold_1_V3(c, &method->nested.multisig_as_multi_threshold_1_V3))
@@ -1253,9 +1065,6 @@ parser_error_t _readMethod_V3(
         break;
     case 7427: /* module 29 call 3 */
         CHECK_ERROR(_readMethod_multisig_cancel_as_multi_V3(c, &method->nested.multisig_cancel_as_multi_V3))
-        break;
-    case 7680: /* module 30 call 0 */
-        CHECK_ERROR(_readMethod_contracts_update_schedule_V3(c, &method->basic.contracts_update_schedule_V3))
         break;
     case 7681: /* module 30 call 1 */
         CHECK_ERROR(_readMethod_contracts_call_V3(c, &method->basic.contracts_call_V3))
@@ -1322,7 +1131,7 @@ parser_error_t _readMethod_V3(
         break;
 #endif
     default:
-        return parser_not_supported;
+        return parser_unexpected_callIndex;
     }
 
     return parser_ok;
@@ -1347,22 +1156,10 @@ const char* _getMethod_ModuleName_V3(uint8_t moduleIdx)
         return STR_MO_SYSTEM;
     case 1:
         return STR_MO_TIMESTAMP;
-    case 4:
-        return STR_MO_RANDOMNESSCOLLECTIVEFLIP;
-    case 5:
-        return STR_MO_BABE;
     case 6:
         return STR_MO_GRANDPA;
-    case 7:
-        return STR_MO_AUTHORSHIP;
-    case 8:
-        return STR_MO_IMONLINE;
-    case 9:
-        return STR_MO_OFFENCES;
     case 10:
         return STR_MO_VALIDATORSSET;
-    case 14:
-        return STR_MO_AUTHORITYDISCOVERY;
     case 15:
         return STR_MO_TECHNICALCOMMITTEE;
     case 16:
@@ -1375,8 +1172,6 @@ const char* _getMethod_ModuleName_V3(uint8_t moduleIdx)
         return STR_MO_ROOTCOMMITTEE;
     case 20:
         return STR_MO_ROOTMEMBERSHIP;
-    case 21:
-        return STR_MO_SCHEDULER;
     case 22:
         return STR_MO_AMENDMENTS;
     case 23:
@@ -1601,6 +1396,8 @@ const char* _getMethod_Name_V3(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_ADD_VESTING_SCHEDULE;
     case 6914: /* module 27 call 2 */
         return STR_ME_CANCEL_ALL_VESTING_SCHEDULES;
+    case 6915: /* module 27 call 3 */
+        return STR_ME_OVERWRITE_VESTING_SCHEDULES;
     case 7169: /* module 28 call 1 */
         return STR_ME_AS_DERIVATIVE;
     case 7424: /* module 29 call 0 */
@@ -1691,33 +1488,13 @@ uint8_t _getMethod_NumItems_V3(uint8_t moduleIdx, uint8_t callIdx)
         return 1;
     case 4: /* module 0 call 4 */
         return 1;
-    case 5: /* module 0 call 5 */
-        return 1;
-    case 6: /* module 0 call 6 */
-        return 1;
-    case 7: /* module 0 call 7 */
-        return 1;
-    case 8: /* module 0 call 8 */
-        return 2;
     case 256: /* module 1 call 0 */
         return 1;
     case 513: /* module 2 call 1 */
         return 3;
     case 514: /* module 2 call 2 */
         return 3;
-    case 1280: /* module 5 call 0 */
-        return 2;
-    case 1281: /* module 5 call 1 */
-        return 2;
-    case 1536: /* module 6 call 0 */
-        return 2;
-    case 1537: /* module 6 call 1 */
-        return 2;
     case 1538: /* module 6 call 2 */
-        return 2;
-    case 1792: /* module 7 call 0 */
-        return 1;
-    case 2048: /* module 8 call 0 */
         return 2;
     case 2560: /* module 10 call 0 */
         return 1;
@@ -1811,18 +1588,6 @@ uint8_t _getMethod_NumItems_V3(uint8_t moduleIdx, uint8_t callIdx)
         return 1;
     case 5126: /* module 20 call 6 */
         return 0;
-    case 5376: /* module 21 call 0 */
-        return 4;
-    case 5377: /* module 21 call 1 */
-        return 2;
-    case 5378: /* module 21 call 2 */
-        return 5;
-    case 5379: /* module 21 call 3 */
-        return 1;
-    case 5380: /* module 21 call 4 */
-        return 4;
-    case 5381: /* module 21 call 5 */
-        return 5;
     case 5632: /* module 22 call 0 */
         return 1;
     case 5633: /* module 22 call 1 */
@@ -1853,7 +1618,7 @@ uint8_t _getMethod_NumItems_V3(uint8_t moduleIdx, uint8_t callIdx)
         return 2;
     case 6914: /* module 27 call 2 */
         return 3;
-    case 7169: /* module 28 call 1 */
+    case 6915: /* module 27 call 3 */
         return 2;
     case 7424: /* module 29 call 0 */
         return 2;
@@ -1863,8 +1628,6 @@ uint8_t _getMethod_NumItems_V3(uint8_t moduleIdx, uint8_t callIdx)
         return 5;
     case 7427: /* module 29 call 3 */
         return 4;
-    case 7680: /* module 30 call 0 */
-        return 1;
     case 7681: /* module 30 call 1 */
         return 4;
     case 7682: /* module 30 call 2 */
@@ -2002,36 +1765,6 @@ const char* _getMethod_ItemName_V3(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
         default:
             return NULL;
         }
-    case 5: /* module 0 call 5 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_changes_trie_config;
-        default:
-            return NULL;
-        }
-    case 6: /* module 0 call 6 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_items;
-        default:
-            return NULL;
-        }
-    case 7: /* module 0 call 7 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_keys;
-        default:
-            return NULL;
-        }
-    case 8: /* module 0 call 8 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_prefix;
-        case 1:
-            return STR_IT__subkeys;
-        default:
-            return NULL;
-        }
     case 256: /* module 1 call 0 */
         switch (itemIdx) {
         case 0:
@@ -2061,64 +1794,12 @@ const char* _getMethod_ItemName_V3(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
         default:
             return NULL;
         }
-    case 1280: /* module 5 call 0 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_equivocation_proof;
-        case 1:
-            return STR_IT_key_owner_proof;
-        default:
-            return NULL;
-        }
-    case 1281: /* module 5 call 1 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_equivocation_proof;
-        case 1:
-            return STR_IT_key_owner_proof;
-        default:
-            return NULL;
-        }
-    case 1536: /* module 6 call 0 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_equivocation_proof;
-        case 1:
-            return STR_IT_key_owner_proof;
-        default:
-            return NULL;
-        }
-    case 1537: /* module 6 call 1 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_equivocation_proof;
-        case 1:
-            return STR_IT_key_owner_proof;
-        default:
-            return NULL;
-        }
     case 1538: /* module 6 call 2 */
         switch (itemIdx) {
         case 0:
             return STR_IT_delay;
         case 1:
             return STR_IT_best_finalized_block_number;
-        default:
-            return NULL;
-        }
-    case 1792: /* module 7 call 0 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_new_uncles;
-        default:
-            return NULL;
-        }
-    case 2048: /* module 8 call 0 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_heartbeat;
-        case 1:
-            return STR_IT__signature;
         default:
             return NULL;
         }
@@ -2504,78 +2185,6 @@ const char* _getMethod_ItemName_V3(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
         default:
             return NULL;
         }
-    case 5376: /* module 21 call 0 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_when;
-        case 1:
-            return STR_IT_maybe_periodic;
-        case 2:
-            return STR_IT_priority;
-        case 3:
-            return STR_IT_call;
-        default:
-            return NULL;
-        }
-    case 5377: /* module 21 call 1 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_when;
-        case 1:
-            return STR_IT_index;
-        default:
-            return NULL;
-        }
-    case 5378: /* module 21 call 2 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_id;
-        case 1:
-            return STR_IT_when;
-        case 2:
-            return STR_IT_maybe_periodic;
-        case 3:
-            return STR_IT_priority;
-        case 4:
-            return STR_IT_call;
-        default:
-            return NULL;
-        }
-    case 5379: /* module 21 call 3 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_id;
-        default:
-            return NULL;
-        }
-    case 5380: /* module 21 call 4 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_after;
-        case 1:
-            return STR_IT_maybe_periodic;
-        case 2:
-            return STR_IT_priority;
-        case 3:
-            return STR_IT_call;
-        default:
-            return NULL;
-        }
-    case 5381: /* module 21 call 5 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_id;
-        case 1:
-            return STR_IT_after;
-        case 2:
-            return STR_IT_maybe_periodic;
-        case 3:
-            return STR_IT_priority;
-        case 4:
-            return STR_IT_call;
-        default:
-            return NULL;
-        }
     case 5632: /* module 22 call 0 */
         switch (itemIdx) {
         case 0:
@@ -2691,12 +2300,12 @@ const char* _getMethod_ItemName_V3(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
         default:
             return NULL;
         }
-    case 7169: /* module 28 call 1 */
+    case 6915: /* module 27 call 3 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_index;
+            return STR_IT_who;
         case 1:
-            return STR_IT_call;
+            return STR_IT_new_schedules;
         default:
             return NULL;
         }
@@ -2751,13 +2360,6 @@ const char* _getMethod_ItemName_V3(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
             return STR_IT_timepoint;
         case 3:
             return STR_IT_call_hash;
-        default:
-            return NULL;
-        }
-    case 7680: /* module 30 call 0 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_schedule;
         default:
             return NULL;
         }
@@ -3084,51 +2686,6 @@ parser_error_t _getMethod_ItemValue_V3(
         default:
             return parser_no_data;
         }
-    case 5: /* module 0 call 5 */
-        switch (itemIdx) {
-        case 0: /* system_set_changes_trie_config_V3 - changes_trie_config */;
-            return _toStringOptionChangesTrieConfiguration_V3(
-                &m->nested.system_set_changes_trie_config_V3.changes_trie_config,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 6: /* module 0 call 6 */
-        switch (itemIdx) {
-        case 0: /* system_set_storage_V3 - items */;
-            return _toStringVecKeyValue_V3(
-                &m->nested.system_set_storage_V3.items,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 7: /* module 0 call 7 */
-        switch (itemIdx) {
-        case 0: /* system_kill_storage_V3 - keys */;
-            return _toStringVecKey_V3(
-                &m->nested.system_kill_storage_V3.keys,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 8: /* module 0 call 8 */
-        switch (itemIdx) {
-        case 0: /* system_kill_prefix_V3 - prefix */;
-            return _toStringKey_V3(
-                &m->nested.system_kill_prefix_V3.prefix,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* system_kill_prefix_V3 - _subkeys */;
-            return _toStringu32(
-                &m->nested.system_kill_prefix_V3._subkeys,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
     case 256: /* module 1 call 0 */
         switch (itemIdx) {
         case 0: /* timestamp_set_V3 - now */;
@@ -3179,66 +2736,6 @@ parser_error_t _getMethod_ItemValue_V3(
         default:
             return parser_no_data;
         }
-    case 1280: /* module 5 call 0 */
-        switch (itemIdx) {
-        case 0: /* babe_report_equivocation_V3 - equivocation_proof */;
-            return _toStringBabeEquivocationProof_V3(
-                &m->basic.babe_report_equivocation_V3.equivocation_proof,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* babe_report_equivocation_V3 - key_owner_proof */;
-            return _toStringKeyOwnerProof_V3(
-                &m->basic.babe_report_equivocation_V3.key_owner_proof,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 1281: /* module 5 call 1 */
-        switch (itemIdx) {
-        case 0: /* babe_report_equivocation_unsigned_V3 - equivocation_proof */;
-            return _toStringBabeEquivocationProof_V3(
-                &m->basic.babe_report_equivocation_unsigned_V3.equivocation_proof,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* babe_report_equivocation_unsigned_V3 - key_owner_proof */;
-            return _toStringKeyOwnerProof_V3(
-                &m->basic.babe_report_equivocation_unsigned_V3.key_owner_proof,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 1536: /* module 6 call 0 */
-        switch (itemIdx) {
-        case 0: /* grandpa_report_equivocation_V3 - equivocation_proof */;
-            return _toStringGrandpaEquivocationProof_V3(
-                &m->basic.grandpa_report_equivocation_V3.equivocation_proof,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* grandpa_report_equivocation_V3 - key_owner_proof */;
-            return _toStringKeyOwnerProof_V3(
-                &m->basic.grandpa_report_equivocation_V3.key_owner_proof,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 1537: /* module 6 call 1 */
-        switch (itemIdx) {
-        case 0: /* grandpa_report_equivocation_unsigned_V3 - equivocation_proof */;
-            return _toStringGrandpaEquivocationProof_V3(
-                &m->basic.grandpa_report_equivocation_unsigned_V3.equivocation_proof,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* grandpa_report_equivocation_unsigned_V3 - key_owner_proof */;
-            return _toStringKeyOwnerProof_V3(
-                &m->basic.grandpa_report_equivocation_unsigned_V3.key_owner_proof,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
     case 1538: /* module 6 call 2 */
         switch (itemIdx) {
         case 0: /* grandpa_note_stalled_V3 - delay */;
@@ -3249,31 +2746,6 @@ parser_error_t _getMethod_ItemValue_V3(
         case 1: /* grandpa_note_stalled_V3 - best_finalized_block_number */;
             return _toStringBlockNumber(
                 &m->basic.grandpa_note_stalled_V3.best_finalized_block_number,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 1792: /* module 7 call 0 */
-        switch (itemIdx) {
-        case 0: /* authorship_set_uncles_V3 - new_uncles */;
-            return _toStringVecHeader(
-                &m->basic.authorship_set_uncles_V3.new_uncles,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 2048: /* module 8 call 0 */
-        switch (itemIdx) {
-        case 0: /* imonline_heartbeat_V3 - heartbeat */;
-            return _toStringHeartbeat(
-                &m->basic.imonline_heartbeat_V3.heartbeat,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* imonline_heartbeat_V3 - _signature */;
-            return _toStringSignature_V3(
-                &m->basic.imonline_heartbeat_V3._signature,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3889,141 +3361,6 @@ parser_error_t _getMethod_ItemValue_V3(
         default:
             return parser_no_data;
         }
-    case 5376: /* module 21 call 0 */
-        switch (itemIdx) {
-        case 0: /* scheduler_schedule_V3 - when */;
-            return _toStringBlockNumber(
-                &m->basic.scheduler_schedule_V3.when,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* scheduler_schedule_V3 - maybe_periodic */;
-            return _toStringOptionPeriod_V3(
-                &m->basic.scheduler_schedule_V3.maybe_periodic,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 2: /* scheduler_schedule_V3 - priority */;
-            return _toStringPriority_V3(
-                &m->basic.scheduler_schedule_V3.priority,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 3: /* scheduler_schedule_V3 - call */;
-            return _toStringCall(
-                &m->basic.scheduler_schedule_V3.call,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 5377: /* module 21 call 1 */
-        switch (itemIdx) {
-        case 0: /* scheduler_cancel_V3 - when */;
-            return _toStringBlockNumber(
-                &m->basic.scheduler_cancel_V3.when,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* scheduler_cancel_V3 - index */;
-            return _toStringu32(
-                &m->basic.scheduler_cancel_V3.index,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 5378: /* module 21 call 2 */
-        switch (itemIdx) {
-        case 0: /* scheduler_schedule_named_V3 - id */;
-            return _toStringBytes(
-                &m->basic.scheduler_schedule_named_V3.id,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* scheduler_schedule_named_V3 - when */;
-            return _toStringBlockNumber(
-                &m->basic.scheduler_schedule_named_V3.when,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 2: /* scheduler_schedule_named_V3 - maybe_periodic */;
-            return _toStringOptionPeriod_V3(
-                &m->basic.scheduler_schedule_named_V3.maybe_periodic,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 3: /* scheduler_schedule_named_V3 - priority */;
-            return _toStringPriority_V3(
-                &m->basic.scheduler_schedule_named_V3.priority,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 4: /* scheduler_schedule_named_V3 - call */;
-            return _toStringCall(
-                &m->basic.scheduler_schedule_named_V3.call,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 5379: /* module 21 call 3 */
-        switch (itemIdx) {
-        case 0: /* scheduler_cancel_named_V3 - id */;
-            return _toStringBytes(
-                &m->basic.scheduler_cancel_named_V3.id,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 5380: /* module 21 call 4 */
-        switch (itemIdx) {
-        case 0: /* scheduler_schedule_after_V3 - after */;
-            return _toStringBlockNumber(
-                &m->basic.scheduler_schedule_after_V3.after,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* scheduler_schedule_after_V3 - maybe_periodic */;
-            return _toStringOptionPeriod_V3(
-                &m->basic.scheduler_schedule_after_V3.maybe_periodic,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 2: /* scheduler_schedule_after_V3 - priority */;
-            return _toStringPriority_V3(
-                &m->basic.scheduler_schedule_after_V3.priority,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 3: /* scheduler_schedule_after_V3 - call */;
-            return _toStringCall(
-                &m->basic.scheduler_schedule_after_V3.call,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 5381: /* module 21 call 5 */
-        switch (itemIdx) {
-        case 0: /* scheduler_schedule_named_after_V3 - id */;
-            return _toStringBytes(
-                &m->basic.scheduler_schedule_named_after_V3.id,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* scheduler_schedule_named_after_V3 - after */;
-            return _toStringBlockNumber(
-                &m->basic.scheduler_schedule_named_after_V3.after,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 2: /* scheduler_schedule_named_after_V3 - maybe_periodic */;
-            return _toStringOptionPeriod_V3(
-                &m->basic.scheduler_schedule_named_after_V3.maybe_periodic,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 3: /* scheduler_schedule_named_after_V3 - priority */;
-            return _toStringPriority_V3(
-                &m->basic.scheduler_schedule_named_after_V3.priority,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 4: /* scheduler_schedule_named_after_V3 - call */;
-            return _toStringCall(
-                &m->basic.scheduler_schedule_named_after_V3.call,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
     case 5632: /* module 22 call 0 */
         switch (itemIdx) {
         case 0: /* amendments_propose_V3 - amendment */;
@@ -4199,16 +3536,16 @@ parser_error_t _getMethod_ItemValue_V3(
         default:
             return parser_no_data;
         }
-    case 7169: /* module 28 call 1 */
+    case 6915: /* module 27 call 3 */
         switch (itemIdx) {
-        case 0: /* utility_as_derivative_V3 - index */;
-            return _toStringu16(
-                &m->nested.utility_as_derivative_V3.index,
+        case 0: /* vesting_overwrite_vesting_schedules_V3 - who */;
+            return _toStringLookupSource_V3(
+                &m->nested.vesting_overwrite_vesting_schedules_V3.who,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* utility_as_derivative_V3 - call */;
-            return _toStringCall(
-                &m->nested.utility_as_derivative_V3.call,
+        case 1: /* vesting_overwrite_vesting_schedules_V3 - new_schedules */;
+            return _toStringVecVestingScheduleOf_V3(
+                &m->nested.vesting_overwrite_vesting_schedules_V3.new_schedules,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -4282,7 +3619,7 @@ parser_error_t _getMethod_ItemValue_V3(
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 3: /* multisig_approve_as_multi_V3 - call_hash */;
-            return _toStringu8_array_32_V3(
+            return _toStringH256(
                 &m->nested.multisig_approve_as_multi_V3.call_hash,
                 outValue, outValueLen,
                 pageIdx, pageCount);
@@ -4312,18 +3649,8 @@ parser_error_t _getMethod_ItemValue_V3(
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 3: /* multisig_cancel_as_multi_V3 - call_hash */;
-            return _toStringu8_array_32_V3(
+            return _toStringH256(
                 &m->nested.multisig_cancel_as_multi_V3.call_hash,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 7680: /* module 30 call 0 */
-        switch (itemIdx) {
-        case 0: /* contracts_update_schedule_V3 - schedule */;
-            return _toStringSchedule_V3(
-                &m->basic.contracts_update_schedule_V3.schedule,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -4659,22 +3986,9 @@ bool _getMethod_IsNestingSupported_V3(uint8_t moduleIdx, uint8_t callIdx)
 
     switch (callPrivIdx) {
     case 256: // Timestamp:Set
-    case 1280: // Babe:Report equivocation
-    case 1281: // Babe:Report equivocation unsigned
-    case 1536: // Grandpa:Report equivocation
-    case 1537: // Grandpa:Report equivocation unsigned
     case 1538: // Grandpa:Note stalled
-    case 1792: // Authorship:Set uncles
-    case 2048: // ImOnline:Heartbeat
     case 3072: // Session:Set keys
     case 3073: // Session:Purge keys
-    case 5376: // Scheduler:Schedule
-    case 5377: // Scheduler:Cancel
-    case 5378: // Scheduler:Schedule named
-    case 5379: // Scheduler:Cancel named
-    case 5380: // Scheduler:Schedule after
-    case 5381: // Scheduler:Schedule named after
-    case 7680: // Contracts:Update schedule
     case 7681: // Contracts:Call
     case 7682: // Contracts:Instantiate with code
     case 7683: // Contracts:Instantiate
