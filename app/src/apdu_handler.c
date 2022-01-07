@@ -35,11 +35,13 @@
 static bool tx_initialized = false;
 
 void extractHDPath(uint32_t rx, uint32_t offset) {
+    tx_initialized = false;
+
     if ((rx - offset) < sizeof(uint32_t) * HDPATH_LEN_DEFAULT) {
         THROW(APDU_CODE_WRONG_LENGTH);
     }
 
-    MEMCPY(hdPath, G_io_apdu_buffer + offset, sizeof(uint32_t) * HDPATH_LEN_DEFAULT);
+    memcpy(hdPath, G_io_apdu_buffer + offset, sizeof(uint32_t) * HDPATH_LEN_DEFAULT);
 
     const bool mainnet = hdPath[0] == HDPATH_0_DEFAULT &&
                          hdPath[1] == HDPATH_1_DEFAULT;
@@ -55,8 +57,7 @@ void extractHDPath(uint32_t rx, uint32_t offset) {
 #endif
 }
 
-__Z_INLINE bool process_chunk(volatile uint32_t *tx, uint32_t rx) {
-    zemu_log("process_chunk\n");
+__Z_INLINE bool process_chunk(__Z_UNUSED volatile uint32_t *tx, uint32_t rx) {
     const uint8_t payloadType = G_io_apdu_buffer[OFFSET_PAYLOAD_TYPE];
 #ifndef SUPPORT_SR25519
     if (G_io_apdu_buffer[OFFSET_P2] != 0) {
@@ -69,30 +70,28 @@ __Z_INLINE bool process_chunk(volatile uint32_t *tx, uint32_t rx) {
 
     uint32_t added;
     switch (payloadType) {
-        case 0:
-            zemu_log("process_chunk - init\n");
+        case P1_INIT:
             tx_initialize();
             tx_reset();
             extractHDPath(rx, OFFSET_DATA);
             tx_initialized = true;
             return false;
-        case 1:
+        case P1_ADD:
             if (!tx_initialized) {
                 THROW(APDU_CODE_TX_NOT_INITIALIZED);
             }
-            zemu_log("process_chunk - add \n");
             added = tx_append(&(G_io_apdu_buffer[OFFSET_DATA]), rx - OFFSET_DATA);
             if (added != rx - OFFSET_DATA) {
                 tx_initialized = false;
                 THROW(APDU_CODE_OUTPUT_BUFFER_TOO_SMALL);
             }
             return false;
-        case 2:
+        case P1_LAST:
             if (!tx_initialized) {
                 THROW(APDU_CODE_TX_NOT_INITIALIZED);
             }
-            zemu_log("process_chunk - end \n");
             added = tx_append(&(G_io_apdu_buffer[OFFSET_DATA]), rx - OFFSET_DATA);
+            tx_initialized = false;
             if (added != rx - OFFSET_DATA) {
                 tx_initialized = false;
                 THROW(APDU_CODE_OUTPUT_BUFFER_TOO_SMALL);
@@ -165,9 +164,10 @@ __Z_INLINE void handleSignSr25519(volatile uint32_t *flags, volatile uint32_t *t
 
     const char *error_msg = tx_parse();
     CHECK_APP_CANARY()
+
     if (error_msg != NULL) {
         int error_msg_length = strlen(error_msg);
-        MEMCPY(G_io_apdu_buffer, error_msg, error_msg_length);
+        memcpy(G_io_apdu_buffer, error_msg, error_msg_length);
         *tx += (error_msg_length);
         THROW(APDU_CODE_DATA_INVALID);
     }
@@ -183,7 +183,7 @@ __Z_INLINE void handleSignEd25519(volatile uint32_t *flags, volatile uint32_t *t
     CHECK_APP_CANARY()
     if (error_msg != NULL) {
         int error_msg_length = strlen(error_msg);
-        MEMCPY(G_io_apdu_buffer, error_msg, error_msg_length);
+        memcpy(G_io_apdu_buffer, error_msg, error_msg_length);
         *tx += (error_msg_length);
         THROW(APDU_CODE_DATA_INVALID);
     }

@@ -1,5 +1,5 @@
 /*******************************************************************************
-*  (c) 2019 Zondax GmbH
+*  (c) 2020 Zondax GmbH
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -19,33 +19,11 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
-#include <stddef.h>
-#include "substrate_methods.h"
-
-#ifdef TARGET_NANOX
-#define MAX_CALL_NESTING_SIZE 6
-#define MAX_CALL_VEC_SIZE 6
-#else
-#define MAX_CALL_NESTING_SIZE 2
-#define MAX_CALL_VEC_SIZE 5
-#endif
-
-typedef struct {
-    pd_CallIndex_t callIndex;
-    pd_Method_t method;
-
-    pd_ExtrinsicEra_t era;
-    pd_CompactIndex_t nonce;
-    pd_CompactBalance_t tip;
-    uint32_t specVersion;
-    uint32_t transactionVersion;
-
-    pd_Hash_t genesisHash;
-    pd_Hash_t blockHash;
-
-    pd_NestCallIdx_t nestCallIdx;
-} parser_tx_t;
+#define COIN_ADDR_TYPE_POLKADOT         0
+#define COIN_ADDR_TYPE_KUSAMA           2
+#define COIN_ADDR_TYPE_EDGEWARE         7
+#define COIN_ADDR_TYPE_KULUPU           16
+#define COIN_ADDR_TYPE_DOTHEREUM        20
 
 #ifdef __cplusplus
 }
