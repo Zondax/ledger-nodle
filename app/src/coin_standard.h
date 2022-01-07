@@ -21,6 +21,7 @@ extern "C" {
 
 #include <stdint.h>
 #include <stddef.h>
+#include "coin_ss58.h"
 
 
 #define HDPATH_2_DEFAULT     (0x80000000u | 0u)

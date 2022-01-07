@@ -111,6 +111,7 @@ OUTPUT_ELF ?= $(CURDIR)/output/app_x.elf
 OUTPUT_INSTALLER:= $(CURDIR)/pkg/installer_x.sh
 endif
 
+$(info TARGET_NAME  = [$(TARGET_NAME)])
 $(info ICONNAME  = [$(ICONNAME)])
 
 ifndef ICONNAME
@@ -120,7 +121,6 @@ endif
 ############
 # Platform
 
-DEFINES       += UNUSED\(x\)=\(void\)x
 DEFINES       += PRINTF\(...\)=
 
 APPVERSION=$(APPVERSION_M).$(APPVERSION_N).$(APPVERSION_P)
@@ -155,10 +155,14 @@ DEFINES       += HAVE_BLE_APDU BLE_COMMAND_TIMEOUT_MS=2000
 SDK_SOURCE_PATH  += lib_blewbxx lib_blewbxx_impl
 else
 # Assume Nano S
+DEFINES       += HAVE_BAGL BAGL_WIDTH=128 BAGL_HEIGHT=32
+DEFINES       += BAGL_WIDTH_MARGIN=10
 DEFINES       += IO_SEPROXYHAL_BUFFER_SIZE_B=128
 endif
 
 # X specific
+
+# App specific
 
 #Feature temporarily disabled
 DEFINES   += LEDGER_SPECIFIC
@@ -184,7 +188,7 @@ endif
 #########################
 
 CC := $(CLANGPATH)clang
-CFLAGS += -O3 -Os -Wno-unknown-pragmas -Wno-unused-parameter
+CFLAGS += -O3 -Os -Wno-unknown-pragmas -Wno-unused-parameter -Wvla
 
 AS := $(GCCPATH)arm-none-eabi-gcc
 AFLAGS +=
