@@ -239,11 +239,11 @@ clean: rust_clean
 # load, delete and listvariants are provided to comply with Ledger requirements
 .PHONY: load
 load:
-	python -m ledgerblue.loadApp $(APP_LOAD_PARAMS)
+	python3 -m ledgerblue.loadApp $(APP_LOAD_PARAMS)
 
 .PHONY: delete
 delete:
-	python -m ledgerblue.deleteApp $(COMMON_DELETE_PARAMS)
+	python3 -m ledgerblue.deleteApp $(COMMON_DELETE_PARAMS)
 
 # Import generic rules from the SDK
 include $(BOLOS_SDK)/Makefile.rules
@@ -255,7 +255,7 @@ dep/%.d: %.c Makefile
 listvariants:
 ifeq ($(TARGET_NAME),TARGET_NANOS)
 	@echo VARIANTS COIN NODL NODL_XL
-else ifeq ($(TARGET_NAME),TARGET_NANOX)
+else
 	@echo VARIANTS COIN NODL
 endif
 
