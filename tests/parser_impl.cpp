@@ -203,4 +203,26 @@ TEST(SCALE, TransferTXBadTxVersion) {
     err = _readTx(&ctx, &tx);
     EXPECT_EQ(err, parser_tx_version_not_supported) << parser_getErrorDescription(err);
 
+}// Parse simple SCALE-encoded transaction
+TEST(SCALE, TransferTXBadSpec) {
+    parser_context_t ctx;
+    parser_error_t err;
+
+    const auto testTx = "00004d3dcb99d5038d240b63ce64c10c05010000000300000091b171bb158e2d3848fa23a9f1c25182fb8e20313b"
+                        "2c1eb49219da7a70ce90c391b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3";
+
+
+    uint8_t buffer[500];
+    auto bufferLen = parseHexString(buffer, sizeof(buffer), testTx);
+
+    parser_init(&ctx, buffer, bufferLen);
+
+    parser_tx_t tx;
+    uint64_t tmp;
+    char tmpBuffer[100];
+    uint8_t pageCount = 0;
+
+    err = _readTx(&ctx, &tx);
+    EXPECT_EQ(err, parser_tx_version_not_supported) << parser_getErrorDescription(err);
 }
+
