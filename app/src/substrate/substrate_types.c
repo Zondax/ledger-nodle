@@ -1,18 +1,18 @@
 /*******************************************************************************
-*  (c) 2019 Zondax GmbH
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*  Unless required by applicable law or agreed to in writing, software
-*  distributed under the License is distributed on an "AS IS" BASIS,
-*  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*  See the License for the specific language governing permissions and
-*  limitations under the License.
-********************************************************************************/
+ *  (c) 2019 - 2022 Zondax GmbH
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ ********************************************************************************/
 
 #include "bignum.h"
 #include "coin.h"
@@ -144,10 +144,6 @@ parser_error_t _readCall(parser_context_t* c, pd_Call_t* v)
     return parser_ok;
 }
 
-parser_error_t _readHash(parser_context_t* c, pd_Hash_t* v) {
-    GEN_DEF_READARRAY(32)
-}
-
 parser_error_t _readHeader(parser_context_t* c, pd_Header_t* v)
 {
     return parser_not_supported;
@@ -190,24 +186,20 @@ parser_error_t _readVecCall(parser_context_t* c, pd_VecCall_t* v)
     return parser_ok;
 }
 
-parser_error_t _readCompactBalanceOf(parser_context_t* c, pd_CompactBalanceOf_t* v)
-{
-    CHECK_INPUT();
-    CHECK_ERROR(_readCompactInt(c, &v->value));
-    return parser_ok;
-}
-
 parser_error_t _readH256(parser_context_t* c, pd_H256_t* v) {
     GEN_DEF_READARRAY(32)
 }
 
-parser_error_t _readHeartbeat(parser_context_t* c, pd_Heartbeat_t* v)
-{
-    return parser_not_supported;
+parser_error_t _readHash(parser_context_t* c, pd_Hash_t* v) {
+    GEN_DEF_READARRAY(32)
 }
 
 parser_error_t _readVecHeader(parser_context_t* c, pd_VecHeader_t* v) {
     GEN_DEF_READVECTOR(Header)
+}
+
+parser_error_t _readVecu8(parser_context_t* c, pd_Vecu8_t* v) {
+    GEN_DEF_READVECTOR(u8)
 }
 
 ///////////////////////////////////
@@ -457,15 +449,6 @@ parser_error_t _toStringCall(
     return parser_display_idx_out_of_range;
 }
 
-parser_error_t _toStringHash(
-    const pd_Hash_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount) {
-    GEN_DEF_TOSTRING_ARRAY(32)
-}
-
 parser_error_t _toStringHeader(
     const pd_Header_t* v,
     char* outValue,
@@ -557,18 +540,6 @@ parser_error_t _toStringVecCall(
     return parser_print_not_supported;
 }
 
-parser_error_t _toStringCompactBalanceOf(
-    const pd_CompactBalanceOf_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount)
-{
-    CHECK_ERROR(_toStringCompactInt(&v->value, COIN_AMOUNT_DECIMAL_PLACES, "", COIN_TICKER, outValue, outValueLen, pageIdx, pageCount))
-    number_inplace_trimming(outValue, 1);
-    return parser_ok;
-}
-
 parser_error_t _toStringH256(
     const pd_H256_t* v,
     char* outValue,
@@ -579,15 +550,13 @@ parser_error_t _toStringH256(
     GEN_DEF_TOSTRING_ARRAY(32);
 }
 
-parser_error_t _toStringHeartbeat(
-    const pd_Heartbeat_t* v,
+parser_error_t _toStringHash(
+    const pd_Hash_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
-    uint8_t* pageCount)
-{
-    CLEAN_AND_CHECK()
-    return parser_print_not_supported;
+    uint8_t* pageCount) {
+    GEN_DEF_TOSTRING_ARRAY(32)
 }
 
 parser_error_t _toStringVecHeader(
@@ -595,9 +564,18 @@ parser_error_t _toStringVecHeader(
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
+    uint8_t* pageCount) {
+    GEN_DEF_TOSTRING_VECTOR(Header)
+}
+
+parser_error_t _toStringVecu8(
+    const pd_Vecu8_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
     uint8_t* pageCount)
 {
-    GEN_DEF_TOSTRING_VECTOR(Header)
+    GEN_DEF_TOSTRING_VECTOR(u8);
 }
 
 ///////////////////////////////////
