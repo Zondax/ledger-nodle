@@ -567,10 +567,10 @@ parser_error_t _readMethod_V1(
         CHECK_ERROR(_readMethod_session_purge_keys_V1(c, &method->basic.session_purge_keys_V1))
         break;
     case 10240: /* module 40 call 0 */
-        CHECK_ERROR(_readMethod_utility_batch_V1(c, &method->basic.utility_batch_V1))
+        CHECK_ERROR(_readMethod_utility_batch_V1(c, &method->nested.utility_batch_V1))
         break;
     case 10242: /* module 40 call 2 */
-        CHECK_ERROR(_readMethod_utility_batch_all_V1(c, &method->basic.utility_batch_all_V1))
+        CHECK_ERROR(_readMethod_utility_batch_all_V1(c, &method->nested.utility_batch_all_V1))
         break;
 
 #ifdef SUBSTRATE_PARSER_FULL
@@ -641,7 +641,7 @@ parser_error_t _readMethod_V1(
         CHECK_ERROR(_readMethod_vesting_overwrite_vesting_schedules_V1(c, &method->basic.vesting_overwrite_vesting_schedules_V1))
         break;
     case 3840: /* module 15 call 0 */
-        CHECK_ERROR(_readMethod_mandate_apply_V1(c, &method->basic.mandate_apply_V1))
+        CHECK_ERROR(_readMethod_mandate_apply_V1(c, &method->nested.mandate_apply_V1))
         break;
     case 4096: /* module 16 call 0 */
         CHECK_ERROR(_readMethod_technicalcommittee_set_members_V1(c, &method->basic.technicalcommittee_set_members_V1))
@@ -743,16 +743,16 @@ parser_error_t _readMethod_V1(
         CHECK_ERROR(_readMethod_allocationsoracles_clear_prime_V1(c, &method->basic.allocationsoracles_clear_prime_V1))
         break;
     case 15360: /* module 60 call 0 */
-        CHECK_ERROR(_readMethod_sudo_sudo_V1(c, &method->basic.sudo_sudo_V1))
+        CHECK_ERROR(_readMethod_sudo_sudo_V1(c, &method->nested.sudo_sudo_V1))
         break;
     case 15361: /* module 60 call 1 */
-        CHECK_ERROR(_readMethod_sudo_sudo_unchecked_weight_V1(c, &method->basic.sudo_sudo_unchecked_weight_V1))
+        CHECK_ERROR(_readMethod_sudo_sudo_unchecked_weight_V1(c, &method->nested.sudo_sudo_unchecked_weight_V1))
         break;
     case 15362: /* module 60 call 2 */
-        CHECK_ERROR(_readMethod_sudo_set_key_V1(c, &method->basic.sudo_set_key_V1))
+        CHECK_ERROR(_readMethod_sudo_set_key_V1(c, &method->nested.sudo_set_key_V1))
         break;
     case 15363: /* module 60 call 3 */
-        CHECK_ERROR(_readMethod_sudo_sudo_as_V1(c, &method->basic.sudo_sudo_as_V1))
+        CHECK_ERROR(_readMethod_sudo_sudo_as_V1(c, &method->nested.sudo_sudo_as_V1))
         break;
 #endif
     default:
@@ -1793,7 +1793,7 @@ parser_error_t _getMethod_ItemValue_V1(
         switch (itemIdx) {
         case 0: /* utility_batch_V1 - calls */;
             return _toStringVecCall(
-                &m->basic.utility_batch_V1.calls,
+                &m->nested.utility_batch_V1.calls,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -1803,7 +1803,7 @@ parser_error_t _getMethod_ItemValue_V1(
         switch (itemIdx) {
         case 0: /* utility_batch_all_V1 - calls */;
             return _toStringVecCall(
-                &m->basic.utility_batch_all_V1.calls,
+                &m->nested.utility_batch_all_V1.calls,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -2079,7 +2079,7 @@ parser_error_t _getMethod_ItemValue_V1(
         switch (itemIdx) {
         case 0: /* mandate_apply_V1 - call */;
             return _toStringCall(
-                &m->basic.mandate_apply_V1.call,
+                &m->nested.mandate_apply_V1.call,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -2539,7 +2539,7 @@ parser_error_t _getMethod_ItemValue_V1(
         switch (itemIdx) {
         case 0: /* sudo_sudo_V1 - call */;
             return _toStringCall(
-                &m->basic.sudo_sudo_V1.call,
+                &m->nested.sudo_sudo_V1.call,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -2549,12 +2549,12 @@ parser_error_t _getMethod_ItemValue_V1(
         switch (itemIdx) {
         case 0: /* sudo_sudo_unchecked_weight_V1 - call */;
             return _toStringCall(
-                &m->basic.sudo_sudo_unchecked_weight_V1.call,
+                &m->nested.sudo_sudo_unchecked_weight_V1.call,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* sudo_sudo_unchecked_weight_V1 - weight */;
             return _toStringWeight_V1(
-                &m->basic.sudo_sudo_unchecked_weight_V1.weight,
+                &m->nested.sudo_sudo_unchecked_weight_V1.weight,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -2564,7 +2564,7 @@ parser_error_t _getMethod_ItemValue_V1(
         switch (itemIdx) {
         case 0: /* sudo_set_key_V1 - new_ */;
             return _toStringLookupasStaticLookupSource_V1(
-                &m->basic.sudo_set_key_V1.new_,
+                &m->nested.sudo_set_key_V1.new_,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -2574,12 +2574,12 @@ parser_error_t _getMethod_ItemValue_V1(
         switch (itemIdx) {
         case 0: /* sudo_sudo_as_V1 - who */;
             return _toStringLookupasStaticLookupSource_V1(
-                &m->basic.sudo_sudo_as_V1.who,
+                &m->nested.sudo_sudo_as_V1.who,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* sudo_sudo_as_V1 - call */;
             return _toStringCall(
-                &m->basic.sudo_sudo_as_V1.call,
+                &m->nested.sudo_sudo_as_V1.call,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -2625,7 +2625,6 @@ bool _getMethod_IsNestingSupported_V1(uint8_t moduleIdx, uint8_t callIdx)
     case 3585: // Vesting:Add vesting schedule
     case 3586: // Vesting:Cancel all vesting schedules
     case 3587: // Vesting:Overwrite vesting schedules
-    case 3840: // Mandate:Apply
     case 4096: // TechnicalCommittee:Set members
     case 4097: // TechnicalCommittee:Execute
     case 4098: // TechnicalCommittee:Propose
@@ -2648,8 +2647,6 @@ bool _getMethod_IsNestingSupported_V1(uint8_t moduleIdx, uint8_t callIdx)
     case 5382: // ValidatorsSet:Clear prime
     case 5888: // Session:Set keys
     case 5889: // Session:Purge keys
-    case 10240: // Utility:Batch
-    case 10242: // Utility:Batch all
     case 12800: // EmergencyShutdown:Toggle
     case 13056: // Allocations:Allocate
     case 13312: // AllocationsOracles:Add member
@@ -2659,10 +2656,6 @@ bool _getMethod_IsNestingSupported_V1(uint8_t moduleIdx, uint8_t callIdx)
     case 13316: // AllocationsOracles:Change key
     case 13317: // AllocationsOracles:Set prime
     case 13318: // AllocationsOracles:Clear prime
-    case 15360: // Sudo:Sudo
-    case 15361: // Sudo:Sudo unchecked weight
-    case 15362: // Sudo:Set key
-    case 15363: // Sudo:Sudo as
         return false;
     default:
         return true;

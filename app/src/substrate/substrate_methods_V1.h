@@ -61,16 +61,6 @@ typedef struct {
 typedef struct {
 } pd_session_purge_keys_V1_t;
 
-#define PD_CALL_UTILITY_BATCH_V1 0
-typedef struct {
-    pd_VecCall_t calls;
-} pd_utility_batch_V1_t;
-
-#define PD_CALL_UTILITY_BATCH_ALL_V1 2
-typedef struct {
-    pd_VecCall_t calls;
-} pd_utility_batch_all_V1_t;
-
 #ifdef SUBSTRATE_PARSER_FULL
 
 #define PD_CALL_TIMESTAMP_SET_V1 0
@@ -154,11 +144,6 @@ typedef struct {
     pd_LookupasStaticLookupSource_V1_t who;
     pd_VecVestingScheduleOf_V1_t new_schedules;
 } pd_vesting_overwrite_vesting_schedules_V1_t;
-
-#define PD_CALL_MANDATE_APPLY_V1 0
-typedef struct {
-    pd_Call_t call;
-} pd_mandate_apply_V1_t;
 
 #define PD_CALL_TECHNICALCOMMITTEE_SET_MEMBERS_V1 0
 typedef struct {
@@ -316,36 +301,12 @@ typedef struct {
 typedef struct {
 } pd_allocationsoracles_clear_prime_V1_t;
 
-#define PD_CALL_SUDO_SUDO_V1 0
-typedef struct {
-    pd_Call_t call;
-} pd_sudo_sudo_V1_t;
-
-#define PD_CALL_SUDO_SUDO_UNCHECKED_WEIGHT_V1 1
-typedef struct {
-    pd_Call_t call;
-    pd_Weight_V1_t weight;
-} pd_sudo_sudo_unchecked_weight_V1_t;
-
-#define PD_CALL_SUDO_SET_KEY_V1 2
-typedef struct {
-    pd_LookupasStaticLookupSource_V1_t new_;
-} pd_sudo_set_key_V1_t;
-
-#define PD_CALL_SUDO_SUDO_AS_V1 3
-typedef struct {
-    pd_LookupasStaticLookupSource_V1_t who;
-    pd_Call_t call;
-} pd_sudo_sudo_as_V1_t;
-
 #endif
 
 typedef union {
     pd_balances_transfer_all_V1_t balances_transfer_all_V1;
     pd_session_set_keys_V1_t session_set_keys_V1;
     pd_session_purge_keys_V1_t session_purge_keys_V1;
-    pd_utility_batch_V1_t utility_batch_V1;
-    pd_utility_batch_all_V1_t utility_batch_all_V1;
 #ifdef SUBSTRATE_PARSER_FULL
     pd_timestamp_set_V1_t timestamp_set_V1;
     pd_balances_force_unreserve_V1_t balances_force_unreserve_V1;
@@ -362,7 +323,6 @@ typedef union {
     pd_vesting_add_vesting_schedule_V1_t vesting_add_vesting_schedule_V1;
     pd_vesting_cancel_all_vesting_schedules_V1_t vesting_cancel_all_vesting_schedules_V1;
     pd_vesting_overwrite_vesting_schedules_V1_t vesting_overwrite_vesting_schedules_V1;
-    pd_mandate_apply_V1_t mandate_apply_V1;
     pd_technicalcommittee_set_members_V1_t technicalcommittee_set_members_V1;
     pd_technicalcommittee_execute_V1_t technicalcommittee_execute_V1;
     pd_technicalcommittee_propose_V1_t technicalcommittee_propose_V1;
@@ -392,10 +352,6 @@ typedef union {
     pd_allocationsoracles_change_key_V1_t allocationsoracles_change_key_V1;
     pd_allocationsoracles_set_prime_V1_t allocationsoracles_set_prime_V1;
     pd_allocationsoracles_clear_prime_V1_t allocationsoracles_clear_prime_V1;
-    pd_sudo_sudo_V1_t sudo_sudo_V1;
-    pd_sudo_sudo_unchecked_weight_V1_t sudo_sudo_unchecked_weight_V1;
-    pd_sudo_set_key_V1_t sudo_set_key_V1;
-    pd_sudo_sudo_as_V1_t sudo_sudo_as_V1;
 #endif
 } pd_MethodBasic_V1_t;
 
@@ -417,6 +373,16 @@ typedef struct {
     pd_LookupasStaticLookupSource_V1_t dest;
     pd_CompactBalance_t amount;
 } pd_balances_transfer_keep_alive_V1_t;
+
+#define PD_CALL_UTILITY_BATCH_V1 0
+typedef struct {
+    pd_VecCall_t calls;
+} pd_utility_batch_V1_t;
+
+#define PD_CALL_UTILITY_BATCH_ALL_V1 2
+typedef struct {
+    pd_VecCall_t calls;
+} pd_utility_batch_all_V1_t;
 
 #ifdef SUBSTRATE_PARSER_FULL
 #define PD_CALL_SYSTEM_FILL_BLOCK_V1 0
@@ -456,6 +422,11 @@ typedef struct {
     pd_CompactBalance_t new_reserved;
 } pd_balances_set_balance_V1_t;
 
+#define PD_CALL_MANDATE_APPLY_V1 0
+typedef struct {
+    pd_Call_t call;
+} pd_mandate_apply_V1_t;
+
 #define PD_CALL_MULTISIG_AS_MULTI_THRESHOLD_1_V1 0
 typedef struct {
     pd_VecAccountId_V1_t other_signatories;
@@ -489,12 +460,36 @@ typedef struct {
     pd_H256_t call_hash;
 } pd_multisig_cancel_as_multi_V1_t;
 
+#define PD_CALL_SUDO_SUDO_V1 0
+typedef struct {
+    pd_Call_t call;
+} pd_sudo_sudo_V1_t;
+
+#define PD_CALL_SUDO_SUDO_UNCHECKED_WEIGHT_V1 1
+typedef struct {
+    pd_Call_t call;
+    pd_Weight_V1_t weight;
+} pd_sudo_sudo_unchecked_weight_V1_t;
+
+#define PD_CALL_SUDO_SET_KEY_V1 2
+typedef struct {
+    pd_LookupasStaticLookupSource_V1_t new_;
+} pd_sudo_set_key_V1_t;
+
+#define PD_CALL_SUDO_SUDO_AS_V1 3
+typedef struct {
+    pd_LookupasStaticLookupSource_V1_t who;
+    pd_Call_t call;
+} pd_sudo_sudo_as_V1_t;
+
 #endif
 
 typedef union {
     pd_balances_transfer_V1_t balances_transfer_V1;
     pd_balances_force_transfer_V1_t balances_force_transfer_V1;
     pd_balances_transfer_keep_alive_V1_t balances_transfer_keep_alive_V1;
+    pd_utility_batch_V1_t utility_batch_V1;
+    pd_utility_batch_all_V1_t utility_batch_all_V1;
 #ifdef SUBSTRATE_PARSER_FULL
     pd_system_fill_block_V1_t system_fill_block_V1;
     pd_system_remark_V1_t system_remark_V1;
@@ -503,10 +498,15 @@ typedef union {
     pd_system_set_code_without_checks_V1_t system_set_code_without_checks_V1;
     pd_system_remark_with_event_V1_t system_remark_with_event_V1;
     pd_balances_set_balance_V1_t balances_set_balance_V1;
+    pd_mandate_apply_V1_t mandate_apply_V1;
     pd_multisig_as_multi_threshold_1_V1_t multisig_as_multi_threshold_1_V1;
     pd_multisig_as_multi_V1_t multisig_as_multi_V1;
     pd_multisig_approve_as_multi_V1_t multisig_approve_as_multi_V1;
     pd_multisig_cancel_as_multi_V1_t multisig_cancel_as_multi_V1;
+    pd_sudo_sudo_V1_t sudo_sudo_V1;
+    pd_sudo_sudo_unchecked_weight_V1_t sudo_sudo_unchecked_weight_V1;
+    pd_sudo_set_key_V1_t sudo_set_key_V1;
+    pd_sudo_sudo_as_V1_t sudo_sudo_as_V1;
 #endif
 } pd_MethodNested_V1_t;
 
