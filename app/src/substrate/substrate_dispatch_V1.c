@@ -442,6 +442,233 @@ __Z_INLINE parser_error_t _readMethod_multisig_cancel_as_multi_V1(
     return parser_ok;
 }
 
+__Z_INLINE parser_error_t _readMethod_uniques_create_V1(
+    parser_context_t* c, pd_uniques_create_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->admin))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_force_create_V1(
+    parser_context_t* c, pd_uniques_force_create_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->owner))
+    CHECK_ERROR(_readbool(c, &m->free_holding))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_destroy_V1(
+    parser_context_t* c, pd_uniques_destroy_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readDestroyWitness_V1(c, &m->witness))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_mint_V1(
+    parser_context_t* c, pd_uniques_mint_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readInstanceId_V1(c, &m->instance))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->owner))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_burn_V1(
+    parser_context_t* c, pd_uniques_burn_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readInstanceId_V1(c, &m->instance))
+    CHECK_ERROR(_readOptionLookupasStaticLookupSource_V1(c, &m->check_owner))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_transfer_V1(
+    parser_context_t* c, pd_uniques_transfer_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readInstanceId_V1(c, &m->instance))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->dest))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_redeposit_V1(
+    parser_context_t* c, pd_uniques_redeposit_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readVecInstanceId_V1(c, &m->instances))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_freeze_V1(
+    parser_context_t* c, pd_uniques_freeze_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readInstanceId_V1(c, &m->instance))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_thaw_V1(
+    parser_context_t* c, pd_uniques_thaw_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readInstanceId_V1(c, &m->instance))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_freeze_class_V1(
+    parser_context_t* c, pd_uniques_freeze_class_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_thaw_class_V1(
+    parser_context_t* c, pd_uniques_thaw_class_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_transfer_ownership_V1(
+    parser_context_t* c, pd_uniques_transfer_ownership_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->owner))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_set_team_V1(
+    parser_context_t* c, pd_uniques_set_team_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->issuer))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->admin))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->freezer))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_approve_transfer_V1(
+    parser_context_t* c, pd_uniques_approve_transfer_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readInstanceId_V1(c, &m->instance))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->delegate))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_cancel_approval_V1(
+    parser_context_t* c, pd_uniques_cancel_approval_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readInstanceId_V1(c, &m->instance))
+    CHECK_ERROR(_readOptionLookupasStaticLookupSource_V1(c, &m->maybe_check_delegate))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_force_asset_status_V1(
+    parser_context_t* c, pd_uniques_force_asset_status_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->owner))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->issuer))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->admin))
+    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->freezer))
+    CHECK_ERROR(_readbool(c, &m->free_holding))
+    CHECK_ERROR(_readbool(c, &m->is_frozen))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_set_attribute_V1(
+    parser_context_t* c, pd_uniques_set_attribute_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readOptionInstanceId_V1(c, &m->maybe_instance))
+    CHECK_ERROR(_readBoundedVecu8_V1(c, &m->key))
+    CHECK_ERROR(_readBoundedVecu8_V1(c, &m->value))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_clear_attribute_V1(
+    parser_context_t* c, pd_uniques_clear_attribute_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readOptionInstanceId_V1(c, &m->maybe_instance))
+    CHECK_ERROR(_readBoundedVecu8_V1(c, &m->key))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_set_metadata_V1(
+    parser_context_t* c, pd_uniques_set_metadata_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readInstanceId_V1(c, &m->instance))
+    CHECK_ERROR(_readBoundedVecu8_V1(c, &m->data))
+    CHECK_ERROR(_readbool(c, &m->is_frozen))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_clear_metadata_V1(
+    parser_context_t* c, pd_uniques_clear_metadata_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readInstanceId_V1(c, &m->instance))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_set_class_metadata_V1(
+    parser_context_t* c, pd_uniques_set_class_metadata_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    CHECK_ERROR(_readBoundedVecu8_V1(c, &m->data))
+    CHECK_ERROR(_readbool(c, &m->is_frozen))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_clear_class_metadata_V1(
+    parser_context_t* c, pd_uniques_clear_class_metadata_V1_t* m)
+{
+    CHECK_ERROR(_readClassId_V1(c, &m->class_))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_set_accept_ownership_V1(
+    parser_context_t* c, pd_uniques_set_accept_ownership_V1_t* m)
+{
+    CHECK_ERROR(_readOptionClassId_V1(c, &m->maybe_class))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_preimage_note_preimage_V1(
+    parser_context_t* c, pd_preimage_note_preimage_V1_t* m)
+{
+    CHECK_ERROR(_readVecu8(c, &m->bytes))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_preimage_unnote_preimage_V1(
+    parser_context_t* c, pd_preimage_unnote_preimage_V1_t* m)
+{
+    CHECK_ERROR(_readHash(c, &m->hash))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_preimage_request_preimage_V1(
+    parser_context_t* c, pd_preimage_request_preimage_V1_t* m)
+{
+    CHECK_ERROR(_readHash(c, &m->hash))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_preimage_unrequest_preimage_V1(
+    parser_context_t* c, pd_preimage_unrequest_preimage_V1_t* m)
+{
+    CHECK_ERROR(_readHash(c, &m->hash))
+    return parser_ok;
+}
+
 __Z_INLINE parser_error_t _readMethod_emergencyshutdown_toggle_V1(
     parser_context_t* c, pd_emergencyshutdown_toggle_V1_t* m)
 {
@@ -503,36 +730,6 @@ __Z_INLINE parser_error_t _readMethod_allocationsoracles_set_prime_V1(
 __Z_INLINE parser_error_t _readMethod_allocationsoracles_clear_prime_V1(
     parser_context_t* c, pd_allocationsoracles_clear_prime_V1_t* m)
 {
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_sudo_sudo_V1(
-    parser_context_t* c, pd_sudo_sudo_V1_t* m)
-{
-    CHECK_ERROR(_readCall(c, &m->call))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_sudo_sudo_unchecked_weight_V1(
-    parser_context_t* c, pd_sudo_sudo_unchecked_weight_V1_t* m)
-{
-    CHECK_ERROR(_readCall(c, &m->call))
-    CHECK_ERROR(_readWeight_V1(c, &m->weight))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_sudo_set_key_V1(
-    parser_context_t* c, pd_sudo_set_key_V1_t* m)
-{
-    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->new_))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_sudo_sudo_as_V1(
-    parser_context_t* c, pd_sudo_sudo_as_V1_t* m)
-{
-    CHECK_ERROR(_readLookupasStaticLookupSource_V1(c, &m->who))
-    CHECK_ERROR(_readCall(c, &m->call))
     return parser_ok;
 }
 
@@ -715,6 +912,87 @@ parser_error_t _readMethod_V1(
     case 10499: /* module 41 call 3 */
         CHECK_ERROR(_readMethod_multisig_cancel_as_multi_V1(c, &method->nested.multisig_cancel_as_multi_V1))
         break;
+    case 10752: /* module 42 call 0 */
+        CHECK_ERROR(_readMethod_uniques_create_V1(c, &method->basic.uniques_create_V1))
+        break;
+    case 10753: /* module 42 call 1 */
+        CHECK_ERROR(_readMethod_uniques_force_create_V1(c, &method->basic.uniques_force_create_V1))
+        break;
+    case 10754: /* module 42 call 2 */
+        CHECK_ERROR(_readMethod_uniques_destroy_V1(c, &method->basic.uniques_destroy_V1))
+        break;
+    case 10755: /* module 42 call 3 */
+        CHECK_ERROR(_readMethod_uniques_mint_V1(c, &method->basic.uniques_mint_V1))
+        break;
+    case 10756: /* module 42 call 4 */
+        CHECK_ERROR(_readMethod_uniques_burn_V1(c, &method->basic.uniques_burn_V1))
+        break;
+    case 10757: /* module 42 call 5 */
+        CHECK_ERROR(_readMethod_uniques_transfer_V1(c, &method->basic.uniques_transfer_V1))
+        break;
+    case 10758: /* module 42 call 6 */
+        CHECK_ERROR(_readMethod_uniques_redeposit_V1(c, &method->basic.uniques_redeposit_V1))
+        break;
+    case 10759: /* module 42 call 7 */
+        CHECK_ERROR(_readMethod_uniques_freeze_V1(c, &method->basic.uniques_freeze_V1))
+        break;
+    case 10760: /* module 42 call 8 */
+        CHECK_ERROR(_readMethod_uniques_thaw_V1(c, &method->basic.uniques_thaw_V1))
+        break;
+    case 10761: /* module 42 call 9 */
+        CHECK_ERROR(_readMethod_uniques_freeze_class_V1(c, &method->basic.uniques_freeze_class_V1))
+        break;
+    case 10762: /* module 42 call 10 */
+        CHECK_ERROR(_readMethod_uniques_thaw_class_V1(c, &method->basic.uniques_thaw_class_V1))
+        break;
+    case 10763: /* module 42 call 11 */
+        CHECK_ERROR(_readMethod_uniques_transfer_ownership_V1(c, &method->basic.uniques_transfer_ownership_V1))
+        break;
+    case 10764: /* module 42 call 12 */
+        CHECK_ERROR(_readMethod_uniques_set_team_V1(c, &method->basic.uniques_set_team_V1))
+        break;
+    case 10765: /* module 42 call 13 */
+        CHECK_ERROR(_readMethod_uniques_approve_transfer_V1(c, &method->basic.uniques_approve_transfer_V1))
+        break;
+    case 10766: /* module 42 call 14 */
+        CHECK_ERROR(_readMethod_uniques_cancel_approval_V1(c, &method->basic.uniques_cancel_approval_V1))
+        break;
+    case 10767: /* module 42 call 15 */
+        CHECK_ERROR(_readMethod_uniques_force_asset_status_V1(c, &method->basic.uniques_force_asset_status_V1))
+        break;
+    case 10768: /* module 42 call 16 */
+        CHECK_ERROR(_readMethod_uniques_set_attribute_V1(c, &method->basic.uniques_set_attribute_V1))
+        break;
+    case 10769: /* module 42 call 17 */
+        CHECK_ERROR(_readMethod_uniques_clear_attribute_V1(c, &method->basic.uniques_clear_attribute_V1))
+        break;
+    case 10770: /* module 42 call 18 */
+        CHECK_ERROR(_readMethod_uniques_set_metadata_V1(c, &method->basic.uniques_set_metadata_V1))
+        break;
+    case 10771: /* module 42 call 19 */
+        CHECK_ERROR(_readMethod_uniques_clear_metadata_V1(c, &method->basic.uniques_clear_metadata_V1))
+        break;
+    case 10772: /* module 42 call 20 */
+        CHECK_ERROR(_readMethod_uniques_set_class_metadata_V1(c, &method->basic.uniques_set_class_metadata_V1))
+        break;
+    case 10773: /* module 42 call 21 */
+        CHECK_ERROR(_readMethod_uniques_clear_class_metadata_V1(c, &method->basic.uniques_clear_class_metadata_V1))
+        break;
+    case 10774: /* module 42 call 22 */
+        CHECK_ERROR(_readMethod_uniques_set_accept_ownership_V1(c, &method->basic.uniques_set_accept_ownership_V1))
+        break;
+    case 11008: /* module 43 call 0 */
+        CHECK_ERROR(_readMethod_preimage_note_preimage_V1(c, &method->basic.preimage_note_preimage_V1))
+        break;
+    case 11009: /* module 43 call 1 */
+        CHECK_ERROR(_readMethod_preimage_unnote_preimage_V1(c, &method->basic.preimage_unnote_preimage_V1))
+        break;
+    case 11010: /* module 43 call 2 */
+        CHECK_ERROR(_readMethod_preimage_request_preimage_V1(c, &method->basic.preimage_request_preimage_V1))
+        break;
+    case 11011: /* module 43 call 3 */
+        CHECK_ERROR(_readMethod_preimage_unrequest_preimage_V1(c, &method->basic.preimage_unrequest_preimage_V1))
+        break;
     case 12800: /* module 50 call 0 */
         CHECK_ERROR(_readMethod_emergencyshutdown_toggle_V1(c, &method->basic.emergencyshutdown_toggle_V1))
         break;
@@ -741,18 +1019,6 @@ parser_error_t _readMethod_V1(
         break;
     case 13318: /* module 52 call 6 */
         CHECK_ERROR(_readMethod_allocationsoracles_clear_prime_V1(c, &method->basic.allocationsoracles_clear_prime_V1))
-        break;
-    case 15360: /* module 60 call 0 */
-        CHECK_ERROR(_readMethod_sudo_sudo_V1(c, &method->nested.sudo_sudo_V1))
-        break;
-    case 15361: /* module 60 call 1 */
-        CHECK_ERROR(_readMethod_sudo_sudo_unchecked_weight_V1(c, &method->nested.sudo_sudo_unchecked_weight_V1))
-        break;
-    case 15362: /* module 60 call 2 */
-        CHECK_ERROR(_readMethod_sudo_set_key_V1(c, &method->nested.sudo_set_key_V1))
-        break;
-    case 15363: /* module 60 call 3 */
-        CHECK_ERROR(_readMethod_sudo_sudo_as_V1(c, &method->nested.sudo_sudo_as_V1))
         break;
 #endif
     default:
@@ -799,14 +1065,16 @@ const char* _getMethod_ModuleName_V1(uint8_t moduleIdx)
         return STR_MO_VALIDATORSSET;
     case 41:
         return STR_MO_MULTISIG;
+    case 42:
+        return STR_MO_UNIQUES;
+    case 43:
+        return STR_MO_PREIMAGE;
     case 50:
         return STR_MO_EMERGENCYSHUTDOWN;
     case 51:
         return STR_MO_ALLOCATIONS;
     case 52:
         return STR_MO_ALLOCATIONSORACLES;
-    case 60:
-        return STR_MO_SUDO;
 #endif
     default:
         return NULL;
@@ -941,6 +1209,60 @@ const char* _getMethod_Name_V1_ParserFull(uint16_t callPrivIdx)
         return STR_ME_APPROVE_AS_MULTI;
     case 10499: /* module 41 call 3 */
         return STR_ME_CANCEL_AS_MULTI;
+    case 10752: /* module 42 call 0 */
+        return STR_ME_CREATE;
+    case 10753: /* module 42 call 1 */
+        return STR_ME_FORCE_CREATE;
+    case 10754: /* module 42 call 2 */
+        return STR_ME_DESTROY;
+    case 10755: /* module 42 call 3 */
+        return STR_ME_MINT;
+    case 10756: /* module 42 call 4 */
+        return STR_ME_BURN;
+    case 10757: /* module 42 call 5 */
+        return STR_ME_TRANSFER;
+    case 10758: /* module 42 call 6 */
+        return STR_ME_REDEPOSIT;
+    case 10759: /* module 42 call 7 */
+        return STR_ME_FREEZE;
+    case 10760: /* module 42 call 8 */
+        return STR_ME_THAW;
+    case 10761: /* module 42 call 9 */
+        return STR_ME_FREEZE_CLASS;
+    case 10762: /* module 42 call 10 */
+        return STR_ME_THAW_CLASS;
+    case 10763: /* module 42 call 11 */
+        return STR_ME_TRANSFER_OWNERSHIP;
+    case 10764: /* module 42 call 12 */
+        return STR_ME_SET_TEAM;
+    case 10765: /* module 42 call 13 */
+        return STR_ME_APPROVE_TRANSFER;
+    case 10766: /* module 42 call 14 */
+        return STR_ME_CANCEL_APPROVAL;
+    case 10767: /* module 42 call 15 */
+        return STR_ME_FORCE_ASSET_STATUS;
+    case 10768: /* module 42 call 16 */
+        return STR_ME_SET_ATTRIBUTE;
+    case 10769: /* module 42 call 17 */
+        return STR_ME_CLEAR_ATTRIBUTE;
+    case 10770: /* module 42 call 18 */
+        return STR_ME_SET_METADATA;
+    case 10771: /* module 42 call 19 */
+        return STR_ME_CLEAR_METADATA;
+    case 10772: /* module 42 call 20 */
+        return STR_ME_SET_CLASS_METADATA;
+    case 10773: /* module 42 call 21 */
+        return STR_ME_CLEAR_CLASS_METADATA;
+    case 10774: /* module 42 call 22 */
+        return STR_ME_SET_ACCEPT_OWNERSHIP;
+    case 11008: /* module 43 call 0 */
+        return STR_ME_NOTE_PREIMAGE;
+    case 11009: /* module 43 call 1 */
+        return STR_ME_UNNOTE_PREIMAGE;
+    case 11010: /* module 43 call 2 */
+        return STR_ME_REQUEST_PREIMAGE;
+    case 11011: /* module 43 call 3 */
+        return STR_ME_UNREQUEST_PREIMAGE;
     case 12800: /* module 50 call 0 */
         return STR_ME_TOGGLE;
     case 13056: /* module 51 call 0 */
@@ -959,14 +1281,6 @@ const char* _getMethod_Name_V1_ParserFull(uint16_t callPrivIdx)
         return STR_ME_SET_PRIME;
     case 13318: /* module 52 call 6 */
         return STR_ME_CLEAR_PRIME;
-    case 15360: /* module 60 call 0 */
-        return STR_ME_SUDO;
-    case 15361: /* module 60 call 1 */
-        return STR_ME_SUDO_UNCHECKED_WEIGHT;
-    case 15362: /* module 60 call 2 */
-        return STR_ME_SET_KEY;
-    case 15363: /* module 60 call 3 */
-        return STR_ME_SUDO_AS;
 #endif
     default:
         return NULL;
@@ -1091,6 +1405,60 @@ uint8_t _getMethod_NumItems_V1(uint8_t moduleIdx, uint8_t callIdx)
         return 5;
     case 10499: /* module 41 call 3 */
         return 4;
+    case 10752: /* module 42 call 0 */
+        return 2;
+    case 10753: /* module 42 call 1 */
+        return 3;
+    case 10754: /* module 42 call 2 */
+        return 2;
+    case 10755: /* module 42 call 3 */
+        return 3;
+    case 10756: /* module 42 call 4 */
+        return 3;
+    case 10757: /* module 42 call 5 */
+        return 3;
+    case 10758: /* module 42 call 6 */
+        return 2;
+    case 10759: /* module 42 call 7 */
+        return 2;
+    case 10760: /* module 42 call 8 */
+        return 2;
+    case 10761: /* module 42 call 9 */
+        return 1;
+    case 10762: /* module 42 call 10 */
+        return 1;
+    case 10763: /* module 42 call 11 */
+        return 2;
+    case 10764: /* module 42 call 12 */
+        return 4;
+    case 10765: /* module 42 call 13 */
+        return 3;
+    case 10766: /* module 42 call 14 */
+        return 3;
+    case 10767: /* module 42 call 15 */
+        return 7;
+    case 10768: /* module 42 call 16 */
+        return 4;
+    case 10769: /* module 42 call 17 */
+        return 3;
+    case 10770: /* module 42 call 18 */
+        return 4;
+    case 10771: /* module 42 call 19 */
+        return 2;
+    case 10772: /* module 42 call 20 */
+        return 3;
+    case 10773: /* module 42 call 21 */
+        return 1;
+    case 10774: /* module 42 call 22 */
+        return 1;
+    case 11008: /* module 43 call 0 */
+        return 1;
+    case 11009: /* module 43 call 1 */
+        return 1;
+    case 11010: /* module 43 call 2 */
+        return 1;
+    case 11011: /* module 43 call 3 */
+        return 1;
     case 12800: /* module 50 call 0 */
         return 0;
     case 13056: /* module 51 call 0 */
@@ -1109,14 +1477,6 @@ uint8_t _getMethod_NumItems_V1(uint8_t moduleIdx, uint8_t callIdx)
         return 1;
     case 13318: /* module 52 call 6 */
         return 0;
-    case 15360: /* module 60 call 0 */
-        return 1;
-    case 15361: /* module 60 call 1 */
-        return 2;
-    case 15362: /* module 60 call 2 */
-        return 1;
-    case 15363: /* module 60 call 3 */
-        return 2;
 #endif
     default:
         return 0;
@@ -1590,6 +1950,271 @@ const char* _getMethod_ItemName_V1(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
         default:
             return NULL;
         }
+    case 10752: /* module 42 call 0 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_admin;
+        default:
+            return NULL;
+        }
+    case 10753: /* module 42 call 1 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_owner;
+        case 2:
+            return STR_IT_free_holding;
+        default:
+            return NULL;
+        }
+    case 10754: /* module 42 call 2 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_witness;
+        default:
+            return NULL;
+        }
+    case 10755: /* module 42 call 3 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_instance;
+        case 2:
+            return STR_IT_owner;
+        default:
+            return NULL;
+        }
+    case 10756: /* module 42 call 4 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_instance;
+        case 2:
+            return STR_IT_check_owner;
+        default:
+            return NULL;
+        }
+    case 10757: /* module 42 call 5 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_instance;
+        case 2:
+            return STR_IT_dest;
+        default:
+            return NULL;
+        }
+    case 10758: /* module 42 call 6 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_instances;
+        default:
+            return NULL;
+        }
+    case 10759: /* module 42 call 7 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_instance;
+        default:
+            return NULL;
+        }
+    case 10760: /* module 42 call 8 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_instance;
+        default:
+            return NULL;
+        }
+    case 10761: /* module 42 call 9 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        default:
+            return NULL;
+        }
+    case 10762: /* module 42 call 10 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        default:
+            return NULL;
+        }
+    case 10763: /* module 42 call 11 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_owner;
+        default:
+            return NULL;
+        }
+    case 10764: /* module 42 call 12 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_issuer;
+        case 2:
+            return STR_IT_admin;
+        case 3:
+            return STR_IT_freezer;
+        default:
+            return NULL;
+        }
+    case 10765: /* module 42 call 13 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_instance;
+        case 2:
+            return STR_IT_delegate;
+        default:
+            return NULL;
+        }
+    case 10766: /* module 42 call 14 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_instance;
+        case 2:
+            return STR_IT_maybe_check_delegate;
+        default:
+            return NULL;
+        }
+    case 10767: /* module 42 call 15 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_owner;
+        case 2:
+            return STR_IT_issuer;
+        case 3:
+            return STR_IT_admin;
+        case 4:
+            return STR_IT_freezer;
+        case 5:
+            return STR_IT_free_holding;
+        case 6:
+            return STR_IT_is_frozen;
+        default:
+            return NULL;
+        }
+    case 10768: /* module 42 call 16 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_maybe_instance;
+        case 2:
+            return STR_IT_key;
+        case 3:
+            return STR_IT_value;
+        default:
+            return NULL;
+        }
+    case 10769: /* module 42 call 17 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_maybe_instance;
+        case 2:
+            return STR_IT_key;
+        default:
+            return NULL;
+        }
+    case 10770: /* module 42 call 18 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_instance;
+        case 2:
+            return STR_IT_data;
+        case 3:
+            return STR_IT_is_frozen;
+        default:
+            return NULL;
+        }
+    case 10771: /* module 42 call 19 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_instance;
+        default:
+            return NULL;
+        }
+    case 10772: /* module 42 call 20 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        case 1:
+            return STR_IT_data;
+        case 2:
+            return STR_IT_is_frozen;
+        default:
+            return NULL;
+        }
+    case 10773: /* module 42 call 21 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_class_;
+        default:
+            return NULL;
+        }
+    case 10774: /* module 42 call 22 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_maybe_class;
+        default:
+            return NULL;
+        }
+    case 11008: /* module 43 call 0 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_bytes;
+        default:
+            return NULL;
+        }
+    case 11009: /* module 43 call 1 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_hash;
+        default:
+            return NULL;
+        }
+    case 11010: /* module 43 call 2 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_hash;
+        default:
+            return NULL;
+        }
+    case 11011: /* module 43 call 3 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_hash;
+        default:
+            return NULL;
+        }
     case 12800: /* module 50 call 0 */
         switch (itemIdx) {
         default:
@@ -1652,38 +2277,6 @@ const char* _getMethod_ItemName_V1(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
         }
     case 13318: /* module 52 call 6 */
         switch (itemIdx) {
-        default:
-            return NULL;
-        }
-    case 15360: /* module 60 call 0 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_call;
-        default:
-            return NULL;
-        }
-    case 15361: /* module 60 call 1 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_call;
-        case 1:
-            return STR_IT_weight;
-        default:
-            return NULL;
-        }
-    case 15362: /* module 60 call 2 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_new_;
-        default:
-            return NULL;
-        }
-    case 15363: /* module 60 call 3 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_who;
-        case 1:
-            return STR_IT_call;
         default:
             return NULL;
         }
@@ -2440,6 +3033,466 @@ parser_error_t _getMethod_ItemValue_V1(
         default:
             return parser_no_data;
         }
+    case 10752: /* module 42 call 0 */
+        switch (itemIdx) {
+        case 0: /* uniques_create_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_create_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_create_V1 - admin */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_create_V1.admin,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10753: /* module 42 call 1 */
+        switch (itemIdx) {
+        case 0: /* uniques_force_create_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_force_create_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_force_create_V1 - owner */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_force_create_V1.owner,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_force_create_V1 - free_holding */;
+            return _toStringbool(
+                &m->basic.uniques_force_create_V1.free_holding,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10754: /* module 42 call 2 */
+        switch (itemIdx) {
+        case 0: /* uniques_destroy_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_destroy_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_destroy_V1 - witness */;
+            return _toStringDestroyWitness_V1(
+                &m->basic.uniques_destroy_V1.witness,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10755: /* module 42 call 3 */
+        switch (itemIdx) {
+        case 0: /* uniques_mint_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_mint_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_mint_V1 - instance */;
+            return _toStringInstanceId_V1(
+                &m->basic.uniques_mint_V1.instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_mint_V1 - owner */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_mint_V1.owner,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10756: /* module 42 call 4 */
+        switch (itemIdx) {
+        case 0: /* uniques_burn_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_burn_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_burn_V1 - instance */;
+            return _toStringInstanceId_V1(
+                &m->basic.uniques_burn_V1.instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_burn_V1 - check_owner */;
+            return _toStringOptionLookupasStaticLookupSource_V1(
+                &m->basic.uniques_burn_V1.check_owner,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10757: /* module 42 call 5 */
+        switch (itemIdx) {
+        case 0: /* uniques_transfer_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_transfer_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_transfer_V1 - instance */;
+            return _toStringInstanceId_V1(
+                &m->basic.uniques_transfer_V1.instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_transfer_V1 - dest */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_transfer_V1.dest,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10758: /* module 42 call 6 */
+        switch (itemIdx) {
+        case 0: /* uniques_redeposit_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_redeposit_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_redeposit_V1 - instances */;
+            return _toStringVecInstanceId_V1(
+                &m->basic.uniques_redeposit_V1.instances,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10759: /* module 42 call 7 */
+        switch (itemIdx) {
+        case 0: /* uniques_freeze_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_freeze_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_freeze_V1 - instance */;
+            return _toStringInstanceId_V1(
+                &m->basic.uniques_freeze_V1.instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10760: /* module 42 call 8 */
+        switch (itemIdx) {
+        case 0: /* uniques_thaw_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_thaw_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_thaw_V1 - instance */;
+            return _toStringInstanceId_V1(
+                &m->basic.uniques_thaw_V1.instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10761: /* module 42 call 9 */
+        switch (itemIdx) {
+        case 0: /* uniques_freeze_class_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_freeze_class_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10762: /* module 42 call 10 */
+        switch (itemIdx) {
+        case 0: /* uniques_thaw_class_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_thaw_class_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10763: /* module 42 call 11 */
+        switch (itemIdx) {
+        case 0: /* uniques_transfer_ownership_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_transfer_ownership_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_transfer_ownership_V1 - owner */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_transfer_ownership_V1.owner,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10764: /* module 42 call 12 */
+        switch (itemIdx) {
+        case 0: /* uniques_set_team_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_set_team_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_set_team_V1 - issuer */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_set_team_V1.issuer,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_set_team_V1 - admin */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_set_team_V1.admin,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 3: /* uniques_set_team_V1 - freezer */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_set_team_V1.freezer,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10765: /* module 42 call 13 */
+        switch (itemIdx) {
+        case 0: /* uniques_approve_transfer_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_approve_transfer_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_approve_transfer_V1 - instance */;
+            return _toStringInstanceId_V1(
+                &m->basic.uniques_approve_transfer_V1.instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_approve_transfer_V1 - delegate */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_approve_transfer_V1.delegate,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10766: /* module 42 call 14 */
+        switch (itemIdx) {
+        case 0: /* uniques_cancel_approval_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_cancel_approval_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_cancel_approval_V1 - instance */;
+            return _toStringInstanceId_V1(
+                &m->basic.uniques_cancel_approval_V1.instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_cancel_approval_V1 - maybe_check_delegate */;
+            return _toStringOptionLookupasStaticLookupSource_V1(
+                &m->basic.uniques_cancel_approval_V1.maybe_check_delegate,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10767: /* module 42 call 15 */
+        switch (itemIdx) {
+        case 0: /* uniques_force_asset_status_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_force_asset_status_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_force_asset_status_V1 - owner */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_force_asset_status_V1.owner,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_force_asset_status_V1 - issuer */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_force_asset_status_V1.issuer,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 3: /* uniques_force_asset_status_V1 - admin */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_force_asset_status_V1.admin,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 4: /* uniques_force_asset_status_V1 - freezer */;
+            return _toStringLookupasStaticLookupSource_V1(
+                &m->basic.uniques_force_asset_status_V1.freezer,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 5: /* uniques_force_asset_status_V1 - free_holding */;
+            return _toStringbool(
+                &m->basic.uniques_force_asset_status_V1.free_holding,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 6: /* uniques_force_asset_status_V1 - is_frozen */;
+            return _toStringbool(
+                &m->basic.uniques_force_asset_status_V1.is_frozen,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10768: /* module 42 call 16 */
+        switch (itemIdx) {
+        case 0: /* uniques_set_attribute_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_set_attribute_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_set_attribute_V1 - maybe_instance */;
+            return _toStringOptionInstanceId_V1(
+                &m->basic.uniques_set_attribute_V1.maybe_instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_set_attribute_V1 - key */;
+            return _toStringBoundedVecu8_V1(
+                &m->basic.uniques_set_attribute_V1.key,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 3: /* uniques_set_attribute_V1 - value */;
+            return _toStringBoundedVecu8_V1(
+                &m->basic.uniques_set_attribute_V1.value,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10769: /* module 42 call 17 */
+        switch (itemIdx) {
+        case 0: /* uniques_clear_attribute_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_clear_attribute_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_clear_attribute_V1 - maybe_instance */;
+            return _toStringOptionInstanceId_V1(
+                &m->basic.uniques_clear_attribute_V1.maybe_instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_clear_attribute_V1 - key */;
+            return _toStringBoundedVecu8_V1(
+                &m->basic.uniques_clear_attribute_V1.key,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10770: /* module 42 call 18 */
+        switch (itemIdx) {
+        case 0: /* uniques_set_metadata_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_set_metadata_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_set_metadata_V1 - instance */;
+            return _toStringInstanceId_V1(
+                &m->basic.uniques_set_metadata_V1.instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_set_metadata_V1 - data */;
+            return _toStringBoundedVecu8_V1(
+                &m->basic.uniques_set_metadata_V1.data,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 3: /* uniques_set_metadata_V1 - is_frozen */;
+            return _toStringbool(
+                &m->basic.uniques_set_metadata_V1.is_frozen,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10771: /* module 42 call 19 */
+        switch (itemIdx) {
+        case 0: /* uniques_clear_metadata_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_clear_metadata_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_clear_metadata_V1 - instance */;
+            return _toStringInstanceId_V1(
+                &m->basic.uniques_clear_metadata_V1.instance,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10772: /* module 42 call 20 */
+        switch (itemIdx) {
+        case 0: /* uniques_set_class_metadata_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_set_class_metadata_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_set_class_metadata_V1 - data */;
+            return _toStringBoundedVecu8_V1(
+                &m->basic.uniques_set_class_metadata_V1.data,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 2: /* uniques_set_class_metadata_V1 - is_frozen */;
+            return _toStringbool(
+                &m->basic.uniques_set_class_metadata_V1.is_frozen,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10773: /* module 42 call 21 */
+        switch (itemIdx) {
+        case 0: /* uniques_clear_class_metadata_V1 - class_ */;
+            return _toStringClassId_V1(
+                &m->basic.uniques_clear_class_metadata_V1.class_,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10774: /* module 42 call 22 */
+        switch (itemIdx) {
+        case 0: /* uniques_set_accept_ownership_V1 - maybe_class */;
+            return _toStringOptionClassId_V1(
+                &m->basic.uniques_set_accept_ownership_V1.maybe_class,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 11008: /* module 43 call 0 */
+        switch (itemIdx) {
+        case 0: /* preimage_note_preimage_V1 - bytes */;
+            return _toStringVecu8(
+                &m->basic.preimage_note_preimage_V1.bytes,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 11009: /* module 43 call 1 */
+        switch (itemIdx) {
+        case 0: /* preimage_unnote_preimage_V1 - hash */;
+            return _toStringHash(
+                &m->basic.preimage_unnote_preimage_V1.hash,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 11010: /* module 43 call 2 */
+        switch (itemIdx) {
+        case 0: /* preimage_request_preimage_V1 - hash */;
+            return _toStringHash(
+                &m->basic.preimage_request_preimage_V1.hash,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 11011: /* module 43 call 3 */
+        switch (itemIdx) {
+        case 0: /* preimage_unrequest_preimage_V1 - hash */;
+            return _toStringHash(
+                &m->basic.preimage_unrequest_preimage_V1.hash,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
     case 12800: /* module 50 call 0 */
         switch (itemIdx) {
         default:
@@ -2535,56 +3588,6 @@ parser_error_t _getMethod_ItemValue_V1(
         default:
             return parser_no_data;
         }
-    case 15360: /* module 60 call 0 */
-        switch (itemIdx) {
-        case 0: /* sudo_sudo_V1 - call */;
-            return _toStringCall(
-                &m->nested.sudo_sudo_V1.call,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 15361: /* module 60 call 1 */
-        switch (itemIdx) {
-        case 0: /* sudo_sudo_unchecked_weight_V1 - call */;
-            return _toStringCall(
-                &m->nested.sudo_sudo_unchecked_weight_V1.call,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* sudo_sudo_unchecked_weight_V1 - weight */;
-            return _toStringWeight_V1(
-                &m->nested.sudo_sudo_unchecked_weight_V1.weight,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 15362: /* module 60 call 2 */
-        switch (itemIdx) {
-        case 0: /* sudo_set_key_V1 - new_ */;
-            return _toStringLookupasStaticLookupSource_V1(
-                &m->nested.sudo_set_key_V1.new_,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 15363: /* module 60 call 3 */
-        switch (itemIdx) {
-        case 0: /* sudo_sudo_as_V1 - who */;
-            return _toStringLookupasStaticLookupSource_V1(
-                &m->nested.sudo_sudo_as_V1.who,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* sudo_sudo_as_V1 - call */;
-            return _toStringCall(
-                &m->nested.sudo_sudo_as_V1.call,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
 #endif
     default:
         return parser_ok;
@@ -2647,6 +3650,33 @@ bool _getMethod_IsNestingSupported_V1(uint8_t moduleIdx, uint8_t callIdx)
     case 5382: // ValidatorsSet:Clear prime
     case 5888: // Session:Set keys
     case 5889: // Session:Purge keys
+    case 10752: // Uniques:Create
+    case 10753: // Uniques:Force create
+    case 10754: // Uniques:Destroy
+    case 10755: // Uniques:Mint
+    case 10756: // Uniques:Burn
+    case 10757: // Uniques:Transfer
+    case 10758: // Uniques:Redeposit
+    case 10759: // Uniques:Freeze
+    case 10760: // Uniques:Thaw
+    case 10761: // Uniques:Freeze class
+    case 10762: // Uniques:Thaw class
+    case 10763: // Uniques:Transfer ownership
+    case 10764: // Uniques:Set team
+    case 10765: // Uniques:Approve transfer
+    case 10766: // Uniques:Cancel approval
+    case 10767: // Uniques:Force asset status
+    case 10768: // Uniques:Set attribute
+    case 10769: // Uniques:Clear attribute
+    case 10770: // Uniques:Set metadata
+    case 10771: // Uniques:Clear metadata
+    case 10772: // Uniques:Set class metadata
+    case 10773: // Uniques:Clear class metadata
+    case 10774: // Uniques:Set accept ownership
+    case 11008: // Preimage:Note preimage
+    case 11009: // Preimage:Unnote preimage
+    case 11010: // Preimage:Request preimage
+    case 11011: // Preimage:Unrequest preimage
     case 12800: // EmergencyShutdown:Toggle
     case 13056: // Allocations:Allocate
     case 13312: // AllocationsOracles:Add member
