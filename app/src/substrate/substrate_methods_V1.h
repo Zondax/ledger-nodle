@@ -40,10 +40,11 @@ extern "C" {
 #define PD_CALL_SESSION_V1 23
 #define PD_CALL_UTILITY_V1 40
 #define PD_CALL_MULTISIG_V1 41
+#define PD_CALL_UNIQUES_V1 42
+#define PD_CALL_PREIMAGE_V1 43
 #define PD_CALL_EMERGENCYSHUTDOWN_V1 50
 #define PD_CALL_ALLOCATIONS_V1 51
 #define PD_CALL_ALLOCATIONSORACLES_V1 52
-#define PD_CALL_SUDO_V1 60
 
 #define PD_CALL_BALANCES_TRANSFER_ALL_V1 4
 typedef struct {
@@ -255,6 +256,179 @@ typedef struct {
 typedef struct {
 } pd_validatorsset_clear_prime_V1_t;
 
+#define PD_CALL_UNIQUES_CREATE_V1 0
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_LookupasStaticLookupSource_V1_t admin;
+} pd_uniques_create_V1_t;
+
+#define PD_CALL_UNIQUES_FORCE_CREATE_V1 1
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_LookupasStaticLookupSource_V1_t owner;
+    pd_bool_t free_holding;
+} pd_uniques_force_create_V1_t;
+
+#define PD_CALL_UNIQUES_DESTROY_V1 2
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_DestroyWitness_V1_t witness;
+} pd_uniques_destroy_V1_t;
+
+#define PD_CALL_UNIQUES_MINT_V1 3
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_InstanceId_V1_t instance;
+    pd_LookupasStaticLookupSource_V1_t owner;
+} pd_uniques_mint_V1_t;
+
+#define PD_CALL_UNIQUES_BURN_V1 4
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_InstanceId_V1_t instance;
+    pd_OptionLookupasStaticLookupSource_V1_t check_owner;
+} pd_uniques_burn_V1_t;
+
+#define PD_CALL_UNIQUES_TRANSFER_V1 5
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_InstanceId_V1_t instance;
+    pd_LookupasStaticLookupSource_V1_t dest;
+} pd_uniques_transfer_V1_t;
+
+#define PD_CALL_UNIQUES_REDEPOSIT_V1 6
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_VecInstanceId_V1_t instances;
+} pd_uniques_redeposit_V1_t;
+
+#define PD_CALL_UNIQUES_FREEZE_V1 7
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_InstanceId_V1_t instance;
+} pd_uniques_freeze_V1_t;
+
+#define PD_CALL_UNIQUES_THAW_V1 8
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_InstanceId_V1_t instance;
+} pd_uniques_thaw_V1_t;
+
+#define PD_CALL_UNIQUES_FREEZE_CLASS_V1 9
+typedef struct {
+    pd_ClassId_V1_t class_;
+} pd_uniques_freeze_class_V1_t;
+
+#define PD_CALL_UNIQUES_THAW_CLASS_V1 10
+typedef struct {
+    pd_ClassId_V1_t class_;
+} pd_uniques_thaw_class_V1_t;
+
+#define PD_CALL_UNIQUES_TRANSFER_OWNERSHIP_V1 11
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_LookupasStaticLookupSource_V1_t owner;
+} pd_uniques_transfer_ownership_V1_t;
+
+#define PD_CALL_UNIQUES_SET_TEAM_V1 12
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_LookupasStaticLookupSource_V1_t issuer;
+    pd_LookupasStaticLookupSource_V1_t admin;
+    pd_LookupasStaticLookupSource_V1_t freezer;
+} pd_uniques_set_team_V1_t;
+
+#define PD_CALL_UNIQUES_APPROVE_TRANSFER_V1 13
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_InstanceId_V1_t instance;
+    pd_LookupasStaticLookupSource_V1_t delegate;
+} pd_uniques_approve_transfer_V1_t;
+
+#define PD_CALL_UNIQUES_CANCEL_APPROVAL_V1 14
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_InstanceId_V1_t instance;
+    pd_OptionLookupasStaticLookupSource_V1_t maybe_check_delegate;
+} pd_uniques_cancel_approval_V1_t;
+
+#define PD_CALL_UNIQUES_FORCE_ASSET_STATUS_V1 15
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_LookupasStaticLookupSource_V1_t owner;
+    pd_LookupasStaticLookupSource_V1_t issuer;
+    pd_LookupasStaticLookupSource_V1_t admin;
+    pd_LookupasStaticLookupSource_V1_t freezer;
+    pd_bool_t free_holding;
+    pd_bool_t is_frozen;
+} pd_uniques_force_asset_status_V1_t;
+
+#define PD_CALL_UNIQUES_SET_ATTRIBUTE_V1 16
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_OptionInstanceId_V1_t maybe_instance;
+    pd_BoundedVecu8_V1_t key;
+    pd_BoundedVecu8_V1_t value;
+} pd_uniques_set_attribute_V1_t;
+
+#define PD_CALL_UNIQUES_CLEAR_ATTRIBUTE_V1 17
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_OptionInstanceId_V1_t maybe_instance;
+    pd_BoundedVecu8_V1_t key;
+} pd_uniques_clear_attribute_V1_t;
+
+#define PD_CALL_UNIQUES_SET_METADATA_V1 18
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_InstanceId_V1_t instance;
+    pd_BoundedVecu8_V1_t data;
+    pd_bool_t is_frozen;
+} pd_uniques_set_metadata_V1_t;
+
+#define PD_CALL_UNIQUES_CLEAR_METADATA_V1 19
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_InstanceId_V1_t instance;
+} pd_uniques_clear_metadata_V1_t;
+
+#define PD_CALL_UNIQUES_SET_CLASS_METADATA_V1 20
+typedef struct {
+    pd_ClassId_V1_t class_;
+    pd_BoundedVecu8_V1_t data;
+    pd_bool_t is_frozen;
+} pd_uniques_set_class_metadata_V1_t;
+
+#define PD_CALL_UNIQUES_CLEAR_CLASS_METADATA_V1 21
+typedef struct {
+    pd_ClassId_V1_t class_;
+} pd_uniques_clear_class_metadata_V1_t;
+
+#define PD_CALL_UNIQUES_SET_ACCEPT_OWNERSHIP_V1 22
+typedef struct {
+    pd_OptionClassId_V1_t maybe_class;
+} pd_uniques_set_accept_ownership_V1_t;
+
+#define PD_CALL_PREIMAGE_NOTE_PREIMAGE_V1 0
+typedef struct {
+    pd_Vecu8_t bytes;
+} pd_preimage_note_preimage_V1_t;
+
+#define PD_CALL_PREIMAGE_UNNOTE_PREIMAGE_V1 1
+typedef struct {
+    pd_Hash_t hash;
+} pd_preimage_unnote_preimage_V1_t;
+
+#define PD_CALL_PREIMAGE_REQUEST_PREIMAGE_V1 2
+typedef struct {
+    pd_Hash_t hash;
+} pd_preimage_request_preimage_V1_t;
+
+#define PD_CALL_PREIMAGE_UNREQUEST_PREIMAGE_V1 3
+typedef struct {
+    pd_Hash_t hash;
+} pd_preimage_unrequest_preimage_V1_t;
+
 #define PD_CALL_EMERGENCYSHUTDOWN_TOGGLE_V1 0
 typedef struct {
 } pd_emergencyshutdown_toggle_V1_t;
@@ -343,6 +517,33 @@ typedef union {
     pd_validatorsset_change_key_V1_t validatorsset_change_key_V1;
     pd_validatorsset_set_prime_V1_t validatorsset_set_prime_V1;
     pd_validatorsset_clear_prime_V1_t validatorsset_clear_prime_V1;
+    pd_uniques_create_V1_t uniques_create_V1;
+    pd_uniques_force_create_V1_t uniques_force_create_V1;
+    pd_uniques_destroy_V1_t uniques_destroy_V1;
+    pd_uniques_mint_V1_t uniques_mint_V1;
+    pd_uniques_burn_V1_t uniques_burn_V1;
+    pd_uniques_transfer_V1_t uniques_transfer_V1;
+    pd_uniques_redeposit_V1_t uniques_redeposit_V1;
+    pd_uniques_freeze_V1_t uniques_freeze_V1;
+    pd_uniques_thaw_V1_t uniques_thaw_V1;
+    pd_uniques_freeze_class_V1_t uniques_freeze_class_V1;
+    pd_uniques_thaw_class_V1_t uniques_thaw_class_V1;
+    pd_uniques_transfer_ownership_V1_t uniques_transfer_ownership_V1;
+    pd_uniques_set_team_V1_t uniques_set_team_V1;
+    pd_uniques_approve_transfer_V1_t uniques_approve_transfer_V1;
+    pd_uniques_cancel_approval_V1_t uniques_cancel_approval_V1;
+    pd_uniques_force_asset_status_V1_t uniques_force_asset_status_V1;
+    pd_uniques_set_attribute_V1_t uniques_set_attribute_V1;
+    pd_uniques_clear_attribute_V1_t uniques_clear_attribute_V1;
+    pd_uniques_set_metadata_V1_t uniques_set_metadata_V1;
+    pd_uniques_clear_metadata_V1_t uniques_clear_metadata_V1;
+    pd_uniques_set_class_metadata_V1_t uniques_set_class_metadata_V1;
+    pd_uniques_clear_class_metadata_V1_t uniques_clear_class_metadata_V1;
+    pd_uniques_set_accept_ownership_V1_t uniques_set_accept_ownership_V1;
+    pd_preimage_note_preimage_V1_t preimage_note_preimage_V1;
+    pd_preimage_unnote_preimage_V1_t preimage_unnote_preimage_V1;
+    pd_preimage_request_preimage_V1_t preimage_request_preimage_V1;
+    pd_preimage_unrequest_preimage_V1_t preimage_unrequest_preimage_V1;
     pd_emergencyshutdown_toggle_V1_t emergencyshutdown_toggle_V1;
     pd_allocations_allocate_V1_t allocations_allocate_V1;
     pd_allocationsoracles_add_member_V1_t allocationsoracles_add_member_V1;
@@ -460,28 +661,6 @@ typedef struct {
     pd_H256_t call_hash;
 } pd_multisig_cancel_as_multi_V1_t;
 
-#define PD_CALL_SUDO_SUDO_V1 0
-typedef struct {
-    pd_Call_t call;
-} pd_sudo_sudo_V1_t;
-
-#define PD_CALL_SUDO_SUDO_UNCHECKED_WEIGHT_V1 1
-typedef struct {
-    pd_Call_t call;
-    pd_Weight_V1_t weight;
-} pd_sudo_sudo_unchecked_weight_V1_t;
-
-#define PD_CALL_SUDO_SET_KEY_V1 2
-typedef struct {
-    pd_LookupasStaticLookupSource_V1_t new_;
-} pd_sudo_set_key_V1_t;
-
-#define PD_CALL_SUDO_SUDO_AS_V1 3
-typedef struct {
-    pd_LookupasStaticLookupSource_V1_t who;
-    pd_Call_t call;
-} pd_sudo_sudo_as_V1_t;
-
 #endif
 
 typedef union {
@@ -503,10 +682,6 @@ typedef union {
     pd_multisig_as_multi_V1_t multisig_as_multi_V1;
     pd_multisig_approve_as_multi_V1_t multisig_approve_as_multi_V1;
     pd_multisig_cancel_as_multi_V1_t multisig_cancel_as_multi_V1;
-    pd_sudo_sudo_V1_t sudo_sudo_V1;
-    pd_sudo_sudo_unchecked_weight_V1_t sudo_sudo_unchecked_weight_V1;
-    pd_sudo_set_key_V1_t sudo_set_key_V1;
-    pd_sudo_sudo_as_V1_t sudo_sudo_as_V1;
 #endif
 } pd_MethodNested_V1_t;
 

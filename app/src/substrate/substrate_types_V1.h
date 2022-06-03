@@ -35,12 +35,30 @@ typedef struct {
 } pd_CompactAccountIndex_V1_t;
 
 typedef struct {
+    uint32_t value;
+} pd_ClassId_V1_t;
+
+typedef struct {
+    uint32_t value;
+} pd_InstanceId_V1_t;
+
+typedef struct {
     const uint8_t* _ptr;
 } pd_KeyValue_V1_t;
 
 typedef struct {
     const uint8_t* _ptr;
 } pd_Key_V1_t;
+
+typedef struct {
+    uint8_t value;
+    union {
+        pd_AccountId_V1_t id;
+        pd_CompactAccountIndex_V1_t index;
+        pd_Bytes_t raw;
+        const uint8_t* _ptr;
+    };
+} pd_LookupasStaticLookupSource_V1_t;
 
 typedef struct {
     pd_BlockNumber_t height;
@@ -60,18 +78,19 @@ typedef struct {
 } pd_schedulePeriodBlockNumber_V1_t;
 
 typedef struct {
-    uint8_t value;
-    union {
-        pd_AccountId_V1_t id;
-        pd_CompactAccountIndex_V1_t index;
-        pd_Bytes_t raw;
-        const uint8_t* _ptr;
-    };
-} pd_LookupasStaticLookupSource_V1_t;
+    pd_Compactu32_t accounts;
+    pd_Compactu32_t sufficients;
+    pd_Compactu32_t approvals;
+} pd_DestroyWitness_V1_t;
 
 typedef struct {
     pd_Call_t call;
 } pd_OpaqueCall_V1_t;
+
+typedef struct {
+    uint8_t some;
+    pd_LookupasStaticLookupSource_V1_t contained;
+} pd_OptionLookupasStaticLookupSource_V1_t;
 
 typedef struct {
     uint8_t some;
@@ -83,6 +102,12 @@ typedef struct {
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
 } pd_VecVestingScheduleOf_V1_t;
+
+typedef struct {
+    uint64_t _len;
+    uint64_t _lenBuffer;
+    const uint8_t* _ptr;
+} pd_BoundedVecu8_V1_t;
 
 typedef struct {
     // TODO: Not implemented
@@ -109,6 +134,16 @@ typedef struct {
 
 typedef struct {
     uint8_t some;
+    pd_ClassId_V1_t contained;
+} pd_OptionClassId_V1_t;
+
+typedef struct {
+    uint8_t some;
+    pd_InstanceId_V1_t contained;
+} pd_OptionInstanceId_V1_t;
+
+typedef struct {
+    uint8_t some;
     pd_schedulePeriodBlockNumber_V1_t contained;
 } pd_OptionschedulePeriodBlockNumber_V1_t;
 
@@ -131,6 +166,12 @@ typedef struct {
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
 } pd_VecAccountId_V1_t;
+
+typedef struct {
+    uint64_t _len;
+    const uint8_t* _ptr;
+    uint64_t _lenBuffer;
+} pd_VecInstanceId_V1_t;
 
 typedef struct {
     uint64_t _len;

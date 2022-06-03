@@ -28,7 +28,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-# Nodle  1.6.x
+# Nodle  1.10.x
 
 ## System
 
@@ -109,7 +109,7 @@ Please:
 
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
-|Apply |    | :heavy_check_mark: |   | `Call` call <br/> |
+|Apply |    | :heavy_check_mark: | :heavy_check_mark: | `Call` call <br/> |
 
 ## TechnicalCommittee
 
@@ -152,6 +152,11 @@ Please:
 |Set prime |    | :heavy_check_mark: |   | `AccountId` who <br/> |
 |Clear prime |    | :heavy_check_mark: |   |  |
 
+## Poa
+
+| Name        | Light | XL | Nesting | Arguments |
+| :---------- |:------------:|:--------:|:--------:|:--------|
+
 ## Session
 
 | Name        | Light | XL | Nesting | Arguments |
@@ -168,6 +173,11 @@ Please:
 |Authorize upgrade |    |   |   | `Hash` code_hash <br/> |
 |Enact authorized upgrade |    |   |   | `Vecu8` code <br/> |
 
+## ParachainInfo
+
+| Name        | Light | XL | Nesting | Arguments |
+| :---------- |:------------:|:--------:|:--------:|:--------|
+
 ## CumulusXcm
 
 | Name        | Light | XL | Nesting | Arguments |
@@ -177,9 +187,9 @@ Please:
 
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
-|Batch | :heavy_check_mark:  | :heavy_check_mark: |   | `VecCall` calls <br/> |
+|Batch | :heavy_check_mark:  | :heavy_check_mark: | :heavy_check_mark: | `VecCall` calls <br/> |
 |As derivative |    |   |   | `u16` index <br/>`Call` call <br/> |
-|Batch all | :heavy_check_mark:  | :heavy_check_mark: |   | `VecCall` calls <br/> |
+|Batch all | :heavy_check_mark:  | :heavy_check_mark: | :heavy_check_mark: | `VecCall` calls <br/> |
 |Dispatch as |    |   |   | `BoxPalletsOrigin` as_origin <br/>`Call` call <br/> |
 
 ## Multisig
@@ -190,6 +200,43 @@ Please:
 |As multi |    | :heavy_check_mark: | :heavy_check_mark: | `u16` threshold <br/>`VecAccountId` other_signatories <br/>`OptionTimepoint` maybe_timepoint <br/>`OpaqueCall` call <br/>`bool` store_call <br/>`Weight` max_weight <br/> |
 |Approve as multi |    | :heavy_check_mark: | :heavy_check_mark: | `u16` threshold <br/>`VecAccountId` other_signatories <br/>`OptionTimepoint` maybe_timepoint <br/>`H256` call_hash <br/>`Weight` max_weight <br/> |
 |Cancel as multi |    | :heavy_check_mark: | :heavy_check_mark: | `u16` threshold <br/>`VecAccountId` other_signatories <br/>`Timepoint` timepoint <br/>`H256` call_hash <br/> |
+
+## Uniques
+
+| Name        | Light | XL | Nesting | Arguments |
+| :---------- |:------------:|:--------:|:--------:|:--------|
+|Create |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`LookupasStaticLookupSource` admin <br/> |
+|Force create |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`LookupasStaticLookupSource` owner <br/>`bool` free_holding <br/> |
+|Destroy |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`DestroyWitness` witness <br/> |
+|Mint |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`LookupasStaticLookupSource` owner <br/> |
+|Burn |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`OptionLookupasStaticLookupSource` check_owner <br/> |
+|Transfer |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`LookupasStaticLookupSource` dest <br/> |
+|Redeposit |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`VecInstanceId` instances <br/> |
+|Freeze |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/> |
+|Thaw |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/> |
+|Freeze class |    | :heavy_check_mark: |   | `ClassId` class_ <br/> |
+|Thaw class |    | :heavy_check_mark: |   | `ClassId` class_ <br/> |
+|Transfer ownership |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`LookupasStaticLookupSource` owner <br/> |
+|Set team |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`LookupasStaticLookupSource` issuer <br/>`LookupasStaticLookupSource` admin <br/>`LookupasStaticLookupSource` freezer <br/> |
+|Approve transfer |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`LookupasStaticLookupSource` delegate <br/> |
+|Cancel approval |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`OptionLookupasStaticLookupSource` maybe_check_delegate <br/> |
+|Force asset status |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`LookupasStaticLookupSource` owner <br/>`LookupasStaticLookupSource` issuer <br/>`LookupasStaticLookupSource` admin <br/>`LookupasStaticLookupSource` freezer <br/>`bool` free_holding <br/>`bool` is_frozen <br/> |
+|Set attribute |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`OptionInstanceId` maybe_instance <br/>`BoundedVecu8` key <br/>`BoundedVecu8` value <br/> |
+|Clear attribute |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`OptionInstanceId` maybe_instance <br/>`BoundedVecu8` key <br/> |
+|Set metadata |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`BoundedVecu8` data <br/>`bool` is_frozen <br/> |
+|Clear metadata |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/> |
+|Set class metadata |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`BoundedVecu8` data <br/>`bool` is_frozen <br/> |
+|Clear class metadata |    | :heavy_check_mark: |   | `ClassId` class_ <br/> |
+|Set accept ownership |    | :heavy_check_mark: |   | `OptionClassId` maybe_class <br/> |
+
+## Preimage
+
+| Name        | Light | XL | Nesting | Arguments |
+| :---------- |:------------:|:--------:|:--------:|:--------|
+|Note preimage |    | :heavy_check_mark: |   | `Vecu8` bytes <br/> |
+|Unnote preimage |    | :heavy_check_mark: |   | `Hash` hash <br/> |
+|Request preimage |    | :heavy_check_mark: |   | `Hash` hash <br/> |
+|Unrequest preimage |    | :heavy_check_mark: |   | `Hash` hash <br/> |
 
 ## EmergencyShutdown
 
@@ -214,13 +261,4 @@ Please:
 |Change key |    | :heavy_check_mark: |   | `AccountId` new_ <br/> |
 |Set prime |    | :heavy_check_mark: |   | `AccountId` who <br/> |
 |Clear prime |    | :heavy_check_mark: |   |  |
-
-## Sudo
-
-| Name        | Light | XL | Nesting | Arguments |
-| :---------- |:------------:|:--------:|:--------:|:--------|
-|Sudo |    | :heavy_check_mark: |   | `Call` call <br/> |
-|Sudo unchecked weight |    | :heavy_check_mark: |   | `Call` call <br/>`Weight` weight <br/> |
-|Set key |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` new_ <br/> |
-|Sudo as |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` who <br/>`Call` call <br/> |
 
