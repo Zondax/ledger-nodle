@@ -61,8 +61,6 @@ typedef enum {
 #define COIN_NAME "Nodle"
 #define COIN_TICKER "NODL "
 
-#define COIN_SECRET_REQUIRED_CLICKS 0
-
 #define MENU_MAIN_APP_LINE1 "Nodle"
 #define MENU_MAIN_APP_LINE2 "Ready"
 #define MENU_MAIN_APP_LINE2_SECRET "NODL RECOVERY"
