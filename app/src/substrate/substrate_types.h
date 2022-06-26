@@ -96,11 +96,6 @@ typedef struct {
 } pd_Call_t;
 
 typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_Header_t;
-
-typedef struct {
     pd_Balance_t value;
 } pd_BalanceOf_t;
 
@@ -122,12 +117,6 @@ typedef struct {
 typedef struct {
     const uint8_t* _ptr;
 } pd_Hash_t;
-
-typedef struct {
-    uint64_t _len;
-    const uint8_t* _ptr;
-    uint64_t _lenBuffer;
-} pd_VecHeader_t;
 
 typedef struct {
     uint64_t _len;

@@ -63,7 +63,6 @@ typedef enum {
 
 #define MENU_MAIN_APP_LINE1 "Nodle"
 #define MENU_MAIN_APP_LINE2 "Ready"
-#define MENU_MAIN_APP_LINE2_SECRET "NODL RECOVERY"
 #define APPVERSION_LINE1 "Nodle"
 #define APPVERSION_LINE2 "v" APPVERSION
 

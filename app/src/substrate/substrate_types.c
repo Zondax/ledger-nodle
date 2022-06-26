@@ -144,11 +144,6 @@ parser_error_t _readCall(parser_context_t* c, pd_Call_t* v)
     return parser_ok;
 }
 
-parser_error_t _readHeader(parser_context_t* c, pd_Header_t* v)
-{
-    return parser_not_supported;
-}
-
 parser_error_t _readBalanceOf(parser_context_t* c, pd_BalanceOf_t* v)
 {
     return _readBalance(c, &v->value);
@@ -192,10 +187,6 @@ parser_error_t _readH256(parser_context_t* c, pd_H256_t* v) {
 
 parser_error_t _readHash(parser_context_t* c, pd_Hash_t* v) {
     GEN_DEF_READARRAY(32)
-}
-
-parser_error_t _readVecHeader(parser_context_t* c, pd_VecHeader_t* v) {
-    GEN_DEF_READVECTOR(Header)
 }
 
 parser_error_t _readVecu8(parser_context_t* c, pd_Vecu8_t* v) {
@@ -449,17 +440,6 @@ parser_error_t _toStringCall(
     return parser_display_idx_out_of_range;
 }
 
-parser_error_t _toStringHeader(
-    const pd_Header_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount)
-{
-    CLEAN_AND_CHECK()
-    return parser_print_not_supported;
-}
-
 parser_error_t _toStringBalanceOf(
     const pd_BalanceOf_t* v,
     char* outValue,
@@ -557,15 +537,6 @@ parser_error_t _toStringHash(
     uint8_t pageIdx,
     uint8_t* pageCount) {
     GEN_DEF_TOSTRING_ARRAY(32)
-}
-
-parser_error_t _toStringVecHeader(
-    const pd_VecHeader_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount) {
-    GEN_DEF_TOSTRING_VECTOR(Header)
 }
 
 parser_error_t _toStringVecu8(
