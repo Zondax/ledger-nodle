@@ -28,14 +28,10 @@ extern "C" {
 // Read functions
 parser_error_t _readAccountId_V1(parser_context_t* c, pd_AccountId_V1_t* v);
 parser_error_t _readBoundedVecu8_V1(parser_context_t* c, pd_BoundedVecu8_V1_t* v);
-parser_error_t _readBoxCallOrHashOfT_V1(parser_context_t* c, pd_BoxCallOrHashOfT_V1_t* v);
-parser_error_t _readBoxPalletsOrigin_V1(parser_context_t* c, pd_BoxPalletsOrigin_V1_t* v);
 parser_error_t _readClassId_V1(parser_context_t* c, pd_ClassId_V1_t* v);
 parser_error_t _readCompactAccountIndex_V1(parser_context_t* c, pd_CompactAccountIndex_V1_t* v);
 parser_error_t _readDestroyWitness_V1(parser_context_t* c, pd_DestroyWitness_V1_t* v);
 parser_error_t _readInstanceId_V1(parser_context_t* c, pd_InstanceId_V1_t* v);
-parser_error_t _readKeyValue_V1(parser_context_t* c, pd_KeyValue_V1_t* v);
-parser_error_t _readKey_V1(parser_context_t* c, pd_Key_V1_t* v);
 parser_error_t _readKeys_V1(parser_context_t* c, pd_Keys_V1_t* v);
 parser_error_t _readLookupasStaticLookupSource_V1(parser_context_t* c, pd_LookupasStaticLookupSource_V1_t* v);
 parser_error_t _readMemberCount_V1(parser_context_t* c, pd_MemberCount_V1_t* v);
@@ -45,20 +41,13 @@ parser_error_t _readOptionClassId_V1(parser_context_t* c, pd_OptionClassId_V1_t*
 parser_error_t _readOptionInstanceId_V1(parser_context_t* c, pd_OptionInstanceId_V1_t* v);
 parser_error_t _readOptionLookupasStaticLookupSource_V1(parser_context_t* c, pd_OptionLookupasStaticLookupSource_V1_t* v);
 parser_error_t _readOptionTimepoint_V1(parser_context_t* c, pd_OptionTimepoint_V1_t* v);
-parser_error_t _readOptionschedulePeriodBlockNumber_V1(parser_context_t* c, pd_OptionschedulePeriodBlockNumber_V1_t* v);
-parser_error_t _readParachainInherentData_V1(parser_context_t* c, pd_ParachainInherentData_V1_t* v);
 parser_error_t _readPerbill_V1(parser_context_t* c, pd_Perbill_V1_t* v);
 parser_error_t _readTimepoint_V1(parser_context_t* c, pd_Timepoint_V1_t* v);
-parser_error_t _readUpwardMessage_V1(parser_context_t* c, pd_UpwardMessage_V1_t* v);
 parser_error_t _readVecAccountId_V1(parser_context_t* c, pd_VecAccountId_V1_t* v);
 parser_error_t _readVecInstanceId_V1(parser_context_t* c, pd_VecInstanceId_V1_t* v);
-parser_error_t _readVecKeyValue_V1(parser_context_t* c, pd_VecKeyValue_V1_t* v);
-parser_error_t _readVecKey_V1(parser_context_t* c, pd_VecKey_V1_t* v);
 parser_error_t _readVecVestingScheduleOf_V1(parser_context_t* c, pd_VecVestingScheduleOf_V1_t* v);
 parser_error_t _readVestingScheduleOf_V1(parser_context_t* c, pd_VestingScheduleOf_V1_t* v);
 parser_error_t _readWeight_V1(parser_context_t* c, pd_Weight_V1_t* v);
-parser_error_t _readschedulePeriodBlockNumber_V1(parser_context_t* c, pd_schedulePeriodBlockNumber_V1_t* v);
-parser_error_t _readschedulePriority_V1(parser_context_t* c, pd_schedulePriority_V1_t* v);
 
 // toString functions
 parser_error_t _toStringAccountId_V1(
@@ -70,20 +59,6 @@ parser_error_t _toStringAccountId_V1(
 
 parser_error_t _toStringBoundedVecu8_V1(
     const pd_BoundedVecu8_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringBoxCallOrHashOfT_V1(
-    const pd_BoxCallOrHashOfT_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringBoxPalletsOrigin_V1(
-    const pd_BoxPalletsOrigin_V1_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -112,20 +87,6 @@ parser_error_t _toStringDestroyWitness_V1(
 
 parser_error_t _toStringInstanceId_V1(
     const pd_InstanceId_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringKeyValue_V1(
-    const pd_KeyValue_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringKey_V1(
-    const pd_Key_V1_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -194,20 +155,6 @@ parser_error_t _toStringOptionTimepoint_V1(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringOptionschedulePeriodBlockNumber_V1(
-    const pd_OptionschedulePeriodBlockNumber_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringParachainInherentData_V1(
-    const pd_ParachainInherentData_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
 parser_error_t _toStringPerbill_V1(
     const pd_Perbill_V1_t* v,
     char* outValue,
@@ -222,13 +169,6 @@ parser_error_t _toStringTimepoint_V1(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringUpwardMessage_V1(
-    const pd_UpwardMessage_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
 parser_error_t _toStringVecAccountId_V1(
     const pd_VecAccountId_V1_t* v,
     char* outValue,
@@ -238,20 +178,6 @@ parser_error_t _toStringVecAccountId_V1(
 
 parser_error_t _toStringVecInstanceId_V1(
     const pd_VecInstanceId_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringVecKeyValue_V1(
-    const pd_VecKeyValue_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringVecKey_V1(
-    const pd_VecKey_V1_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -273,20 +199,6 @@ parser_error_t _toStringVestingScheduleOf_V1(
 
 parser_error_t _toStringWeight_V1(
     const pd_Weight_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringschedulePeriodBlockNumber_V1(
-    const pd_schedulePeriodBlockNumber_V1_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringschedulePriority_V1(
-    const pd_schedulePriority_V1_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,

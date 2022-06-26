@@ -43,14 +43,6 @@ typedef struct {
 } pd_InstanceId_V1_t;
 
 typedef struct {
-    const uint8_t* _ptr;
-} pd_KeyValue_V1_t;
-
-typedef struct {
-    const uint8_t* _ptr;
-} pd_Key_V1_t;
-
-typedef struct {
     uint8_t value;
     union {
         pd_AccountId_V1_t id;
@@ -71,11 +63,6 @@ typedef struct {
     uint32_t period_count;
     pd_Balance_t balance;
 } pd_VestingScheduleOf_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_schedulePeriodBlockNumber_V1_t;
 
 typedef struct {
     pd_Compactu32_t accounts;
@@ -110,16 +97,6 @@ typedef struct {
 } pd_BoundedVecu8_V1_t;
 
 typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_BoxCallOrHashOfT_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_BoxPalletsOrigin_V1_t;
-
-typedef struct {
     const uint8_t* _ptr;
 } pd_Keys_V1_t;
 
@@ -143,23 +120,8 @@ typedef struct {
 } pd_OptionInstanceId_V1_t;
 
 typedef struct {
-    uint8_t some;
-    pd_schedulePeriodBlockNumber_V1_t contained;
-} pd_OptionschedulePeriodBlockNumber_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_ParachainInherentData_V1_t;
-
-typedef struct {
     uint32_t value;
 } pd_Perbill_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_UpwardMessage_V1_t;
 
 typedef struct {
     uint64_t _len;
@@ -174,25 +136,8 @@ typedef struct {
 } pd_VecInstanceId_V1_t;
 
 typedef struct {
-    uint64_t _len;
-    const uint8_t* _ptr;
-    uint64_t _lenBuffer;
-} pd_VecKeyValue_V1_t;
-
-typedef struct {
-    uint64_t _len;
-    const uint8_t* _ptr;
-    uint64_t _lenBuffer;
-} pd_VecKey_V1_t;
-
-typedef struct {
     uint64_t value;
 } pd_Weight_V1_t;
-
-typedef struct {
-    // TODO: Not implemented
-    uint8_t _NOT_IMPLEMENTED__DO_NOT_USE;
-} pd_schedulePriority_V1_t;
 
 #ifdef __cplusplus
 }
