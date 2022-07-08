@@ -1,5 +1,5 @@
 /*******************************************************************************
-*  (c) 2019 Zondax GmbH
+*  (c) 2019 - 2022  Zondax GmbH
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -53,6 +53,7 @@ typedef enum {
     parser_tx_nesting_not_supported,
     parser_tx_nesting_limit_reached,
     parser_tx_call_vec_too_large,
+    parser_junction_limit,
 } parser_error_t;
 
 typedef struct {
