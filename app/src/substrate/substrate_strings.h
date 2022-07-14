@@ -36,7 +36,6 @@ static const char* STR_MO_UTILITY = "Utility";
 static const char* STR_MO_MULTISIG = "Multisig";
 static const char* STR_MO_UNIQUES = "Uniques";
 static const char* STR_MO_PREIMAGE = "Preimage";
-static const char* STR_MO_EMERGENCYSHUTDOWN = "Emergencyshutdown";
 static const char* STR_MO_ALLOCATIONS = "Allocations";
 static const char* STR_MO_ALLOCATIONSORACLES = "Allocationsoracles";
 
@@ -60,7 +59,6 @@ static const char* STR_ME_APPLY_AS = "Apply as";
 static const char* STR_ME_CLAIM = "Claim";
 static const char* STR_ME_ADD_VESTING_SCHEDULE = "Add vesting schedule";
 static const char* STR_ME_CANCEL_ALL_VESTING_SCHEDULES = "Cancel all vesting schedules";
-static const char* STR_ME_OVERWRITE_VESTING_SCHEDULES = "Overwrite vesting schedules";
 static const char* STR_ME_APPLY = "Apply";
 static const char* STR_ME_SET_MEMBERS = "Set members";
 static const char* STR_ME_EXECUTE = "Execute";
@@ -109,7 +107,6 @@ static const char* STR_ME_NOTE_PREIMAGE = "Note preimage";
 static const char* STR_ME_UNNOTE_PREIMAGE = "Unnote preimage";
 static const char* STR_ME_REQUEST_PREIMAGE = "Request preimage";
 static const char* STR_ME_UNREQUEST_PREIMAGE = "Unrequest preimage";
-static const char* STR_ME_TOGGLE = "Toggle";
 static const char* STR_ME_ALLOCATE = "Allocate";
 
 // Items names
@@ -133,8 +130,6 @@ static const char* STR_IT_to = "To";
 static const char* STR_IT_call = "Call";
 static const char* STR_IT_schedule = "Schedule";
 static const char* STR_IT_funds_collector = "Funds collector";
-static const char* STR_IT_limit_to_free_balance = "Limit to free balance";
-static const char* STR_IT_new_schedules = "New schedules";
 static const char* STR_IT_new_members = "New members";
 static const char* STR_IT_prime = "Prime";
 static const char* STR_IT_old_count = "Old count";
@@ -178,6 +173,7 @@ static const char* STR_IT_data = "Data";
 static const char* STR_IT_maybe_class = "Maybe class";
 static const char* STR_IT_bytes = "Bytes";
 static const char* STR_IT_hash = "Hash";
+static const char* STR_IT_batch = "Batch";
 
 #ifdef __cplusplus
 }

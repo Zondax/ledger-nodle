@@ -28,7 +28,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-# Nodle  1.10.x
+# Nodle  4.11.x
 
 ## System
 
@@ -102,8 +102,7 @@ Please:
 | :---------- |:------------:|:--------:|:--------:|:--------|
 |Claim |    | :heavy_check_mark: |   |  |
 |Add vesting schedule |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` dest <br/>`VestingScheduleOf` schedule <br/> |
-|Cancel all vesting schedules |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` who <br/>`LookupasStaticLookupSource` funds_collector <br/>`bool` limit_to_free_balance <br/> |
-|Overwrite vesting schedules |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` who <br/>`VecVestingScheduleOf` new_schedules <br/> |
+|Cancel all vesting schedules |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` who <br/>`LookupasStaticLookupSource` funds_collector <br/> |
 
 ## Mandate
 
@@ -238,16 +237,11 @@ Please:
 |Request preimage |    | :heavy_check_mark: |   | `Hash` hash <br/> |
 |Unrequest preimage |    | :heavy_check_mark: |   | `Hash` hash <br/> |
 
-## EmergencyShutdown
-
-| Name        | Light | XL | Nesting | Arguments |
-| :---------- |:------------:|:--------:|:--------:|:--------|
-|Toggle |    | :heavy_check_mark: |   |  |
-
 ## Allocations
 
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
+|Batch |    | :heavy_check_mark: |   | `VecTupleAccountIdBalanceOf` batch <br/> |
 |Allocate |    | :heavy_check_mark: |   | `AccountId` to <br/>`Balance` amount <br/>`Vecu8` proof <br/> |
 
 ## AllocationsOracles
