@@ -112,6 +112,11 @@ parser_error_t _readBalance(parser_context_t* c, pd_Balance_t* v) {
     GEN_DEF_READARRAY(16)
 }
 
+parser_error_t _readBalanceOf(parser_context_t* c, pd_BalanceOf_t* v)
+{
+    return _readBalance(c, &v->value);
+}
+
 parser_error_t _readBytes(parser_context_t* c, pd_Bytes_t* v)
 {
     CHECK_INPUT()
@@ -142,11 +147,6 @@ parser_error_t _readCall(parser_context_t* c, pd_Call_t* v)
     }
     v->nestCallIdx.slotIdx = c->tx_obj->nestCallIdx.slotIdx;
     return parser_ok;
-}
-
-parser_error_t _readBalanceOf(parser_context_t* c, pd_BalanceOf_t* v)
-{
-    return _readBalance(c, &v->value);
 }
 
 parser_error_t _readProposal(parser_context_t* c, pd_Proposal_t* v)
@@ -350,6 +350,16 @@ parser_error_t _toStringBalance(
     return parser_ok;
 }
 
+parser_error_t _toStringBalanceOf(
+    const pd_BalanceOf_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    return _toStringBalance(&v->value, outValue, outValueLen, pageIdx, pageCount);
+}
+
 parser_error_t _toStringBytes(
     const pd_Bytes_t* v,
     char* outValue,
@@ -438,16 +448,6 @@ parser_error_t _toStringCall(
     }
 
     return parser_display_idx_out_of_range;
-}
-
-parser_error_t _toStringBalanceOf(
-    const pd_BalanceOf_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount)
-{
-    return _toStringBalance(&v->value, outValue, outValueLen, pageIdx, pageCount);
 }
 
 parser_error_t _toStringProposal(
