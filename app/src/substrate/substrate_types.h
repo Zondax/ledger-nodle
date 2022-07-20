@@ -85,6 +85,10 @@ typedef struct {
 } pd_Balance_t;
 
 typedef struct {
+    pd_Balance_t value;
+} pd_BalanceOf_t;
+
+typedef struct {
     uint64_t _len;
     const uint8_t* _ptr;
 } pd_Bytes_t;
@@ -94,10 +98,6 @@ typedef struct {
     const uint32_t* _txVerPtr;
     pd_NestCallIdx_t nestCallIdx;
 } pd_Call_t;
-
-typedef struct {
-    pd_Balance_t value;
-} pd_BalanceOf_t;
 
 typedef struct {
     pd_Call_t call;

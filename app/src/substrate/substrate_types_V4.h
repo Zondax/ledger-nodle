@@ -28,116 +28,121 @@ extern "C" {
 
 typedef struct {
     const uint8_t* _ptr;
-} pd_AccountId_V1_t;
+} pd_AccountId_V4_t;
 
 typedef struct {
     compactInt_t value;
-} pd_CompactAccountIndex_V1_t;
+} pd_CompactAccountIndex_V4_t;
 
 typedef struct {
     uint32_t value;
-} pd_ClassId_V1_t;
+} pd_ClassId_V4_t;
 
 typedef struct {
     uint32_t value;
-} pd_InstanceId_V1_t;
+} pd_InstanceId_V4_t;
 
 typedef struct {
     uint8_t value;
     union {
-        pd_AccountId_V1_t id;
-        pd_CompactAccountIndex_V1_t index;
+        pd_AccountId_V4_t id;
+        pd_CompactAccountIndex_V4_t index;
         pd_Bytes_t raw;
         const uint8_t* _ptr;
     };
-} pd_LookupasStaticLookupSource_V1_t;
+} pd_LookupasStaticLookupSource_V4_t;
 
 typedef struct {
     pd_BlockNumber_t height;
     uint32_t index;
-} pd_Timepoint_V1_t;
+} pd_Timepoint_V4_t;
+
+typedef struct {
+    pd_AccountId_V4_t accountid;
+    pd_BalanceOf_t balance;
+} pd_TupleAccountIdBalanceOf_V4_t;
+
+typedef struct {
+    pd_Compactu32_t accounts;
+    pd_Compactu32_t sufficients;
+    pd_Compactu32_t approvals;
+} pd_DestroyWitness_V4_t;
+
+typedef struct {
+    pd_Call_t call;
+} pd_OpaqueCall_V4_t;
+
+typedef struct {
+    uint8_t some;
+    pd_LookupasStaticLookupSource_V4_t contained;
+} pd_OptionLookupasStaticLookupSource_V4_t;
+
+typedef struct {
+    uint8_t some;
+    pd_Timepoint_V4_t contained;
+} pd_OptionTimepoint_V4_t;
+
+typedef struct {
+    uint64_t _len;
+    const uint8_t* _ptr;
+    uint64_t _lenBuffer;
+} pd_VecTupleAccountIdBalanceOf_V4_t;
 
 typedef struct {
     pd_BlockNumber_t start;
     pd_BlockNumber_t period;
     uint32_t period_count;
     pd_Balance_t balance;
-} pd_VestingScheduleOf_V1_t;
-
-typedef struct {
-    pd_Compactu32_t accounts;
-    pd_Compactu32_t sufficients;
-    pd_Compactu32_t approvals;
-} pd_DestroyWitness_V1_t;
-
-typedef struct {
-    pd_Call_t call;
-} pd_OpaqueCall_V1_t;
-
-typedef struct {
-    uint8_t some;
-    pd_LookupasStaticLookupSource_V1_t contained;
-} pd_OptionLookupasStaticLookupSource_V1_t;
-
-typedef struct {
-    uint8_t some;
-    pd_Timepoint_V1_t contained;
-} pd_OptionTimepoint_V1_t;
-
-typedef struct {
-    uint64_t _len;
-    const uint8_t* _ptr;
-    uint64_t _lenBuffer;
-} pd_VecVestingScheduleOf_V1_t;
+} pd_VestingScheduleOf_V4_t;
 
 typedef struct {
     uint64_t _len;
     uint64_t _lenBuffer;
     const uint8_t* _ptr;
-} pd_BoundedVecu8_V1_t;
+} pd_BoundedVecu8_V4_t;
 
 typedef struct {
     const uint8_t* _ptr;
-} pd_Keys_V1_t;
+} pd_Keys_V4_t;
 
 typedef struct {
     uint32_t value;
-} pd_MemberCount_V1_t;
+} pd_MemberCount_V4_t;
 
 typedef struct {
     uint8_t some;
-    pd_AccountId_V1_t contained;
-} pd_OptionAccountId_V1_t;
+    pd_AccountId_V4_t contained;
+} pd_OptionAccountId_V4_t;
 
 typedef struct {
     uint8_t some;
-    pd_ClassId_V1_t contained;
-} pd_OptionClassId_V1_t;
+    pd_ClassId_V4_t contained;
+} pd_OptionClassId_V4_t;
 
 typedef struct {
     uint8_t some;
-    pd_InstanceId_V1_t contained;
-} pd_OptionInstanceId_V1_t;
+    pd_InstanceId_V4_t contained;
+} pd_OptionInstanceId_V4_t;
 
 typedef struct {
     uint32_t value;
-} pd_Perbill_V1_t;
+} pd_Perbill_V4_t;
 
 typedef struct {
     uint64_t _len;
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
-} pd_VecAccountId_V1_t;
+} pd_VecAccountId_V4_t;
 
 typedef struct {
     uint64_t _len;
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
-} pd_VecInstanceId_V1_t;
+} pd_VecInstanceId_V4_t;
 
 typedef struct {
     uint64_t value;
-} pd_Weight_V1_t;
+} pd_Weight_V4_t;
 
 #ifdef __cplusplus
 }
