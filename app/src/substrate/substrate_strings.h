@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2022 Zondax GmbH
+ *  (c) 2019 - 2022 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -77,6 +77,7 @@ static const char* STR_ME_SET_KEYS = "Set keys";
 static const char* STR_ME_PURGE_KEYS = "Purge keys";
 static const char* STR_ME_BATCH = "Batch";
 static const char* STR_ME_BATCH_ALL = "Batch all";
+static const char* STR_ME_FORCE_BATCH = "Force batch";
 static const char* STR_ME_AS_MULTI_THRESHOLD_1 = "As multi threshold 1";
 static const char* STR_ME_AS_MULTI = "As multi";
 static const char* STR_ME_APPROVE_AS_MULTI = "Approve as multi";
@@ -89,25 +90,25 @@ static const char* STR_ME_BURN = "Burn";
 static const char* STR_ME_REDEPOSIT = "Redeposit";
 static const char* STR_ME_FREEZE = "Freeze";
 static const char* STR_ME_THAW = "Thaw";
-static const char* STR_ME_FREEZE_CLASS = "Freeze class";
-static const char* STR_ME_THAW_CLASS = "Thaw class";
+static const char* STR_ME_FREEZE_COLLECTION = "Freeze collection";
+static const char* STR_ME_THAW_COLLECTION = "Thaw collection";
 static const char* STR_ME_TRANSFER_OWNERSHIP = "Transfer ownership";
 static const char* STR_ME_SET_TEAM = "Set team";
 static const char* STR_ME_APPROVE_TRANSFER = "Approve transfer";
 static const char* STR_ME_CANCEL_APPROVAL = "Cancel approval";
-static const char* STR_ME_FORCE_ASSET_STATUS = "Force asset status";
+static const char* STR_ME_FORCE_ITEM_STATUS = "Force item status";
 static const char* STR_ME_SET_ATTRIBUTE = "Set attribute";
 static const char* STR_ME_CLEAR_ATTRIBUTE = "Clear attribute";
 static const char* STR_ME_SET_METADATA = "Set metadata";
 static const char* STR_ME_CLEAR_METADATA = "Clear metadata";
-static const char* STR_ME_SET_CLASS_METADATA = "Set class metadata";
-static const char* STR_ME_CLEAR_CLASS_METADATA = "Clear class metadata";
+static const char* STR_ME_SET_COLLECTION_METADATA = "Set collection metadata";
+static const char* STR_ME_CLEAR_COLLECTION_METADATA = "Clear collection metadata";
 static const char* STR_ME_SET_ACCEPT_OWNERSHIP = "Set accept ownership";
+static const char* STR_ME_SET_COLLECTION_MAX_SUPPLY = "Set collection max supply";
 static const char* STR_ME_NOTE_PREIMAGE = "Note preimage";
 static const char* STR_ME_UNNOTE_PREIMAGE = "Unnote preimage";
 static const char* STR_ME_REQUEST_PREIMAGE = "Request preimage";
 static const char* STR_ME_UNREQUEST_PREIMAGE = "Unrequest preimage";
-static const char* STR_ME_ALLOCATE = "Allocate";
 
 // Items names
 static const char* STR_IT_ratio = "Ratio";
@@ -153,24 +154,24 @@ static const char* STR_IT_store_call = "Store call";
 static const char* STR_IT_max_weight = "Max weight";
 static const char* STR_IT_call_hash = "Call hash";
 static const char* STR_IT_timepoint = "Timepoint";
-static const char* STR_IT_class_ = "Class";
+static const char* STR_IT_collection = "Collection";
 static const char* STR_IT_admin = "Admin";
 static const char* STR_IT_owner = "Owner";
 static const char* STR_IT_free_holding = "Free holding";
 static const char* STR_IT_witness = "Witness";
-static const char* STR_IT_instance = "Instance";
+static const char* STR_IT_item = "Item";
 static const char* STR_IT_check_owner = "Check owner";
-static const char* STR_IT_instances = "Instances";
 static const char* STR_IT_issuer = "Issuer";
 static const char* STR_IT_freezer = "Freezer";
 static const char* STR_IT_delegate = "Delegate";
 static const char* STR_IT_maybe_check_delegate = "Maybe check delegate";
 static const char* STR_IT_is_frozen = "Is frozen";
-static const char* STR_IT_maybe_instance = "Maybe instance";
+static const char* STR_IT_maybe_item = "Maybe item";
 static const char* STR_IT_key = "Key";
 static const char* STR_IT_value = "Value";
 static const char* STR_IT_data = "Data";
-static const char* STR_IT_maybe_class = "Maybe class";
+static const char* STR_IT_maybe_collection = "Maybe collection";
+static const char* STR_IT_max_supply = "Max supply";
 static const char* STR_IT_bytes = "Bytes";
 static const char* STR_IT_hash = "Hash";
 static const char* STR_IT_batch = "Batch";
