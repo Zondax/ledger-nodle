@@ -28,7 +28,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-# Nodle  4.11.x
+# Nodle  4.12.x
 
 ## System
 
@@ -190,6 +190,7 @@ Please:
 |As derivative |    |   |   | `u16` index <br/>`Call` call <br/> |
 |Batch all | :heavy_check_mark:  | :heavy_check_mark: | :heavy_check_mark: | `VecCall` calls <br/> |
 |Dispatch as |    |   |   | `BoxPalletsOrigin` as_origin <br/>`Call` call <br/> |
+|Force batch | :heavy_check_mark:  | :heavy_check_mark: |   | `VecCall` calls <br/> |
 
 ## Multisig
 
@@ -204,29 +205,30 @@ Please:
 
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
-|Create |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`LookupasStaticLookupSource` admin <br/> |
-|Force create |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`LookupasStaticLookupSource` owner <br/>`bool` free_holding <br/> |
-|Destroy |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`DestroyWitness` witness <br/> |
-|Mint |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`LookupasStaticLookupSource` owner <br/> |
-|Burn |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`OptionLookupasStaticLookupSource` check_owner <br/> |
-|Transfer |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`LookupasStaticLookupSource` dest <br/> |
-|Redeposit |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`VecInstanceId` instances <br/> |
-|Freeze |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/> |
-|Thaw |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/> |
-|Freeze class |    | :heavy_check_mark: |   | `ClassId` class_ <br/> |
-|Thaw class |    | :heavy_check_mark: |   | `ClassId` class_ <br/> |
-|Transfer ownership |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`LookupasStaticLookupSource` owner <br/> |
-|Set team |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`LookupasStaticLookupSource` issuer <br/>`LookupasStaticLookupSource` admin <br/>`LookupasStaticLookupSource` freezer <br/> |
-|Approve transfer |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`LookupasStaticLookupSource` delegate <br/> |
-|Cancel approval |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`OptionLookupasStaticLookupSource` maybe_check_delegate <br/> |
-|Force asset status |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`LookupasStaticLookupSource` owner <br/>`LookupasStaticLookupSource` issuer <br/>`LookupasStaticLookupSource` admin <br/>`LookupasStaticLookupSource` freezer <br/>`bool` free_holding <br/>`bool` is_frozen <br/> |
-|Set attribute |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`OptionInstanceId` maybe_instance <br/>`BoundedVecu8` key <br/>`BoundedVecu8` value <br/> |
-|Clear attribute |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`OptionInstanceId` maybe_instance <br/>`BoundedVecu8` key <br/> |
-|Set metadata |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/>`BoundedVecu8` data <br/>`bool` is_frozen <br/> |
-|Clear metadata |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`InstanceId` instance <br/> |
-|Set class metadata |    | :heavy_check_mark: |   | `ClassId` class_ <br/>`BoundedVecu8` data <br/>`bool` is_frozen <br/> |
-|Clear class metadata |    | :heavy_check_mark: |   | `ClassId` class_ <br/> |
-|Set accept ownership |    | :heavy_check_mark: |   | `OptionClassId` maybe_class <br/> |
+|Create |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`LookupasStaticLookupSource` admin <br/> |
+|Force create |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`LookupasStaticLookupSource` owner <br/>`bool` free_holding <br/> |
+|Destroy |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`DestroyWitness` witness <br/> |
+|Mint |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/>`LookupasStaticLookupSource` owner <br/> |
+|Burn |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/>`OptionLookupasStaticLookupSource` check_owner <br/> |
+|Transfer |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/>`LookupasStaticLookupSource` dest <br/> |
+|Redeposit |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`VecItemId` items <br/> |
+|Freeze |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/> |
+|Thaw |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/> |
+|Freeze collection |    | :heavy_check_mark: |   | `CollectionId` collection <br/> |
+|Thaw collection |    | :heavy_check_mark: |   | `CollectionId` collection <br/> |
+|Transfer ownership |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`LookupasStaticLookupSource` owner <br/> |
+|Set team |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`LookupasStaticLookupSource` issuer <br/>`LookupasStaticLookupSource` admin <br/>`LookupasStaticLookupSource` freezer <br/> |
+|Approve transfer |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/>`LookupasStaticLookupSource` delegate <br/> |
+|Cancel approval |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/>`OptionLookupasStaticLookupSource` maybe_check_delegate <br/> |
+|Force item status |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`LookupasStaticLookupSource` owner <br/>`LookupasStaticLookupSource` issuer <br/>`LookupasStaticLookupSource` admin <br/>`LookupasStaticLookupSource` freezer <br/>`bool` free_holding <br/>`bool` is_frozen <br/> |
+|Set attribute |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`OptionItemId` maybe_item <br/>`BoundedVecu8` key <br/>`BoundedVecu8` value <br/> |
+|Clear attribute |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`OptionItemId` maybe_item <br/>`BoundedVecu8` key <br/> |
+|Set metadata |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/>`BoundedVecu8` data <br/>`bool` is_frozen <br/> |
+|Clear metadata |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/> |
+|Set collection metadata |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`BoundedVecu8` data <br/>`bool` is_frozen <br/> |
+|Clear collection metadata |    | :heavy_check_mark: |   | `CollectionId` collection <br/> |
+|Set accept ownership |    | :heavy_check_mark: |   | `OptionCollectionId` maybe_collection <br/> |
+|Set collection max supply |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`u32` max_supply <br/> |
 
 ## Preimage
 
@@ -242,7 +244,6 @@ Please:
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
 |Batch |    | :heavy_check_mark: |   | `VecTupleAccountIdBalanceOf` batch <br/> |
-|Allocate |    | :heavy_check_mark: |   | `AccountId` to <br/>`Balance` amount <br/>`Vecu8` proof <br/> |
 
 ## AllocationsOracles
 

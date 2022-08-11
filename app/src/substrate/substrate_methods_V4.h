@@ -61,6 +61,11 @@ typedef struct {
 typedef struct {
 } pd_session_purge_keys_V4_t;
 
+#define PD_CALL_UTILITY_FORCE_BATCH_V4 4
+typedef struct {
+    pd_VecCall_t calls;
+} pd_utility_force_batch_V4_t;
+
 #ifdef SUBSTRATE_PARSER_FULL
 
 #define PD_CALL_TIMESTAMP_SET_V4 0
@@ -250,81 +255,81 @@ typedef struct {
 
 #define PD_CALL_UNIQUES_CREATE_V4 0
 typedef struct {
-    pd_ClassId_V4_t class_;
+    pd_CollectionId_V4_t collection;
     pd_LookupasStaticLookupSource_V4_t admin;
 } pd_uniques_create_V4_t;
 
 #define PD_CALL_UNIQUES_FORCE_CREATE_V4 1
 typedef struct {
-    pd_ClassId_V4_t class_;
+    pd_CollectionId_V4_t collection;
     pd_LookupasStaticLookupSource_V4_t owner;
     pd_bool_t free_holding;
 } pd_uniques_force_create_V4_t;
 
 #define PD_CALL_UNIQUES_DESTROY_V4 2
 typedef struct {
-    pd_ClassId_V4_t class_;
+    pd_CollectionId_V4_t collection;
     pd_DestroyWitness_V4_t witness;
 } pd_uniques_destroy_V4_t;
 
 #define PD_CALL_UNIQUES_MINT_V4 3
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_InstanceId_V4_t instance;
+    pd_CollectionId_V4_t collection;
+    pd_ItemId_V4_t item;
     pd_LookupasStaticLookupSource_V4_t owner;
 } pd_uniques_mint_V4_t;
 
 #define PD_CALL_UNIQUES_BURN_V4 4
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_InstanceId_V4_t instance;
+    pd_CollectionId_V4_t collection;
+    pd_ItemId_V4_t item;
     pd_OptionLookupasStaticLookupSource_V4_t check_owner;
 } pd_uniques_burn_V4_t;
 
 #define PD_CALL_UNIQUES_TRANSFER_V4 5
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_InstanceId_V4_t instance;
+    pd_CollectionId_V4_t collection;
+    pd_ItemId_V4_t item;
     pd_LookupasStaticLookupSource_V4_t dest;
 } pd_uniques_transfer_V4_t;
 
 #define PD_CALL_UNIQUES_REDEPOSIT_V4 6
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_VecInstanceId_V4_t instances;
+    pd_CollectionId_V4_t collection;
+    pd_VecItemId_V4_t items;
 } pd_uniques_redeposit_V4_t;
 
 #define PD_CALL_UNIQUES_FREEZE_V4 7
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_InstanceId_V4_t instance;
+    pd_CollectionId_V4_t collection;
+    pd_ItemId_V4_t item;
 } pd_uniques_freeze_V4_t;
 
 #define PD_CALL_UNIQUES_THAW_V4 8
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_InstanceId_V4_t instance;
+    pd_CollectionId_V4_t collection;
+    pd_ItemId_V4_t item;
 } pd_uniques_thaw_V4_t;
 
-#define PD_CALL_UNIQUES_FREEZE_CLASS_V4 9
+#define PD_CALL_UNIQUES_FREEZE_COLLECTION_V4 9
 typedef struct {
-    pd_ClassId_V4_t class_;
-} pd_uniques_freeze_class_V4_t;
+    pd_CollectionId_V4_t collection;
+} pd_uniques_freeze_collection_V4_t;
 
-#define PD_CALL_UNIQUES_THAW_CLASS_V4 10
+#define PD_CALL_UNIQUES_THAW_COLLECTION_V4 10
 typedef struct {
-    pd_ClassId_V4_t class_;
-} pd_uniques_thaw_class_V4_t;
+    pd_CollectionId_V4_t collection;
+} pd_uniques_thaw_collection_V4_t;
 
 #define PD_CALL_UNIQUES_TRANSFER_OWNERSHIP_V4 11
 typedef struct {
-    pd_ClassId_V4_t class_;
+    pd_CollectionId_V4_t collection;
     pd_LookupasStaticLookupSource_V4_t owner;
 } pd_uniques_transfer_ownership_V4_t;
 
 #define PD_CALL_UNIQUES_SET_TEAM_V4 12
 typedef struct {
-    pd_ClassId_V4_t class_;
+    pd_CollectionId_V4_t collection;
     pd_LookupasStaticLookupSource_V4_t issuer;
     pd_LookupasStaticLookupSource_V4_t admin;
     pd_LookupasStaticLookupSource_V4_t freezer;
@@ -332,74 +337,80 @@ typedef struct {
 
 #define PD_CALL_UNIQUES_APPROVE_TRANSFER_V4 13
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_InstanceId_V4_t instance;
+    pd_CollectionId_V4_t collection;
+    pd_ItemId_V4_t item;
     pd_LookupasStaticLookupSource_V4_t delegate;
 } pd_uniques_approve_transfer_V4_t;
 
 #define PD_CALL_UNIQUES_CANCEL_APPROVAL_V4 14
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_InstanceId_V4_t instance;
+    pd_CollectionId_V4_t collection;
+    pd_ItemId_V4_t item;
     pd_OptionLookupasStaticLookupSource_V4_t maybe_check_delegate;
 } pd_uniques_cancel_approval_V4_t;
 
-#define PD_CALL_UNIQUES_FORCE_ASSET_STATUS_V4 15
+#define PD_CALL_UNIQUES_FORCE_ITEM_STATUS_V4 15
 typedef struct {
-    pd_ClassId_V4_t class_;
+    pd_CollectionId_V4_t collection;
     pd_LookupasStaticLookupSource_V4_t owner;
     pd_LookupasStaticLookupSource_V4_t issuer;
     pd_LookupasStaticLookupSource_V4_t admin;
     pd_LookupasStaticLookupSource_V4_t freezer;
     pd_bool_t free_holding;
     pd_bool_t is_frozen;
-} pd_uniques_force_asset_status_V4_t;
+} pd_uniques_force_item_status_V4_t;
 
 #define PD_CALL_UNIQUES_SET_ATTRIBUTE_V4 16
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_OptionInstanceId_V4_t maybe_instance;
+    pd_CollectionId_V4_t collection;
+    pd_OptionItemId_V4_t maybe_item;
     pd_BoundedVecu8_V4_t key;
     pd_BoundedVecu8_V4_t value;
 } pd_uniques_set_attribute_V4_t;
 
 #define PD_CALL_UNIQUES_CLEAR_ATTRIBUTE_V4 17
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_OptionInstanceId_V4_t maybe_instance;
+    pd_CollectionId_V4_t collection;
+    pd_OptionItemId_V4_t maybe_item;
     pd_BoundedVecu8_V4_t key;
 } pd_uniques_clear_attribute_V4_t;
 
 #define PD_CALL_UNIQUES_SET_METADATA_V4 18
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_InstanceId_V4_t instance;
+    pd_CollectionId_V4_t collection;
+    pd_ItemId_V4_t item;
     pd_BoundedVecu8_V4_t data;
     pd_bool_t is_frozen;
 } pd_uniques_set_metadata_V4_t;
 
 #define PD_CALL_UNIQUES_CLEAR_METADATA_V4 19
 typedef struct {
-    pd_ClassId_V4_t class_;
-    pd_InstanceId_V4_t instance;
+    pd_CollectionId_V4_t collection;
+    pd_ItemId_V4_t item;
 } pd_uniques_clear_metadata_V4_t;
 
-#define PD_CALL_UNIQUES_SET_CLASS_METADATA_V4 20
+#define PD_CALL_UNIQUES_SET_COLLECTION_METADATA_V4 20
 typedef struct {
-    pd_ClassId_V4_t class_;
+    pd_CollectionId_V4_t collection;
     pd_BoundedVecu8_V4_t data;
     pd_bool_t is_frozen;
-} pd_uniques_set_class_metadata_V4_t;
+} pd_uniques_set_collection_metadata_V4_t;
 
-#define PD_CALL_UNIQUES_CLEAR_CLASS_METADATA_V4 21
+#define PD_CALL_UNIQUES_CLEAR_COLLECTION_METADATA_V4 21
 typedef struct {
-    pd_ClassId_V4_t class_;
-} pd_uniques_clear_class_metadata_V4_t;
+    pd_CollectionId_V4_t collection;
+} pd_uniques_clear_collection_metadata_V4_t;
 
 #define PD_CALL_UNIQUES_SET_ACCEPT_OWNERSHIP_V4 22
 typedef struct {
-    pd_OptionClassId_V4_t maybe_class;
+    pd_OptionCollectionId_V4_t maybe_collection;
 } pd_uniques_set_accept_ownership_V4_t;
+
+#define PD_CALL_UNIQUES_SET_COLLECTION_MAX_SUPPLY_V4 23
+typedef struct {
+    pd_CollectionId_V4_t collection;
+    pd_u32_t max_supply;
+} pd_uniques_set_collection_max_supply_V4_t;
 
 #define PD_CALL_PREIMAGE_NOTE_PREIMAGE_V4 0
 typedef struct {
@@ -425,13 +436,6 @@ typedef struct {
 typedef struct {
     pd_VecTupleAccountIdBalanceOf_V4_t batch;
 } pd_allocations_batch_V4_t;
-
-#define PD_CALL_ALLOCATIONS_ALLOCATE_V4 1
-typedef struct {
-    pd_AccountId_V4_t to;
-    pd_Balance_t amount;
-    pd_Vecu8_t proof;
-} pd_allocations_allocate_V4_t;
 
 #define PD_CALL_ALLOCATIONSORACLES_ADD_MEMBER_V4 0
 typedef struct {
@@ -474,6 +478,7 @@ typedef union {
     pd_balances_transfer_all_V4_t balances_transfer_all_V4;
     pd_session_set_keys_V4_t session_set_keys_V4;
     pd_session_purge_keys_V4_t session_purge_keys_V4;
+    pd_utility_force_batch_V4_t utility_force_batch_V4;
 #ifdef SUBSTRATE_PARSER_FULL
     pd_timestamp_set_V4_t timestamp_set_V4;
     pd_balances_force_unreserve_V4_t balances_force_unreserve_V4;
@@ -518,26 +523,26 @@ typedef union {
     pd_uniques_redeposit_V4_t uniques_redeposit_V4;
     pd_uniques_freeze_V4_t uniques_freeze_V4;
     pd_uniques_thaw_V4_t uniques_thaw_V4;
-    pd_uniques_freeze_class_V4_t uniques_freeze_class_V4;
-    pd_uniques_thaw_class_V4_t uniques_thaw_class_V4;
+    pd_uniques_freeze_collection_V4_t uniques_freeze_collection_V4;
+    pd_uniques_thaw_collection_V4_t uniques_thaw_collection_V4;
     pd_uniques_transfer_ownership_V4_t uniques_transfer_ownership_V4;
     pd_uniques_set_team_V4_t uniques_set_team_V4;
     pd_uniques_approve_transfer_V4_t uniques_approve_transfer_V4;
     pd_uniques_cancel_approval_V4_t uniques_cancel_approval_V4;
-    pd_uniques_force_asset_status_V4_t uniques_force_asset_status_V4;
+    pd_uniques_force_item_status_V4_t uniques_force_item_status_V4;
     pd_uniques_set_attribute_V4_t uniques_set_attribute_V4;
     pd_uniques_clear_attribute_V4_t uniques_clear_attribute_V4;
     pd_uniques_set_metadata_V4_t uniques_set_metadata_V4;
     pd_uniques_clear_metadata_V4_t uniques_clear_metadata_V4;
-    pd_uniques_set_class_metadata_V4_t uniques_set_class_metadata_V4;
-    pd_uniques_clear_class_metadata_V4_t uniques_clear_class_metadata_V4;
+    pd_uniques_set_collection_metadata_V4_t uniques_set_collection_metadata_V4;
+    pd_uniques_clear_collection_metadata_V4_t uniques_clear_collection_metadata_V4;
     pd_uniques_set_accept_ownership_V4_t uniques_set_accept_ownership_V4;
+    pd_uniques_set_collection_max_supply_V4_t uniques_set_collection_max_supply_V4;
     pd_preimage_note_preimage_V4_t preimage_note_preimage_V4;
     pd_preimage_unnote_preimage_V4_t preimage_unnote_preimage_V4;
     pd_preimage_request_preimage_V4_t preimage_request_preimage_V4;
     pd_preimage_unrequest_preimage_V4_t preimage_unrequest_preimage_V4;
     pd_allocations_batch_V4_t allocations_batch_V4;
-    pd_allocations_allocate_V4_t allocations_allocate_V4;
     pd_allocationsoracles_add_member_V4_t allocationsoracles_add_member_V4;
     pd_allocationsoracles_remove_member_V4_t allocationsoracles_remove_member_V4;
     pd_allocationsoracles_swap_member_V4_t allocationsoracles_swap_member_V4;

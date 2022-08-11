@@ -32,7 +32,7 @@ parser_error_t _readBoundedVecu8_V4(parser_context_t* c, pd_BoundedVecu8_V4_t* v
     GEN_DEF_READVECTOR(u8)
 }
 
-parser_error_t _readClassId_V4(parser_context_t* c, pd_ClassId_V4_t* v)
+parser_error_t _readCollectionId_V4(parser_context_t* c, pd_CollectionId_V4_t* v)
 {
     CHECK_INPUT()
     CHECK_ERROR(_readUInt32(c, &v->value))
@@ -52,7 +52,7 @@ parser_error_t _readDestroyWitness_V4(parser_context_t* c, pd_DestroyWitness_V4_
     return parser_ok;
 }
 
-parser_error_t _readInstanceId_V4(parser_context_t* c, pd_InstanceId_V4_t* v)
+parser_error_t _readItemId_V4(parser_context_t* c, pd_ItemId_V4_t* v)
 {
     CHECK_INPUT()
     CHECK_ERROR(_readUInt32(c, &v->value))
@@ -148,8 +148,8 @@ parser_error_t _readVecAccountId_V4(parser_context_t* c, pd_VecAccountId_V4_t* v
     GEN_DEF_READVECTOR(AccountId_V4)
 }
 
-parser_error_t _readVecInstanceId_V4(parser_context_t* c, pd_VecInstanceId_V4_t* v) {
-    GEN_DEF_READVECTOR(InstanceId_V4)
+parser_error_t _readVecItemId_V4(parser_context_t* c, pd_VecItemId_V4_t* v) {
+    GEN_DEF_READVECTOR(ItemId_V4)
 }
 
 parser_error_t _readVecTupleAccountIdBalanceOf_V4(parser_context_t* c, pd_VecTupleAccountIdBalanceOf_V4_t* v) {
@@ -165,20 +165,20 @@ parser_error_t _readOptionAccountId_V4(parser_context_t* c, pd_OptionAccountId_V
     return parser_ok;
 }
 
-parser_error_t _readOptionClassId_V4(parser_context_t* c, pd_OptionClassId_V4_t* v)
+parser_error_t _readOptionCollectionId_V4(parser_context_t* c, pd_OptionCollectionId_V4_t* v)
 {
     CHECK_ERROR(_readUInt8(c, &v->some))
     if (v->some > 0) {
-        CHECK_ERROR(_readClassId_V4(c, &v->contained))
+        CHECK_ERROR(_readCollectionId_V4(c, &v->contained))
     }
     return parser_ok;
 }
 
-parser_error_t _readOptionInstanceId_V4(parser_context_t* c, pd_OptionInstanceId_V4_t* v)
+parser_error_t _readOptionItemId_V4(parser_context_t* c, pd_OptionItemId_V4_t* v)
 {
     CHECK_ERROR(_readUInt8(c, &v->some))
     if (v->some > 0) {
-        CHECK_ERROR(_readInstanceId_V4(c, &v->contained))
+        CHECK_ERROR(_readItemId_V4(c, &v->contained))
     }
     return parser_ok;
 }
@@ -224,16 +224,14 @@ parser_error_t _toStringBoundedVecu8_V4(
     GEN_DEF_TOSTRING_VECTOR(u8)
 }
 
-parser_error_t _toStringClassId_V4(
-    const pd_ClassId_V4_t* v,
+parser_error_t _toStringCollectionId_V4(
+    const pd_CollectionId_V4_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
     uint8_t* pageCount)
 {
-    CLEAN_AND_CHECK()
-    CHECK_ERROR(_toStringu32(&v->value, outValue, outValueLen, pageIdx, pageCount))
-    return parser_ok;
+    return _toStringu32(&v->value, outValue, outValueLen, pageIdx, pageCount);
 }
 
 parser_error_t _toStringCompactAccountIndex_V4(
@@ -290,16 +288,14 @@ parser_error_t _toStringDestroyWitness_V4(
     return parser_display_idx_out_of_range;
 }
 
-parser_error_t _toStringInstanceId_V4(
-    const pd_InstanceId_V4_t* v,
+parser_error_t _toStringItemId_V4(
+    const pd_ItemId_V4_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
     uint8_t* pageCount)
 {
-    CLEAN_AND_CHECK()
-    CHECK_ERROR(_toStringu32(&v->value, outValue, outValueLen, pageIdx, pageCount))
-    return parser_ok;
+    return _toStringu32(&v->value, outValue, outValueLen, pageIdx, pageCount);
 }
 
 parser_error_t _toStringKeys_V4(
@@ -532,14 +528,14 @@ parser_error_t _toStringVecAccountId_V4(
     GEN_DEF_TOSTRING_VECTOR(AccountId_V4);
 }
 
-parser_error_t _toStringVecInstanceId_V4(
-    const pd_VecInstanceId_V4_t* v,
+parser_error_t _toStringVecItemId_V4(
+    const pd_VecItemId_V4_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
     uint8_t* pageCount)
 {
-    GEN_DEF_TOSTRING_VECTOR(InstanceId_V4);
+    GEN_DEF_TOSTRING_VECTOR(ItemId_V4);
 }
 
 parser_error_t _toStringVecTupleAccountIdBalanceOf_V4(
@@ -573,8 +569,8 @@ parser_error_t _toStringOptionAccountId_V4(
     return parser_ok;
 }
 
-parser_error_t _toStringOptionClassId_V4(
-    const pd_OptionClassId_V4_t* v,
+parser_error_t _toStringOptionCollectionId_V4(
+    const pd_OptionCollectionId_V4_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -584,7 +580,7 @@ parser_error_t _toStringOptionClassId_V4(
 
     *pageCount = 1;
     if (v->some > 0) {
-        CHECK_ERROR(_toStringClassId_V4(
+        CHECK_ERROR(_toStringCollectionId_V4(
             &v->contained,
             outValue, outValueLen,
             pageIdx, pageCount));
@@ -594,8 +590,8 @@ parser_error_t _toStringOptionClassId_V4(
     return parser_ok;
 }
 
-parser_error_t _toStringOptionInstanceId_V4(
-    const pd_OptionInstanceId_V4_t* v,
+parser_error_t _toStringOptionItemId_V4(
+    const pd_OptionItemId_V4_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -605,7 +601,7 @@ parser_error_t _toStringOptionInstanceId_V4(
 
     *pageCount = 1;
     if (v->some > 0) {
-        CHECK_ERROR(_toStringInstanceId_V4(
+        CHECK_ERROR(_toStringItemId_V4(
             &v->contained,
             outValue, outValueLen,
             pageIdx, pageCount));

@@ -36,11 +36,11 @@ typedef struct {
 
 typedef struct {
     uint32_t value;
-} pd_ClassId_V4_t;
+} pd_CollectionId_V4_t;
 
 typedef struct {
     uint32_t value;
-} pd_InstanceId_V4_t;
+} pd_ItemId_V4_t;
 
 typedef struct {
     uint8_t value;
@@ -116,13 +116,13 @@ typedef struct {
 
 typedef struct {
     uint8_t some;
-    pd_ClassId_V4_t contained;
-} pd_OptionClassId_V4_t;
+    pd_CollectionId_V4_t contained;
+} pd_OptionCollectionId_V4_t;
 
 typedef struct {
     uint8_t some;
-    pd_InstanceId_V4_t contained;
-} pd_OptionInstanceId_V4_t;
+    pd_ItemId_V4_t contained;
+} pd_OptionItemId_V4_t;
 
 typedef struct {
     uint32_t value;
@@ -138,7 +138,7 @@ typedef struct {
     uint64_t _len;
     const uint8_t* _ptr;
     uint64_t _lenBuffer;
-} pd_VecInstanceId_V4_t;
+} pd_VecItemId_V4_t;
 
 typedef struct {
     uint64_t value;
