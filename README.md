@@ -28,7 +28,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-# Nodle  4.12.x
+# Nodle  5.15.x
 
 ## System
 
@@ -103,6 +103,7 @@ Please:
 |Claim |    | :heavy_check_mark: |   |  |
 |Add vesting schedule |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` dest <br/>`VestingScheduleOf` schedule <br/> |
 |Cancel all vesting schedules |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` who <br/>`LookupasStaticLookupSource` funds_collector <br/> |
+|Renounce |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` who <br/> |
 
 ## Mandate
 
@@ -182,6 +183,12 @@ Please:
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
 
+## DmpQueue
+
+| Name        | Light | XL | Nesting | Arguments |
+| :---------- |:------------:|:--------:|:--------:|:--------|
+|Service overweight |    | :heavy_check_mark: |   | `OverweightIndex` index <br/>`Weight` weight_limit <br/> |
+
 ## Utility
 
 | Name        | Light | XL | Nesting | Arguments |
@@ -205,8 +212,9 @@ Please:
 
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
-|Create |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`LookupasStaticLookupSource` admin <br/> |
-|Force create |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`LookupasStaticLookupSource` owner <br/>`bool` free_holding <br/> |
+|Create |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` admin <br/> |
+|Force create |    | :heavy_check_mark: |   | `LookupasStaticLookupSource` owner <br/>`bool` free_holding <br/> |
+|Try increment id |    | :heavy_check_mark: |   |  |
 |Destroy |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`DestroyWitness` witness <br/> |
 |Mint |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/>`LookupasStaticLookupSource` owner <br/> |
 |Burn |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/>`OptionLookupasStaticLookupSource` check_owner <br/> |
@@ -229,6 +237,8 @@ Please:
 |Clear collection metadata |    | :heavy_check_mark: |   | `CollectionId` collection <br/> |
 |Set accept ownership |    | :heavy_check_mark: |   | `OptionCollectionId` maybe_collection <br/> |
 |Set collection max supply |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`u32` max_supply <br/> |
+|Set price |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/>`OptionItemPrice` price <br/>`OptionLookupasStaticLookupSource` whitelisted_buyer <br/> |
+|Buy item |    | :heavy_check_mark: |   | `CollectionId` collection <br/>`ItemId` item <br/>`ItemPrice` bid_price <br/> |
 
 ## Preimage
 
@@ -244,6 +254,7 @@ Please:
 | Name        | Light | XL | Nesting | Arguments |
 | :---------- |:------------:|:--------:|:--------:|:--------|
 |Batch |    | :heavy_check_mark: |   | `VecTupleAccountIdBalanceOf` batch <br/> |
+|Set curve starting block |    | :heavy_check_mark: |   | `BlockNumber` curve_start <br/> |
 
 ## AllocationsOracles
 
@@ -256,4 +267,12 @@ Please:
 |Change key |    | :heavy_check_mark: |   | `AccountId` new_ <br/> |
 |Set prime |    | :heavy_check_mark: |   | `AccountId` who <br/> |
 |Clear prime |    | :heavy_check_mark: |   |  |
+
+## DaoReserve
+
+| Name        | Light | XL | Nesting | Arguments |
+| :---------- |:------------:|:--------:|:--------:|:--------|
+|Spend |    | :heavy_check_mark: |   | `AccountId` to <br/>`BalanceOf` amount <br/> |
+|Tip |    | :heavy_check_mark: |   | `BalanceOf` amount <br/> |
+|Apply as |    | :heavy_check_mark: |   | `Call` call <br/> |
 
