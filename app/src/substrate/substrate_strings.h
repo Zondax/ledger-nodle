@@ -38,6 +38,8 @@ static const char* STR_MO_UNIQUES = "Uniques";
 static const char* STR_MO_PREIMAGE = "Preimage";
 static const char* STR_MO_ALLOCATIONS = "Allocations";
 static const char* STR_MO_ALLOCATIONSORACLES = "Allocationsoracles";
+static const char* STR_MO_DMPQUEUE = "Dmpqueue";
+static const char* STR_MO_DAORESERVE = "Daoreserve";
 
 // Methods names
 static const char* STR_ME_FILL_BLOCK = "Fill block";
@@ -109,6 +111,12 @@ static const char* STR_ME_NOTE_PREIMAGE = "Note preimage";
 static const char* STR_ME_UNNOTE_PREIMAGE = "Unnote preimage";
 static const char* STR_ME_REQUEST_PREIMAGE = "Request preimage";
 static const char* STR_ME_UNREQUEST_PREIMAGE = "Unrequest preimage";
+static const char* STR_ME_RENOUNCE = "Renounce";
+static const char* STR_ME_SERVICE_OVERWEIGHT = "Service overweight";
+static const char* STR_ME_TRY_INCREMENT_ID = "Try increment id";
+static const char* STR_ME_SET_PRICE = "Set price";
+static const char* STR_ME_BUY_ITEM = "Buy item";
+static const char* STR_ME_SET_CURVE_STARTING_BLOCK = "Set curve starting block";
 
 // Items names
 static const char* STR_IT_ratio = "Ratio";
@@ -175,6 +183,11 @@ static const char* STR_IT_max_supply = "Max supply";
 static const char* STR_IT_bytes = "Bytes";
 static const char* STR_IT_hash = "Hash";
 static const char* STR_IT_batch = "Batch";
+static const char* STR_IT_weight_limit = "Weight limit";
+static const char* STR_IT_price = "Price";
+static const char* STR_IT_whitelisted_buyer = "Whitelisted buyer";
+static const char* STR_IT_bid_price = "Bid price";
+static const char* STR_IT_curve_start = "Curve start";
 
 #ifdef __cplusplus
 }
