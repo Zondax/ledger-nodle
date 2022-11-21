@@ -24,12 +24,45 @@
 #include <zxformat.h>
 #include <zxmacros.h>
 
+parser_error_t _readAccountIdLookupOfT_V5(parser_context_t* c, pd_AccountIdLookupOfT_V5_t* v)
+{
+    CHECK_INPUT()
+    CHECK_ERROR(_readUInt8(c, &v->value))
+    switch (v->value) {
+    case 0: // Id
+        CHECK_ERROR(_readAccountId_V5(c, &v->id))
+        break;
+    case 1: // Index
+        CHECK_ERROR(_readCompactAccountIndex_V5(c, &v->index))
+        break;
+    case 2: // Raw
+        CHECK_ERROR(_readBytes(c, &v->raw))
+        break;
+    case 3: // Address32
+        GEN_DEF_READARRAY(32)
+        break;
+    case 4: // Address20
+        GEN_DEF_READARRAY(20)
+        break;
+    default:
+        return parser_unexpected_value;
+    }
+
+    return parser_ok;
+}
+
 parser_error_t _readAccountId_V5(parser_context_t* c, pd_AccountId_V5_t* v) {
     GEN_DEF_READARRAY(32)
 }
 
 parser_error_t _readBoundedVecu8_V5(parser_context_t* c, pd_BoundedVecu8_V5_t* v) {
     GEN_DEF_READVECTOR(u8)
+}
+
+parser_error_t _readCodeHash_V5(parser_context_t* c, pd_CodeHash_V5_t* v)
+{
+    CHECK_ERROR(_readHash(c, &v->hash))
+    return parser_ok;
 }
 
 parser_error_t _readCollectionId_V5(parser_context_t* c, pd_CollectionId_V5_t* v)
@@ -170,6 +203,15 @@ parser_error_t _readVecTupleAccountIdBalanceOf_V5(parser_context_t* c, pd_VecTup
     GEN_DEF_READVECTOR(TupleAccountIdBalanceOf_V5)
 }
 
+parser_error_t _readOptionAccountIdLookupOfT_V5(parser_context_t* c, pd_OptionAccountIdLookupOfT_V5_t* v)
+{
+    CHECK_ERROR(_readUInt8(c, &v->some))
+    if (v->some > 0) {
+        CHECK_ERROR(_readAccountIdLookupOfT_V5(c, &v->contained))
+    }
+    return parser_ok;
+}
+
 parser_error_t _readOptionAccountId_V5(parser_context_t* c, pd_OptionAccountId_V5_t* v)
 {
     CHECK_ERROR(_readUInt8(c, &v->some))
@@ -206,15 +248,6 @@ parser_error_t _readOptionItemPrice_V5(parser_context_t* c, pd_OptionItemPrice_V
     return parser_ok;
 }
 
-parser_error_t _readOptionLookupasStaticLookupSource_V5(parser_context_t* c, pd_OptionLookupasStaticLookupSource_V5_t* v)
-{
-    CHECK_ERROR(_readUInt8(c, &v->some))
-    if (v->some > 0) {
-        CHECK_ERROR(_readLookupasStaticLookupSource_V5(c, &v->contained))
-    }
-    return parser_ok;
-}
-
 parser_error_t _readOptionTimepoint_V5(parser_context_t* c, pd_OptionTimepoint_V5_t* v)
 {
     CHECK_ERROR(_readUInt8(c, &v->some))
@@ -227,6 +260,39 @@ parser_error_t _readOptionTimepoint_V5(parser_context_t* c, pd_OptionTimepoint_V
 ///////////////////////////////////
 ///////////////////////////////////
 ///////////////////////////////////
+
+parser_error_t _toStringAccountIdLookupOfT_V5(
+    const pd_AccountIdLookupOfT_V5_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+    switch (v->value) {
+    case 0: // Id
+        CHECK_ERROR(_toStringAccountId_V5(&v->id, outValue, outValueLen, pageIdx, pageCount))
+        break;
+    case 1: // Index
+        CHECK_ERROR(_toStringCompactAccountIndex_V5(&v->index, outValue, outValueLen, pageIdx, pageCount))
+        break;
+    case 2: // Raw
+        CHECK_ERROR(_toStringBytes(&v->raw, outValue, outValueLen, pageIdx, pageCount))
+        break;
+    case 3: // Address32
+    {
+        GEN_DEF_TOSTRING_ARRAY(32)
+    }
+    case 4: // Address20
+    {
+        GEN_DEF_TOSTRING_ARRAY(20)
+    }
+    default:
+        return parser_not_supported;
+    }
+
+    return parser_ok;
+}
 
 parser_error_t _toStringAccountId_V5(
     const pd_AccountId_V5_t* v,
@@ -245,6 +311,16 @@ parser_error_t _toStringBoundedVecu8_V5(
     uint8_t pageIdx,
     uint8_t* pageCount) {
     GEN_DEF_TOSTRING_VECTOR(u8)
+}
+
+parser_error_t _toStringCodeHash_V5(
+    const pd_CodeHash_V5_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    return _toStringHash(&v->hash, outValue, outValueLen, pageIdx, pageCount);
 }
 
 parser_error_t _toStringCollectionId_V5(
@@ -593,6 +669,27 @@ parser_error_t _toStringVecTupleAccountIdBalanceOf_V5(
     GEN_DEF_TOSTRING_VECTOR(TupleAccountIdBalanceOf_V5);
 }
 
+parser_error_t _toStringOptionAccountIdLookupOfT_V5(
+    const pd_OptionAccountIdLookupOfT_V5_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+
+    *pageCount = 1;
+    if (v->some > 0) {
+        CHECK_ERROR(_toStringAccountIdLookupOfT_V5(
+            &v->contained,
+            outValue, outValueLen,
+            pageIdx, pageCount));
+    } else {
+        snprintf(outValue, outValueLen, "None");
+    }
+    return parser_ok;
+}
+
 parser_error_t _toStringOptionAccountId_V5(
     const pd_OptionAccountId_V5_t* v,
     char* outValue,
@@ -668,27 +765,6 @@ parser_error_t _toStringOptionItemPrice_V5(
     *pageCount = 1;
     if (v->some > 0) {
         CHECK_ERROR(_toStringItemPrice_V5(
-            &v->contained,
-            outValue, outValueLen,
-            pageIdx, pageCount));
-    } else {
-        snprintf(outValue, outValueLen, "None");
-    }
-    return parser_ok;
-}
-
-parser_error_t _toStringOptionLookupasStaticLookupSource_V5(
-    const pd_OptionLookupasStaticLookupSource_V5_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount)
-{
-    CLEAN_AND_CHECK()
-
-    *pageCount = 1;
-    if (v->some > 0) {
-        CHECK_ERROR(_toStringLookupasStaticLookupSource_V5(
             &v->contained,
             outValue, outValueLen,
             pageIdx, pageCount));

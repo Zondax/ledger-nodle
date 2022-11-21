@@ -100,6 +100,14 @@ typedef struct {
 } pd_Call_t;
 
 typedef struct {
+    compactInt_t value;
+} pd_CompactBalanceOf_t;
+
+typedef struct {
+    const uint8_t* _ptr;
+} pd_Hash_t;
+
+typedef struct {
     pd_Call_t call;
 } pd_Proposal_t;
 
@@ -115,8 +123,9 @@ typedef struct {
 } pd_H256_t;
 
 typedef struct {
-    const uint8_t* _ptr;
-} pd_Hash_t;
+    uint8_t some;
+    pd_CompactBalanceOf_t contained;
+} pd_OptionCompactBalanceOf_t;
 
 typedef struct {
     uint64_t _len;

@@ -25,6 +25,9 @@ extern "C" {
 #include "substrate_types_V5.h"
 #include <stddef.h>
 #include <stdint.h>
+#ifdef LEDGER_SPECIFIC
+#include "bolos_target.h"
+#endif
 
 #define PD_CALL_SYSTEM_V5 0
 #define PD_CALL_TIMESTAMP_V5 1
@@ -36,7 +39,7 @@ extern "C" {
 #define PD_CALL_MANDATE_V5 15
 #define PD_CALL_TECHNICALCOMMITTEE_V5 16
 #define PD_CALL_TECHNICALMEMBERSHIP_V5 17
-#define PD_CALL_VALIDATORSSET_V5 21
+#define PD_CALL_COLLATORSELECTION_V5 19
 #define PD_CALL_SESSION_V5 23
 #define PD_CALL_DMPQUEUE_V5 33
 #define PD_CALL_UTILITY_V5 40
@@ -46,10 +49,11 @@ extern "C" {
 #define PD_CALL_ALLOCATIONS_V5 51
 #define PD_CALL_ALLOCATIONSORACLES_V5 52
 #define PD_CALL_DAORESERVE_V5 60
+#define PD_CALL_CONTRACTS_V5 62
 
 #define PD_CALL_BALANCES_TRANSFER_ALL_V5 4
 typedef struct {
-    pd_LookupasStaticLookupSource_V5_t dest;
+    pd_AccountIdLookupOfT_V5_t dest;
     pd_bool_t keep_alive;
 } pd_balances_transfer_all_V5_t;
 
@@ -69,6 +73,8 @@ typedef struct {
 } pd_utility_force_batch_V5_t;
 
 #ifdef SUBSTRATE_PARSER_FULL
+#ifndef TARGET_NANOS
+#endif
 
 #define PD_CALL_TIMESTAMP_SET_V5 0
 typedef struct {
@@ -77,7 +83,7 @@ typedef struct {
 
 #define PD_CALL_BALANCES_FORCE_UNRESERVE_V5 5
 typedef struct {
-    pd_LookupasStaticLookupSource_V5_t who;
+    pd_AccountIdLookupOfT_V5_t who;
     pd_Balance_t amount;
 } pd_balances_force_unreserve_V5_t;
 
@@ -192,18 +198,18 @@ typedef struct {
 
 #define PD_CALL_TECHNICALMEMBERSHIP_ADD_MEMBER_V5 0
 typedef struct {
-    pd_AccountId_V5_t who;
+    pd_AccountIdLookupOfT_V5_t who;
 } pd_technicalmembership_add_member_V5_t;
 
 #define PD_CALL_TECHNICALMEMBERSHIP_REMOVE_MEMBER_V5 1
 typedef struct {
-    pd_AccountId_V5_t who;
+    pd_AccountIdLookupOfT_V5_t who;
 } pd_technicalmembership_remove_member_V5_t;
 
 #define PD_CALL_TECHNICALMEMBERSHIP_SWAP_MEMBER_V5 2
 typedef struct {
-    pd_AccountId_V5_t remove;
-    pd_AccountId_V5_t add;
+    pd_AccountIdLookupOfT_V5_t remove;
+    pd_AccountIdLookupOfT_V5_t add;
 } pd_technicalmembership_swap_member_V5_t;
 
 #define PD_CALL_TECHNICALMEMBERSHIP_RESET_MEMBERS_V5 3
@@ -213,52 +219,40 @@ typedef struct {
 
 #define PD_CALL_TECHNICALMEMBERSHIP_CHANGE_KEY_V5 4
 typedef struct {
-    pd_AccountId_V5_t new_;
+    pd_AccountIdLookupOfT_V5_t new_;
 } pd_technicalmembership_change_key_V5_t;
 
 #define PD_CALL_TECHNICALMEMBERSHIP_SET_PRIME_V5 5
 typedef struct {
-    pd_AccountId_V5_t who;
+    pd_AccountIdLookupOfT_V5_t who;
 } pd_technicalmembership_set_prime_V5_t;
 
 #define PD_CALL_TECHNICALMEMBERSHIP_CLEAR_PRIME_V5 6
 typedef struct {
 } pd_technicalmembership_clear_prime_V5_t;
 
-#define PD_CALL_VALIDATORSSET_ADD_MEMBER_V5 0
+#define PD_CALL_COLLATORSELECTION_SET_INVULNERABLES_V5 0
 typedef struct {
-    pd_AccountId_V5_t who;
-} pd_validatorsset_add_member_V5_t;
+    pd_VecAccountId_V5_t new_;
+} pd_collatorselection_set_invulnerables_V5_t;
 
-#define PD_CALL_VALIDATORSSET_REMOVE_MEMBER_V5 1
+#define PD_CALL_COLLATORSELECTION_SET_DESIRED_CANDIDATES_V5 1
 typedef struct {
-    pd_AccountId_V5_t who;
-} pd_validatorsset_remove_member_V5_t;
+    pd_u32_t max;
+} pd_collatorselection_set_desired_candidates_V5_t;
 
-#define PD_CALL_VALIDATORSSET_SWAP_MEMBER_V5 2
+#define PD_CALL_COLLATORSELECTION_SET_CANDIDACY_BOND_V5 2
 typedef struct {
-    pd_AccountId_V5_t remove;
-    pd_AccountId_V5_t add;
-} pd_validatorsset_swap_member_V5_t;
+    pd_Balance_t bond;
+} pd_collatorselection_set_candidacy_bond_V5_t;
 
-#define PD_CALL_VALIDATORSSET_RESET_MEMBERS_V5 3
+#define PD_CALL_COLLATORSELECTION_REGISTER_AS_CANDIDATE_V5 3
 typedef struct {
-    pd_VecAccountId_V5_t members;
-} pd_validatorsset_reset_members_V5_t;
+} pd_collatorselection_register_as_candidate_V5_t;
 
-#define PD_CALL_VALIDATORSSET_CHANGE_KEY_V5 4
+#define PD_CALL_COLLATORSELECTION_LEAVE_INTENT_V5 4
 typedef struct {
-    pd_AccountId_V5_t new_;
-} pd_validatorsset_change_key_V5_t;
-
-#define PD_CALL_VALIDATORSSET_SET_PRIME_V5 5
-typedef struct {
-    pd_AccountId_V5_t who;
-} pd_validatorsset_set_prime_V5_t;
-
-#define PD_CALL_VALIDATORSSET_CLEAR_PRIME_V5 6
-typedef struct {
-} pd_validatorsset_clear_prime_V5_t;
+} pd_collatorselection_leave_intent_V5_t;
 
 #define PD_CALL_DMPQUEUE_SERVICE_OVERWEIGHT_V5 0
 typedef struct {
@@ -268,114 +262,112 @@ typedef struct {
 
 #define PD_CALL_UNIQUES_CREATE_V5 0
 typedef struct {
-    pd_LookupasStaticLookupSource_V5_t admin;
+    pd_CollectionId_V5_t collection;
+    pd_AccountIdLookupOfT_V5_t admin;
 } pd_uniques_create_V5_t;
 
 #define PD_CALL_UNIQUES_FORCE_CREATE_V5 1
 typedef struct {
-    pd_LookupasStaticLookupSource_V5_t owner;
+    pd_CollectionId_V5_t collection;
+    pd_AccountIdLookupOfT_V5_t owner;
     pd_bool_t free_holding;
 } pd_uniques_force_create_V5_t;
 
-#define PD_CALL_UNIQUES_TRY_INCREMENT_ID_V5 2
-typedef struct {
-} pd_uniques_try_increment_id_V5_t;
-
-#define PD_CALL_UNIQUES_DESTROY_V5 3
+#define PD_CALL_UNIQUES_DESTROY_V5 2
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_DestroyWitness_V5_t witness;
 } pd_uniques_destroy_V5_t;
 
-#define PD_CALL_UNIQUES_MINT_V5 4
+#define PD_CALL_UNIQUES_MINT_V5 3
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
-    pd_LookupasStaticLookupSource_V5_t owner;
+    pd_AccountIdLookupOfT_V5_t owner;
 } pd_uniques_mint_V5_t;
 
-#define PD_CALL_UNIQUES_BURN_V5 5
+#define PD_CALL_UNIQUES_BURN_V5 4
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
-    pd_OptionLookupasStaticLookupSource_V5_t check_owner;
+    pd_OptionAccountIdLookupOfT_V5_t check_owner;
 } pd_uniques_burn_V5_t;
 
-#define PD_CALL_UNIQUES_TRANSFER_V5 6
+#define PD_CALL_UNIQUES_TRANSFER_V5 5
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
-    pd_LookupasStaticLookupSource_V5_t dest;
+    pd_AccountIdLookupOfT_V5_t dest;
 } pd_uniques_transfer_V5_t;
 
-#define PD_CALL_UNIQUES_REDEPOSIT_V5 7
+#define PD_CALL_UNIQUES_REDEPOSIT_V5 6
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_VecItemId_V5_t items;
 } pd_uniques_redeposit_V5_t;
 
-#define PD_CALL_UNIQUES_FREEZE_V5 8
+#define PD_CALL_UNIQUES_FREEZE_V5 7
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
 } pd_uniques_freeze_V5_t;
 
-#define PD_CALL_UNIQUES_THAW_V5 9
+#define PD_CALL_UNIQUES_THAW_V5 8
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
 } pd_uniques_thaw_V5_t;
 
-#define PD_CALL_UNIQUES_FREEZE_COLLECTION_V5 10
+#define PD_CALL_UNIQUES_FREEZE_COLLECTION_V5 9
 typedef struct {
     pd_CollectionId_V5_t collection;
 } pd_uniques_freeze_collection_V5_t;
 
-#define PD_CALL_UNIQUES_THAW_COLLECTION_V5 11
+#define PD_CALL_UNIQUES_THAW_COLLECTION_V5 10
 typedef struct {
     pd_CollectionId_V5_t collection;
 } pd_uniques_thaw_collection_V5_t;
 
-#define PD_CALL_UNIQUES_TRANSFER_OWNERSHIP_V5 12
+#define PD_CALL_UNIQUES_TRANSFER_OWNERSHIP_V5 11
 typedef struct {
     pd_CollectionId_V5_t collection;
-    pd_LookupasStaticLookupSource_V5_t owner;
+    pd_AccountIdLookupOfT_V5_t owner;
 } pd_uniques_transfer_ownership_V5_t;
 
-#define PD_CALL_UNIQUES_SET_TEAM_V5 13
+#define PD_CALL_UNIQUES_SET_TEAM_V5 12
 typedef struct {
     pd_CollectionId_V5_t collection;
-    pd_LookupasStaticLookupSource_V5_t issuer;
-    pd_LookupasStaticLookupSource_V5_t admin;
-    pd_LookupasStaticLookupSource_V5_t freezer;
+    pd_AccountIdLookupOfT_V5_t issuer;
+    pd_AccountIdLookupOfT_V5_t admin;
+    pd_AccountIdLookupOfT_V5_t freezer;
 } pd_uniques_set_team_V5_t;
 
-#define PD_CALL_UNIQUES_APPROVE_TRANSFER_V5 14
+#define PD_CALL_UNIQUES_APPROVE_TRANSFER_V5 13
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
-    pd_LookupasStaticLookupSource_V5_t delegate;
+    pd_AccountIdLookupOfT_V5_t delegate;
 } pd_uniques_approve_transfer_V5_t;
 
-#define PD_CALL_UNIQUES_CANCEL_APPROVAL_V5 15
+#define PD_CALL_UNIQUES_CANCEL_APPROVAL_V5 14
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
-    pd_OptionLookupasStaticLookupSource_V5_t maybe_check_delegate;
+    pd_OptionAccountIdLookupOfT_V5_t maybe_check_delegate;
 } pd_uniques_cancel_approval_V5_t;
 
-#define PD_CALL_UNIQUES_FORCE_ITEM_STATUS_V5 16
+#define PD_CALL_UNIQUES_FORCE_ITEM_STATUS_V5 15
 typedef struct {
     pd_CollectionId_V5_t collection;
-    pd_LookupasStaticLookupSource_V5_t owner;
-    pd_LookupasStaticLookupSource_V5_t issuer;
-    pd_LookupasStaticLookupSource_V5_t admin;
-    pd_LookupasStaticLookupSource_V5_t freezer;
+    pd_AccountIdLookupOfT_V5_t owner;
+    pd_AccountIdLookupOfT_V5_t issuer;
+    pd_AccountIdLookupOfT_V5_t admin;
+    pd_AccountIdLookupOfT_V5_t freezer;
     pd_bool_t free_holding;
     pd_bool_t is_frozen;
 } pd_uniques_force_item_status_V5_t;
 
-#define PD_CALL_UNIQUES_SET_ATTRIBUTE_V5 17
+#define PD_CALL_UNIQUES_SET_ATTRIBUTE_V5 16
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_OptionItemId_V5_t maybe_item;
@@ -383,14 +375,14 @@ typedef struct {
     pd_BoundedVecu8_V5_t value;
 } pd_uniques_set_attribute_V5_t;
 
-#define PD_CALL_UNIQUES_CLEAR_ATTRIBUTE_V5 18
+#define PD_CALL_UNIQUES_CLEAR_ATTRIBUTE_V5 17
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_OptionItemId_V5_t maybe_item;
     pd_BoundedVecu8_V5_t key;
 } pd_uniques_clear_attribute_V5_t;
 
-#define PD_CALL_UNIQUES_SET_METADATA_V5 19
+#define PD_CALL_UNIQUES_SET_METADATA_V5 18
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
@@ -398,44 +390,44 @@ typedef struct {
     pd_bool_t is_frozen;
 } pd_uniques_set_metadata_V5_t;
 
-#define PD_CALL_UNIQUES_CLEAR_METADATA_V5 20
+#define PD_CALL_UNIQUES_CLEAR_METADATA_V5 19
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
 } pd_uniques_clear_metadata_V5_t;
 
-#define PD_CALL_UNIQUES_SET_COLLECTION_METADATA_V5 21
+#define PD_CALL_UNIQUES_SET_COLLECTION_METADATA_V5 20
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_BoundedVecu8_V5_t data;
     pd_bool_t is_frozen;
 } pd_uniques_set_collection_metadata_V5_t;
 
-#define PD_CALL_UNIQUES_CLEAR_COLLECTION_METADATA_V5 22
+#define PD_CALL_UNIQUES_CLEAR_COLLECTION_METADATA_V5 21
 typedef struct {
     pd_CollectionId_V5_t collection;
 } pd_uniques_clear_collection_metadata_V5_t;
 
-#define PD_CALL_UNIQUES_SET_ACCEPT_OWNERSHIP_V5 23
+#define PD_CALL_UNIQUES_SET_ACCEPT_OWNERSHIP_V5 22
 typedef struct {
     pd_OptionCollectionId_V5_t maybe_collection;
 } pd_uniques_set_accept_ownership_V5_t;
 
-#define PD_CALL_UNIQUES_SET_COLLECTION_MAX_SUPPLY_V5 24
+#define PD_CALL_UNIQUES_SET_COLLECTION_MAX_SUPPLY_V5 23
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_u32_t max_supply;
 } pd_uniques_set_collection_max_supply_V5_t;
 
-#define PD_CALL_UNIQUES_SET_PRICE_V5 25
+#define PD_CALL_UNIQUES_SET_PRICE_V5 24
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
     pd_OptionItemPrice_V5_t price;
-    pd_OptionLookupasStaticLookupSource_V5_t whitelisted_buyer;
+    pd_OptionAccountIdLookupOfT_V5_t whitelisted_buyer;
 } pd_uniques_set_price_V5_t;
 
-#define PD_CALL_UNIQUES_BUY_ITEM_V5 26
+#define PD_CALL_UNIQUES_BUY_ITEM_V5 25
 typedef struct {
     pd_CollectionId_V5_t collection;
     pd_ItemId_V5_t item;
@@ -474,18 +466,18 @@ typedef struct {
 
 #define PD_CALL_ALLOCATIONSORACLES_ADD_MEMBER_V5 0
 typedef struct {
-    pd_AccountId_V5_t who;
+    pd_AccountIdLookupOfT_V5_t who;
 } pd_allocationsoracles_add_member_V5_t;
 
 #define PD_CALL_ALLOCATIONSORACLES_REMOVE_MEMBER_V5 1
 typedef struct {
-    pd_AccountId_V5_t who;
+    pd_AccountIdLookupOfT_V5_t who;
 } pd_allocationsoracles_remove_member_V5_t;
 
 #define PD_CALL_ALLOCATIONSORACLES_SWAP_MEMBER_V5 2
 typedef struct {
-    pd_AccountId_V5_t remove;
-    pd_AccountId_V5_t add;
+    pd_AccountIdLookupOfT_V5_t remove;
+    pd_AccountIdLookupOfT_V5_t add;
 } pd_allocationsoracles_swap_member_V5_t;
 
 #define PD_CALL_ALLOCATIONSORACLES_RESET_MEMBERS_V5 3
@@ -495,12 +487,12 @@ typedef struct {
 
 #define PD_CALL_ALLOCATIONSORACLES_CHANGE_KEY_V5 4
 typedef struct {
-    pd_AccountId_V5_t new_;
+    pd_AccountIdLookupOfT_V5_t new_;
 } pd_allocationsoracles_change_key_V5_t;
 
 #define PD_CALL_ALLOCATIONSORACLES_SET_PRIME_V5 5
 typedef struct {
-    pd_AccountId_V5_t who;
+    pd_AccountIdLookupOfT_V5_t who;
 } pd_allocationsoracles_set_prime_V5_t;
 
 #define PD_CALL_ALLOCATIONSORACLES_CLEAR_PRIME_V5 6
@@ -523,6 +515,52 @@ typedef struct {
     pd_Call_t call;
 } pd_daoreserve_apply_as_V5_t;
 
+#define PD_CALL_CONTRACTS_CALL_V5 0
+typedef struct {
+    pd_AccountIdLookupOfT_V5_t dest;
+    pd_CompactBalance_t amount;
+    pd_Compactu64_t gas_limit;
+    pd_OptionCompactBalanceOf_t storage_deposit_limit;
+    pd_Vecu8_t data;
+} pd_contracts_call_V5_t;
+
+#define PD_CALL_CONTRACTS_INSTANTIATE_WITH_CODE_V5 1
+typedef struct {
+    pd_CompactBalance_t amount;
+    pd_Compactu64_t gas_limit;
+    pd_OptionCompactBalanceOf_t storage_deposit_limit;
+    pd_Vecu8_t code;
+    pd_Vecu8_t data;
+    pd_Vecu8_t salt;
+} pd_contracts_instantiate_with_code_V5_t;
+
+#define PD_CALL_CONTRACTS_INSTANTIATE_V5 2
+typedef struct {
+    pd_CompactBalance_t amount;
+    pd_Compactu64_t gas_limit;
+    pd_OptionCompactBalanceOf_t storage_deposit_limit;
+    pd_CodeHash_V5_t code_hash;
+    pd_Bytes_t data;
+    pd_Bytes_t salt;
+} pd_contracts_instantiate_V5_t;
+
+#define PD_CALL_CONTRACTS_UPLOAD_CODE_V5 3
+typedef struct {
+    pd_Vecu8_t code;
+    pd_OptionCompactBalanceOf_t storage_deposit_limit;
+} pd_contracts_upload_code_V5_t;
+
+#define PD_CALL_CONTRACTS_REMOVE_CODE_V5 4
+typedef struct {
+    pd_CodeHash_V5_t code_hash;
+} pd_contracts_remove_code_V5_t;
+
+#define PD_CALL_CONTRACTS_SET_CODE_V5 5
+typedef struct {
+    pd_AccountIdLookupOfT_V5_t dest;
+    pd_CodeHash_V5_t code_hash;
+} pd_contracts_set_code_V5_t;
+
 #endif
 
 typedef union {
@@ -531,6 +569,8 @@ typedef union {
     pd_session_purge_keys_V5_t session_purge_keys_V5;
     pd_utility_force_batch_V5_t utility_force_batch_V5;
 #ifdef SUBSTRATE_PARSER_FULL
+#ifndef TARGET_NANOS
+#endif
     pd_timestamp_set_V5_t timestamp_set_V5;
     pd_balances_force_unreserve_V5_t balances_force_unreserve_V5;
     pd_companyreserve_spend_V5_t companyreserve_spend_V5;
@@ -559,17 +599,14 @@ typedef union {
     pd_technicalmembership_change_key_V5_t technicalmembership_change_key_V5;
     pd_technicalmembership_set_prime_V5_t technicalmembership_set_prime_V5;
     pd_technicalmembership_clear_prime_V5_t technicalmembership_clear_prime_V5;
-    pd_validatorsset_add_member_V5_t validatorsset_add_member_V5;
-    pd_validatorsset_remove_member_V5_t validatorsset_remove_member_V5;
-    pd_validatorsset_swap_member_V5_t validatorsset_swap_member_V5;
-    pd_validatorsset_reset_members_V5_t validatorsset_reset_members_V5;
-    pd_validatorsset_change_key_V5_t validatorsset_change_key_V5;
-    pd_validatorsset_set_prime_V5_t validatorsset_set_prime_V5;
-    pd_validatorsset_clear_prime_V5_t validatorsset_clear_prime_V5;
+    pd_collatorselection_set_invulnerables_V5_t collatorselection_set_invulnerables_V5;
+    pd_collatorselection_set_desired_candidates_V5_t collatorselection_set_desired_candidates_V5;
+    pd_collatorselection_set_candidacy_bond_V5_t collatorselection_set_candidacy_bond_V5;
+    pd_collatorselection_register_as_candidate_V5_t collatorselection_register_as_candidate_V5;
+    pd_collatorselection_leave_intent_V5_t collatorselection_leave_intent_V5;
     pd_dmpqueue_service_overweight_V5_t dmpqueue_service_overweight_V5;
     pd_uniques_create_V5_t uniques_create_V5;
     pd_uniques_force_create_V5_t uniques_force_create_V5;
-    pd_uniques_try_increment_id_V5_t uniques_try_increment_id_V5;
     pd_uniques_destroy_V5_t uniques_destroy_V5;
     pd_uniques_mint_V5_t uniques_mint_V5;
     pd_uniques_burn_V5_t uniques_burn_V5;
@@ -610,25 +647,31 @@ typedef union {
     pd_daoreserve_spend_V5_t daoreserve_spend_V5;
     pd_daoreserve_tip_V5_t daoreserve_tip_V5;
     pd_daoreserve_apply_as_V5_t daoreserve_apply_as_V5;
+    pd_contracts_call_V5_t contracts_call_V5;
+    pd_contracts_instantiate_with_code_V5_t contracts_instantiate_with_code_V5;
+    pd_contracts_instantiate_V5_t contracts_instantiate_V5;
+    pd_contracts_upload_code_V5_t contracts_upload_code_V5;
+    pd_contracts_remove_code_V5_t contracts_remove_code_V5;
+    pd_contracts_set_code_V5_t contracts_set_code_V5;
 #endif
 } pd_MethodBasic_V5_t;
 
 #define PD_CALL_BALANCES_TRANSFER_V5 0
 typedef struct {
-    pd_LookupasStaticLookupSource_V5_t dest;
+    pd_AccountIdLookupOfT_V5_t dest;
     pd_CompactBalance_t amount;
 } pd_balances_transfer_V5_t;
 
 #define PD_CALL_BALANCES_FORCE_TRANSFER_V5 2
 typedef struct {
-    pd_LookupasStaticLookupSource_V5_t source;
-    pd_LookupasStaticLookupSource_V5_t dest;
+    pd_AccountIdLookupOfT_V5_t source;
+    pd_AccountIdLookupOfT_V5_t dest;
     pd_CompactBalance_t amount;
 } pd_balances_force_transfer_V5_t;
 
 #define PD_CALL_BALANCES_TRANSFER_KEEP_ALIVE_V5 3
 typedef struct {
-    pd_LookupasStaticLookupSource_V5_t dest;
+    pd_AccountIdLookupOfT_V5_t dest;
     pd_CompactBalance_t amount;
 } pd_balances_transfer_keep_alive_V5_t;
 
@@ -643,6 +686,8 @@ typedef struct {
 } pd_utility_batch_all_V5_t;
 
 #ifdef SUBSTRATE_PARSER_FULL
+#ifndef TARGET_NANOS
+#endif
 #define PD_CALL_SYSTEM_FILL_BLOCK_V5 0
 typedef struct {
     pd_Perbill_V5_t ratio;
@@ -675,7 +720,7 @@ typedef struct {
 
 #define PD_CALL_BALANCES_SET_BALANCE_V5 1
 typedef struct {
-    pd_LookupasStaticLookupSource_V5_t who;
+    pd_AccountIdLookupOfT_V5_t who;
     pd_CompactBalance_t new_free;
     pd_CompactBalance_t new_reserved;
 } pd_balances_set_balance_V5_t;
@@ -727,6 +772,8 @@ typedef union {
     pd_utility_batch_V5_t utility_batch_V5;
     pd_utility_batch_all_V5_t utility_batch_all_V5;
 #ifdef SUBSTRATE_PARSER_FULL
+#ifndef TARGET_NANOS
+#endif
     pd_system_fill_block_V5_t system_fill_block_V5;
     pd_system_remark_V5_t system_remark_V5;
     pd_system_set_heap_pages_V5_t system_set_heap_pages_V5;
