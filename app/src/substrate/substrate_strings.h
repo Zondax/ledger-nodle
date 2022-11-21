@@ -38,8 +38,10 @@ static const char* STR_MO_UNIQUES = "Uniques";
 static const char* STR_MO_PREIMAGE = "Preimage";
 static const char* STR_MO_ALLOCATIONS = "Allocations";
 static const char* STR_MO_ALLOCATIONSORACLES = "Allocationsoracles";
+static const char* STR_MO_COLLATORSELECTION = "Collatorselection";
 static const char* STR_MO_DMPQUEUE = "Dmpqueue";
 static const char* STR_MO_DAORESERVE = "Daoreserve";
+static const char* STR_MO_CONTRACTS = "Contracts";
 
 // Methods names
 static const char* STR_ME_FILL_BLOCK = "Fill block";
@@ -112,11 +114,20 @@ static const char* STR_ME_UNNOTE_PREIMAGE = "Unnote preimage";
 static const char* STR_ME_REQUEST_PREIMAGE = "Request preimage";
 static const char* STR_ME_UNREQUEST_PREIMAGE = "Unrequest preimage";
 static const char* STR_ME_RENOUNCE = "Renounce";
+static const char* STR_ME_SET_INVULNERABLES = "Set invulnerables";
+static const char* STR_ME_SET_DESIRED_CANDIDATES = "Set desired candidates";
+static const char* STR_ME_SET_CANDIDACY_BOND = "Set candidacy bond";
+static const char* STR_ME_REGISTER_AS_CANDIDATE = "Register as candidate";
+static const char* STR_ME_LEAVE_INTENT = "Leave intent";
 static const char* STR_ME_SERVICE_OVERWEIGHT = "Service overweight";
-static const char* STR_ME_TRY_INCREMENT_ID = "Try increment id";
 static const char* STR_ME_SET_PRICE = "Set price";
 static const char* STR_ME_BUY_ITEM = "Buy item";
 static const char* STR_ME_SET_CURVE_STARTING_BLOCK = "Set curve starting block";
+static const char* STR_ME_CALL = "Call";
+static const char* STR_ME_INSTANTIATE_WITH_CODE = "Instantiate with code";
+static const char* STR_ME_INSTANTIATE = "Instantiate";
+static const char* STR_ME_UPLOAD_CODE = "Upload code";
+static const char* STR_ME_REMOVE_CODE = "Remove code";
 
 // Items names
 static const char* STR_IT_ratio = "Ratio";
@@ -183,11 +194,17 @@ static const char* STR_IT_max_supply = "Max supply";
 static const char* STR_IT_bytes = "Bytes";
 static const char* STR_IT_hash = "Hash";
 static const char* STR_IT_batch = "Batch";
+static const char* STR_IT_max = "Max";
+static const char* STR_IT_bond = "Bond";
 static const char* STR_IT_weight_limit = "Weight limit";
 static const char* STR_IT_price = "Price";
 static const char* STR_IT_whitelisted_buyer = "Whitelisted buyer";
 static const char* STR_IT_bid_price = "Bid price";
 static const char* STR_IT_curve_start = "Curve start";
+static const char* STR_IT_gas_limit = "Gas limit";
+static const char* STR_IT_storage_deposit_limit = "Storage deposit limit";
+static const char* STR_IT_salt = "Salt";
+static const char* STR_IT_code_hash = "Code hash";
 
 #ifdef __cplusplus
 }

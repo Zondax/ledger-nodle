@@ -26,8 +26,10 @@ extern "C" {
 #include <stdint.h>
 
 // Read functions
+parser_error_t _readAccountIdLookupOfT_V5(parser_context_t* c, pd_AccountIdLookupOfT_V5_t* v);
 parser_error_t _readAccountId_V5(parser_context_t* c, pd_AccountId_V5_t* v);
 parser_error_t _readBoundedVecu8_V5(parser_context_t* c, pd_BoundedVecu8_V5_t* v);
+parser_error_t _readCodeHash_V5(parser_context_t* c, pd_CodeHash_V5_t* v);
 parser_error_t _readCollectionId_V5(parser_context_t* c, pd_CollectionId_V5_t* v);
 parser_error_t _readCompactAccountIndex_V5(parser_context_t* c, pd_CompactAccountIndex_V5_t* v);
 parser_error_t _readDestroyWitness_V5(parser_context_t* c, pd_DestroyWitness_V5_t* v);
@@ -37,11 +39,11 @@ parser_error_t _readKeys_V5(parser_context_t* c, pd_Keys_V5_t* v);
 parser_error_t _readLookupasStaticLookupSource_V5(parser_context_t* c, pd_LookupasStaticLookupSource_V5_t* v);
 parser_error_t _readMemberCount_V5(parser_context_t* c, pd_MemberCount_V5_t* v);
 parser_error_t _readOpaqueCall_V5(parser_context_t* c, pd_OpaqueCall_V5_t* v);
+parser_error_t _readOptionAccountIdLookupOfT_V5(parser_context_t* c, pd_OptionAccountIdLookupOfT_V5_t* v);
 parser_error_t _readOptionAccountId_V5(parser_context_t* c, pd_OptionAccountId_V5_t* v);
 parser_error_t _readOptionCollectionId_V5(parser_context_t* c, pd_OptionCollectionId_V5_t* v);
 parser_error_t _readOptionItemId_V5(parser_context_t* c, pd_OptionItemId_V5_t* v);
 parser_error_t _readOptionItemPrice_V5(parser_context_t* c, pd_OptionItemPrice_V5_t* v);
-parser_error_t _readOptionLookupasStaticLookupSource_V5(parser_context_t* c, pd_OptionLookupasStaticLookupSource_V5_t* v);
 parser_error_t _readOptionTimepoint_V5(parser_context_t* c, pd_OptionTimepoint_V5_t* v);
 parser_error_t _readOverweightIndex_V5(parser_context_t* c, pd_OverweightIndex_V5_t* v);
 parser_error_t _readPerbill_V5(parser_context_t* c, pd_Perbill_V5_t* v);
@@ -54,6 +56,13 @@ parser_error_t _readVestingScheduleOf_V5(parser_context_t* c, pd_VestingSchedule
 parser_error_t _readWeight_V5(parser_context_t* c, pd_Weight_V5_t* v);
 
 // toString functions
+parser_error_t _toStringAccountIdLookupOfT_V5(
+    const pd_AccountIdLookupOfT_V5_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
 parser_error_t _toStringAccountId_V5(
     const pd_AccountId_V5_t* v,
     char* outValue,
@@ -63,6 +72,13 @@ parser_error_t _toStringAccountId_V5(
 
 parser_error_t _toStringBoundedVecu8_V5(
     const pd_BoundedVecu8_V5_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
+parser_error_t _toStringCodeHash_V5(
+    const pd_CodeHash_V5_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -131,6 +147,13 @@ parser_error_t _toStringOpaqueCall_V5(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
+parser_error_t _toStringOptionAccountIdLookupOfT_V5(
+    const pd_OptionAccountIdLookupOfT_V5_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount);
+
 parser_error_t _toStringOptionAccountId_V5(
     const pd_OptionAccountId_V5_t* v,
     char* outValue,
@@ -154,13 +177,6 @@ parser_error_t _toStringOptionItemId_V5(
 
 parser_error_t _toStringOptionItemPrice_V5(
     const pd_OptionItemPrice_V5_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount);
-
-parser_error_t _toStringOptionLookupasStaticLookupSource_V5(
-    const pd_OptionLookupasStaticLookupSource_V5_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,

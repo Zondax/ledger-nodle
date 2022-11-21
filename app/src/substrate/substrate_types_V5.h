@@ -35,6 +35,16 @@ typedef struct {
 } pd_CompactAccountIndex_V5_t;
 
 typedef struct {
+    uint8_t value;
+    union {
+        pd_AccountId_V5_t id;
+        pd_CompactAccountIndex_V5_t index;
+        pd_Bytes_t raw;
+        const uint8_t* _ptr;
+    };
+} pd_AccountIdLookupOfT_V5_t;
+
+typedef struct {
     uint32_t value;
 } pd_CollectionId_V5_t;
 
@@ -47,16 +57,6 @@ typedef struct {
 } pd_ItemPrice_V5_t;
 
 typedef struct {
-    uint8_t value;
-    union {
-        pd_AccountId_V5_t id;
-        pd_CompactAccountIndex_V5_t index;
-        pd_Bytes_t raw;
-        const uint8_t* _ptr;
-    };
-} pd_LookupasStaticLookupSource_V5_t;
-
-typedef struct {
     pd_BlockNumber_t height;
     uint32_t index;
 } pd_Timepoint_V5_t;
@@ -67,10 +67,24 @@ typedef struct {
 } pd_TupleAccountIdBalanceOf_V5_t;
 
 typedef struct {
+    pd_Hash_t hash;
+} pd_CodeHash_V5_t;
+
+typedef struct {
     pd_Compactu32_t accounts;
     pd_Compactu32_t sufficients;
     pd_Compactu32_t approvals;
 } pd_DestroyWitness_V5_t;
+
+typedef struct {
+    uint8_t value;
+    union {
+        pd_AccountId_V5_t id;
+        pd_CompactAccountIndex_V5_t index;
+        pd_Bytes_t raw;
+        const uint8_t* _ptr;
+    };
+} pd_LookupasStaticLookupSource_V5_t;
 
 typedef struct {
     pd_Call_t call;
@@ -78,13 +92,13 @@ typedef struct {
 
 typedef struct {
     uint8_t some;
-    pd_ItemPrice_V5_t contained;
-} pd_OptionItemPrice_V5_t;
+    pd_AccountIdLookupOfT_V5_t contained;
+} pd_OptionAccountIdLookupOfT_V5_t;
 
 typedef struct {
     uint8_t some;
-    pd_LookupasStaticLookupSource_V5_t contained;
-} pd_OptionLookupasStaticLookupSource_V5_t;
+    pd_ItemPrice_V5_t contained;
+} pd_OptionItemPrice_V5_t;
 
 typedef struct {
     uint8_t some;
