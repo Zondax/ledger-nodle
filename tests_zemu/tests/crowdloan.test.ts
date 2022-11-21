@@ -25,11 +25,7 @@ const defaultOptions = {
   X11: false,
 }
 
-jest.setTimeout(60000)
-
-beforeAll(async () => {
-  await Zemu.checkAndPullImage()
-})
+jest.setTimeout(180000)
 
 async function activateCrowdloanMode(sim: any) {
   // Crowdloan can be activate only when expert mode is enabled
