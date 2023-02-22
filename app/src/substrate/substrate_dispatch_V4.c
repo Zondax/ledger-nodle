@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2022 Zondax GmbH
+ *  (c) 2019 - 2022 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -75,6 +75,13 @@ __Z_INLINE parser_error_t _readMethod_utility_batch_V4(
 
 __Z_INLINE parser_error_t _readMethod_utility_batch_all_V4(
     parser_context_t* c, pd_utility_batch_all_V4_t* m)
+{
+    CHECK_ERROR(_readVecCall(c, &m->calls))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_utility_force_batch_V4(
+    parser_context_t* c, pd_utility_force_batch_V4_t* m)
 {
     CHECK_ERROR(_readVecCall(c, &m->calls))
     return parser_ok;
@@ -436,7 +443,7 @@ __Z_INLINE parser_error_t _readMethod_multisig_cancel_as_multi_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_create_V4(
     parser_context_t* c, pd_uniques_create_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->admin))
     return parser_ok;
 }
@@ -444,7 +451,7 @@ __Z_INLINE parser_error_t _readMethod_uniques_create_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_force_create_V4(
     parser_context_t* c, pd_uniques_force_create_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->owner))
     CHECK_ERROR(_readbool(c, &m->free_holding))
     return parser_ok;
@@ -453,7 +460,7 @@ __Z_INLINE parser_error_t _readMethod_uniques_force_create_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_destroy_V4(
     parser_context_t* c, pd_uniques_destroy_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
     CHECK_ERROR(_readDestroyWitness_V4(c, &m->witness))
     return parser_ok;
 }
@@ -461,8 +468,8 @@ __Z_INLINE parser_error_t _readMethod_uniques_destroy_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_mint_V4(
     parser_context_t* c, pd_uniques_mint_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readInstanceId_V4(c, &m->instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readItemId_V4(c, &m->item))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->owner))
     return parser_ok;
 }
@@ -470,8 +477,8 @@ __Z_INLINE parser_error_t _readMethod_uniques_mint_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_burn_V4(
     parser_context_t* c, pd_uniques_burn_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readInstanceId_V4(c, &m->instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readItemId_V4(c, &m->item))
     CHECK_ERROR(_readOptionLookupasStaticLookupSource_V4(c, &m->check_owner))
     return parser_ok;
 }
@@ -479,8 +486,8 @@ __Z_INLINE parser_error_t _readMethod_uniques_burn_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_transfer_V4(
     parser_context_t* c, pd_uniques_transfer_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readInstanceId_V4(c, &m->instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readItemId_V4(c, &m->item))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->dest))
     return parser_ok;
 }
@@ -488,45 +495,45 @@ __Z_INLINE parser_error_t _readMethod_uniques_transfer_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_redeposit_V4(
     parser_context_t* c, pd_uniques_redeposit_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readVecInstanceId_V4(c, &m->instances))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readVecItemId_V4(c, &m->items))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_uniques_freeze_V4(
     parser_context_t* c, pd_uniques_freeze_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readInstanceId_V4(c, &m->instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readItemId_V4(c, &m->item))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_uniques_thaw_V4(
     parser_context_t* c, pd_uniques_thaw_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readInstanceId_V4(c, &m->instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readItemId_V4(c, &m->item))
     return parser_ok;
 }
 
-__Z_INLINE parser_error_t _readMethod_uniques_freeze_class_V4(
-    parser_context_t* c, pd_uniques_freeze_class_V4_t* m)
+__Z_INLINE parser_error_t _readMethod_uniques_freeze_collection_V4(
+    parser_context_t* c, pd_uniques_freeze_collection_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
     return parser_ok;
 }
 
-__Z_INLINE parser_error_t _readMethod_uniques_thaw_class_V4(
-    parser_context_t* c, pd_uniques_thaw_class_V4_t* m)
+__Z_INLINE parser_error_t _readMethod_uniques_thaw_collection_V4(
+    parser_context_t* c, pd_uniques_thaw_collection_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_uniques_transfer_ownership_V4(
     parser_context_t* c, pd_uniques_transfer_ownership_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->owner))
     return parser_ok;
 }
@@ -534,7 +541,7 @@ __Z_INLINE parser_error_t _readMethod_uniques_transfer_ownership_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_set_team_V4(
     parser_context_t* c, pd_uniques_set_team_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->issuer))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->admin))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->freezer))
@@ -544,8 +551,8 @@ __Z_INLINE parser_error_t _readMethod_uniques_set_team_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_approve_transfer_V4(
     parser_context_t* c, pd_uniques_approve_transfer_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readInstanceId_V4(c, &m->instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readItemId_V4(c, &m->item))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->delegate))
     return parser_ok;
 }
@@ -553,16 +560,16 @@ __Z_INLINE parser_error_t _readMethod_uniques_approve_transfer_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_cancel_approval_V4(
     parser_context_t* c, pd_uniques_cancel_approval_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readInstanceId_V4(c, &m->instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readItemId_V4(c, &m->item))
     CHECK_ERROR(_readOptionLookupasStaticLookupSource_V4(c, &m->maybe_check_delegate))
     return parser_ok;
 }
 
-__Z_INLINE parser_error_t _readMethod_uniques_force_asset_status_V4(
-    parser_context_t* c, pd_uniques_force_asset_status_V4_t* m)
+__Z_INLINE parser_error_t _readMethod_uniques_force_item_status_V4(
+    parser_context_t* c, pd_uniques_force_item_status_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->owner))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->issuer))
     CHECK_ERROR(_readLookupasStaticLookupSource_V4(c, &m->admin))
@@ -575,8 +582,8 @@ __Z_INLINE parser_error_t _readMethod_uniques_force_asset_status_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_set_attribute_V4(
     parser_context_t* c, pd_uniques_set_attribute_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readOptionInstanceId_V4(c, &m->maybe_instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readOptionItemId_V4(c, &m->maybe_item))
     CHECK_ERROR(_readBoundedVecu8_V4(c, &m->key))
     CHECK_ERROR(_readBoundedVecu8_V4(c, &m->value))
     return parser_ok;
@@ -585,8 +592,8 @@ __Z_INLINE parser_error_t _readMethod_uniques_set_attribute_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_clear_attribute_V4(
     parser_context_t* c, pd_uniques_clear_attribute_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readOptionInstanceId_V4(c, &m->maybe_instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readOptionItemId_V4(c, &m->maybe_item))
     CHECK_ERROR(_readBoundedVecu8_V4(c, &m->key))
     return parser_ok;
 }
@@ -594,8 +601,8 @@ __Z_INLINE parser_error_t _readMethod_uniques_clear_attribute_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_set_metadata_V4(
     parser_context_t* c, pd_uniques_set_metadata_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readInstanceId_V4(c, &m->instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readItemId_V4(c, &m->item))
     CHECK_ERROR(_readBoundedVecu8_V4(c, &m->data))
     CHECK_ERROR(_readbool(c, &m->is_frozen))
     return parser_ok;
@@ -604,31 +611,39 @@ __Z_INLINE parser_error_t _readMethod_uniques_set_metadata_V4(
 __Z_INLINE parser_error_t _readMethod_uniques_clear_metadata_V4(
     parser_context_t* c, pd_uniques_clear_metadata_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
-    CHECK_ERROR(_readInstanceId_V4(c, &m->instance))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readItemId_V4(c, &m->item))
     return parser_ok;
 }
 
-__Z_INLINE parser_error_t _readMethod_uniques_set_class_metadata_V4(
-    parser_context_t* c, pd_uniques_set_class_metadata_V4_t* m)
+__Z_INLINE parser_error_t _readMethod_uniques_set_collection_metadata_V4(
+    parser_context_t* c, pd_uniques_set_collection_metadata_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
     CHECK_ERROR(_readBoundedVecu8_V4(c, &m->data))
     CHECK_ERROR(_readbool(c, &m->is_frozen))
     return parser_ok;
 }
 
-__Z_INLINE parser_error_t _readMethod_uniques_clear_class_metadata_V4(
-    parser_context_t* c, pd_uniques_clear_class_metadata_V4_t* m)
+__Z_INLINE parser_error_t _readMethod_uniques_clear_collection_metadata_V4(
+    parser_context_t* c, pd_uniques_clear_collection_metadata_V4_t* m)
 {
-    CHECK_ERROR(_readClassId_V4(c, &m->class_))
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
     return parser_ok;
 }
 
 __Z_INLINE parser_error_t _readMethod_uniques_set_accept_ownership_V4(
     parser_context_t* c, pd_uniques_set_accept_ownership_V4_t* m)
 {
-    CHECK_ERROR(_readOptionClassId_V4(c, &m->maybe_class))
+    CHECK_ERROR(_readOptionCollectionId_V4(c, &m->maybe_collection))
+    return parser_ok;
+}
+
+__Z_INLINE parser_error_t _readMethod_uniques_set_collection_max_supply_V4(
+    parser_context_t* c, pd_uniques_set_collection_max_supply_V4_t* m)
+{
+    CHECK_ERROR(_readCollectionId_V4(c, &m->collection))
+    CHECK_ERROR(_readu32(c, &m->max_supply))
     return parser_ok;
 }
 
@@ -664,15 +679,6 @@ __Z_INLINE parser_error_t _readMethod_allocations_batch_V4(
     parser_context_t* c, pd_allocations_batch_V4_t* m)
 {
     CHECK_ERROR(_readVecTupleAccountIdBalanceOf_V4(c, &m->batch))
-    return parser_ok;
-}
-
-__Z_INLINE parser_error_t _readMethod_allocations_allocate_V4(
-    parser_context_t* c, pd_allocations_allocate_V4_t* m)
-{
-    CHECK_ERROR(_readAccountId_V4(c, &m->to))
-    CHECK_ERROR(_readBalance(c, &m->amount))
-    CHECK_ERROR(_readVecu8(c, &m->proof))
     return parser_ok;
 }
 
@@ -760,6 +766,9 @@ parser_error_t _readMethod_V4(
         break;
     case 10242: /* module 40 call 2 */
         CHECK_ERROR(_readMethod_utility_batch_all_V4(c, &method->nested.utility_batch_all_V4))
+        break;
+    case 10244: /* module 40 call 4 */
+        CHECK_ERROR(_readMethod_utility_force_batch_V4(c, &method->basic.utility_force_batch_V4))
         break;
 
 #ifdef SUBSTRATE_PARSER_FULL
@@ -929,10 +938,10 @@ parser_error_t _readMethod_V4(
         CHECK_ERROR(_readMethod_uniques_thaw_V4(c, &method->basic.uniques_thaw_V4))
         break;
     case 10761: /* module 42 call 9 */
-        CHECK_ERROR(_readMethod_uniques_freeze_class_V4(c, &method->basic.uniques_freeze_class_V4))
+        CHECK_ERROR(_readMethod_uniques_freeze_collection_V4(c, &method->basic.uniques_freeze_collection_V4))
         break;
     case 10762: /* module 42 call 10 */
-        CHECK_ERROR(_readMethod_uniques_thaw_class_V4(c, &method->basic.uniques_thaw_class_V4))
+        CHECK_ERROR(_readMethod_uniques_thaw_collection_V4(c, &method->basic.uniques_thaw_collection_V4))
         break;
     case 10763: /* module 42 call 11 */
         CHECK_ERROR(_readMethod_uniques_transfer_ownership_V4(c, &method->basic.uniques_transfer_ownership_V4))
@@ -947,7 +956,7 @@ parser_error_t _readMethod_V4(
         CHECK_ERROR(_readMethod_uniques_cancel_approval_V4(c, &method->basic.uniques_cancel_approval_V4))
         break;
     case 10767: /* module 42 call 15 */
-        CHECK_ERROR(_readMethod_uniques_force_asset_status_V4(c, &method->basic.uniques_force_asset_status_V4))
+        CHECK_ERROR(_readMethod_uniques_force_item_status_V4(c, &method->basic.uniques_force_item_status_V4))
         break;
     case 10768: /* module 42 call 16 */
         CHECK_ERROR(_readMethod_uniques_set_attribute_V4(c, &method->basic.uniques_set_attribute_V4))
@@ -962,13 +971,16 @@ parser_error_t _readMethod_V4(
         CHECK_ERROR(_readMethod_uniques_clear_metadata_V4(c, &method->basic.uniques_clear_metadata_V4))
         break;
     case 10772: /* module 42 call 20 */
-        CHECK_ERROR(_readMethod_uniques_set_class_metadata_V4(c, &method->basic.uniques_set_class_metadata_V4))
+        CHECK_ERROR(_readMethod_uniques_set_collection_metadata_V4(c, &method->basic.uniques_set_collection_metadata_V4))
         break;
     case 10773: /* module 42 call 21 */
-        CHECK_ERROR(_readMethod_uniques_clear_class_metadata_V4(c, &method->basic.uniques_clear_class_metadata_V4))
+        CHECK_ERROR(_readMethod_uniques_clear_collection_metadata_V4(c, &method->basic.uniques_clear_collection_metadata_V4))
         break;
     case 10774: /* module 42 call 22 */
         CHECK_ERROR(_readMethod_uniques_set_accept_ownership_V4(c, &method->basic.uniques_set_accept_ownership_V4))
+        break;
+    case 10775: /* module 42 call 23 */
+        CHECK_ERROR(_readMethod_uniques_set_collection_max_supply_V4(c, &method->basic.uniques_set_collection_max_supply_V4))
         break;
     case 11008: /* module 43 call 0 */
         CHECK_ERROR(_readMethod_preimage_note_preimage_V4(c, &method->basic.preimage_note_preimage_V4))
@@ -984,9 +996,6 @@ parser_error_t _readMethod_V4(
         break;
     case 13056: /* module 51 call 0 */
         CHECK_ERROR(_readMethod_allocations_batch_V4(c, &method->basic.allocations_batch_V4))
-        break;
-    case 13057: /* module 51 call 1 */
-        CHECK_ERROR(_readMethod_allocations_allocate_V4(c, &method->basic.allocations_allocate_V4))
         break;
     case 13312: /* module 52 call 0 */
         CHECK_ERROR(_readMethod_allocationsoracles_add_member_V4(c, &method->basic.allocationsoracles_add_member_V4))
@@ -1091,6 +1100,8 @@ const char* _getMethod_Name_V4(uint8_t moduleIdx, uint8_t callIdx)
         return STR_ME_BATCH;
     case 10242: /* module 40 call 2 */
         return STR_ME_BATCH_ALL;
+    case 10244: /* module 40 call 4 */
+        return STR_ME_FORCE_BATCH;
     default:
         return _getMethod_Name_V4_ParserFull(callPrivIdx);
     }
@@ -1213,9 +1224,9 @@ const char* _getMethod_Name_V4_ParserFull(uint16_t callPrivIdx)
     case 10760: /* module 42 call 8 */
         return STR_ME_THAW;
     case 10761: /* module 42 call 9 */
-        return STR_ME_FREEZE_CLASS;
+        return STR_ME_FREEZE_COLLECTION;
     case 10762: /* module 42 call 10 */
-        return STR_ME_THAW_CLASS;
+        return STR_ME_THAW_COLLECTION;
     case 10763: /* module 42 call 11 */
         return STR_ME_TRANSFER_OWNERSHIP;
     case 10764: /* module 42 call 12 */
@@ -1225,7 +1236,7 @@ const char* _getMethod_Name_V4_ParserFull(uint16_t callPrivIdx)
     case 10766: /* module 42 call 14 */
         return STR_ME_CANCEL_APPROVAL;
     case 10767: /* module 42 call 15 */
-        return STR_ME_FORCE_ASSET_STATUS;
+        return STR_ME_FORCE_ITEM_STATUS;
     case 10768: /* module 42 call 16 */
         return STR_ME_SET_ATTRIBUTE;
     case 10769: /* module 42 call 17 */
@@ -1235,11 +1246,13 @@ const char* _getMethod_Name_V4_ParserFull(uint16_t callPrivIdx)
     case 10771: /* module 42 call 19 */
         return STR_ME_CLEAR_METADATA;
     case 10772: /* module 42 call 20 */
-        return STR_ME_SET_CLASS_METADATA;
+        return STR_ME_SET_COLLECTION_METADATA;
     case 10773: /* module 42 call 21 */
-        return STR_ME_CLEAR_CLASS_METADATA;
+        return STR_ME_CLEAR_COLLECTION_METADATA;
     case 10774: /* module 42 call 22 */
         return STR_ME_SET_ACCEPT_OWNERSHIP;
+    case 10775: /* module 42 call 23 */
+        return STR_ME_SET_COLLECTION_MAX_SUPPLY;
     case 11008: /* module 43 call 0 */
         return STR_ME_NOTE_PREIMAGE;
     case 11009: /* module 43 call 1 */
@@ -1250,8 +1263,6 @@ const char* _getMethod_Name_V4_ParserFull(uint16_t callPrivIdx)
         return STR_ME_UNREQUEST_PREIMAGE;
     case 13056: /* module 51 call 0 */
         return STR_ME_BATCH;
-    case 13057: /* module 51 call 1 */
-        return STR_ME_ALLOCATE;
     case 13312: /* module 52 call 0 */
         return STR_ME_ADD_MEMBER;
     case 13313: /* module 52 call 1 */
@@ -1294,6 +1305,8 @@ uint8_t _getMethod_NumItems_V4(uint8_t moduleIdx, uint8_t callIdx)
     case 10240: /* module 40 call 0 */
         return 1;
     case 10242: /* module 40 call 2 */
+        return 1;
+    case 10244: /* module 40 call 4 */
         return 1;
 #ifdef SUBSTRATE_PARSER_FULL
     case 0: /* module 0 call 0 */
@@ -1434,6 +1447,8 @@ uint8_t _getMethod_NumItems_V4(uint8_t moduleIdx, uint8_t callIdx)
         return 1;
     case 10774: /* module 42 call 22 */
         return 1;
+    case 10775: /* module 42 call 23 */
+        return 2;
     case 11008: /* module 43 call 0 */
         return 1;
     case 11009: /* module 43 call 1 */
@@ -1444,8 +1459,6 @@ uint8_t _getMethod_NumItems_V4(uint8_t moduleIdx, uint8_t callIdx)
         return 1;
     case 13056: /* module 51 call 0 */
         return 1;
-    case 13057: /* module 51 call 1 */
-        return 3;
     case 13312: /* module 52 call 0 */
         return 1;
     case 13313: /* module 52 call 1 */
@@ -1533,6 +1546,13 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
             return NULL;
         }
     case 10242: /* module 40 call 2 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_calls;
+        default:
+            return NULL;
+        }
+    case 10244: /* module 40 call 4 */
         switch (itemIdx) {
         case 0:
             return STR_IT_calls;
@@ -1925,7 +1945,7 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10752: /* module 42 call 0 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
             return STR_IT_admin;
         default:
@@ -1934,7 +1954,7 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10753: /* module 42 call 1 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
             return STR_IT_owner;
         case 2:
@@ -1945,7 +1965,7 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10754: /* module 42 call 2 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
             return STR_IT_witness;
         default:
@@ -1954,9 +1974,9 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10755: /* module 42 call 3 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_instance;
+            return STR_IT_item;
         case 2:
             return STR_IT_owner;
         default:
@@ -1965,9 +1985,9 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10756: /* module 42 call 4 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_instance;
+            return STR_IT_item;
         case 2:
             return STR_IT_check_owner;
         default:
@@ -1976,9 +1996,9 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10757: /* module 42 call 5 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_instance;
+            return STR_IT_item;
         case 2:
             return STR_IT_dest;
         default:
@@ -1987,48 +2007,48 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10758: /* module 42 call 6 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_instances;
+            return STR_IT_items;
         default:
             return NULL;
         }
     case 10759: /* module 42 call 7 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_instance;
+            return STR_IT_item;
         default:
             return NULL;
         }
     case 10760: /* module 42 call 8 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_instance;
+            return STR_IT_item;
         default:
             return NULL;
         }
     case 10761: /* module 42 call 9 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         default:
             return NULL;
         }
     case 10762: /* module 42 call 10 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         default:
             return NULL;
         }
     case 10763: /* module 42 call 11 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
             return STR_IT_owner;
         default:
@@ -2037,7 +2057,7 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10764: /* module 42 call 12 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
             return STR_IT_issuer;
         case 2:
@@ -2050,9 +2070,9 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10765: /* module 42 call 13 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_instance;
+            return STR_IT_item;
         case 2:
             return STR_IT_delegate;
         default:
@@ -2061,9 +2081,9 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10766: /* module 42 call 14 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_instance;
+            return STR_IT_item;
         case 2:
             return STR_IT_maybe_check_delegate;
         default:
@@ -2072,7 +2092,7 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10767: /* module 42 call 15 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
             return STR_IT_owner;
         case 2:
@@ -2091,9 +2111,9 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10768: /* module 42 call 16 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_maybe_instance;
+            return STR_IT_maybe_item;
         case 2:
             return STR_IT_key;
         case 3:
@@ -2104,9 +2124,9 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10769: /* module 42 call 17 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_maybe_instance;
+            return STR_IT_maybe_item;
         case 2:
             return STR_IT_key;
         default:
@@ -2115,9 +2135,9 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10770: /* module 42 call 18 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_instance;
+            return STR_IT_item;
         case 2:
             return STR_IT_data;
         case 3:
@@ -2128,16 +2148,16 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10771: /* module 42 call 19 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
-            return STR_IT_instance;
+            return STR_IT_item;
         default:
             return NULL;
         }
     case 10772: /* module 42 call 20 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         case 1:
             return STR_IT_data;
         case 2:
@@ -2148,14 +2168,23 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
     case 10773: /* module 42 call 21 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_class_;
+            return STR_IT_collection;
         default:
             return NULL;
         }
     case 10774: /* module 42 call 22 */
         switch (itemIdx) {
         case 0:
-            return STR_IT_maybe_class;
+            return STR_IT_maybe_collection;
+        default:
+            return NULL;
+        }
+    case 10775: /* module 42 call 23 */
+        switch (itemIdx) {
+        case 0:
+            return STR_IT_collection;
+        case 1:
+            return STR_IT_max_supply;
         default:
             return NULL;
         }
@@ -2191,17 +2220,6 @@ const char* _getMethod_ItemName_V4(uint8_t moduleIdx, uint8_t callIdx, uint8_t i
         switch (itemIdx) {
         case 0:
             return STR_IT_batch;
-        default:
-            return NULL;
-        }
-    case 13057: /* module 51 call 1 */
-        switch (itemIdx) {
-        case 0:
-            return STR_IT_to;
-        case 1:
-            return STR_IT_amount;
-        case 2:
-            return STR_IT_proof;
         default:
             return NULL;
         }
@@ -2371,6 +2389,16 @@ parser_error_t _getMethod_ItemValue_V4(
         case 0: /* utility_batch_all_V4 - calls */;
             return _toStringVecCall(
                 &m->nested.utility_batch_all_V4.calls,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10244: /* module 40 call 4 */
+        switch (itemIdx) {
+        case 0: /* utility_force_batch_V4 - calls */;
+            return _toStringVecCall(
+                &m->basic.utility_force_batch_V4.calls,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -2989,9 +3017,9 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10752: /* module 42 call 0 */
         switch (itemIdx) {
-        case 0: /* uniques_create_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_create_V4.class_,
+        case 0: /* uniques_create_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_create_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* uniques_create_V4 - admin */;
@@ -3004,9 +3032,9 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10753: /* module 42 call 1 */
         switch (itemIdx) {
-        case 0: /* uniques_force_create_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_force_create_V4.class_,
+        case 0: /* uniques_force_create_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_force_create_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* uniques_force_create_V4 - owner */;
@@ -3024,9 +3052,9 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10754: /* module 42 call 2 */
         switch (itemIdx) {
-        case 0: /* uniques_destroy_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_destroy_V4.class_,
+        case 0: /* uniques_destroy_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_destroy_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* uniques_destroy_V4 - witness */;
@@ -3039,14 +3067,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10755: /* module 42 call 3 */
         switch (itemIdx) {
-        case 0: /* uniques_mint_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_mint_V4.class_,
+        case 0: /* uniques_mint_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_mint_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_mint_V4 - instance */;
-            return _toStringInstanceId_V4(
-                &m->basic.uniques_mint_V4.instance,
+        case 1: /* uniques_mint_V4 - item */;
+            return _toStringItemId_V4(
+                &m->basic.uniques_mint_V4.item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* uniques_mint_V4 - owner */;
@@ -3059,14 +3087,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10756: /* module 42 call 4 */
         switch (itemIdx) {
-        case 0: /* uniques_burn_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_burn_V4.class_,
+        case 0: /* uniques_burn_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_burn_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_burn_V4 - instance */;
-            return _toStringInstanceId_V4(
-                &m->basic.uniques_burn_V4.instance,
+        case 1: /* uniques_burn_V4 - item */;
+            return _toStringItemId_V4(
+                &m->basic.uniques_burn_V4.item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* uniques_burn_V4 - check_owner */;
@@ -3079,14 +3107,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10757: /* module 42 call 5 */
         switch (itemIdx) {
-        case 0: /* uniques_transfer_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_transfer_V4.class_,
+        case 0: /* uniques_transfer_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_transfer_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_transfer_V4 - instance */;
-            return _toStringInstanceId_V4(
-                &m->basic.uniques_transfer_V4.instance,
+        case 1: /* uniques_transfer_V4 - item */;
+            return _toStringItemId_V4(
+                &m->basic.uniques_transfer_V4.item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* uniques_transfer_V4 - dest */;
@@ -3099,14 +3127,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10758: /* module 42 call 6 */
         switch (itemIdx) {
-        case 0: /* uniques_redeposit_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_redeposit_V4.class_,
+        case 0: /* uniques_redeposit_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_redeposit_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_redeposit_V4 - instances */;
-            return _toStringVecInstanceId_V4(
-                &m->basic.uniques_redeposit_V4.instances,
+        case 1: /* uniques_redeposit_V4 - items */;
+            return _toStringVecItemId_V4(
+                &m->basic.uniques_redeposit_V4.items,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3114,14 +3142,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10759: /* module 42 call 7 */
         switch (itemIdx) {
-        case 0: /* uniques_freeze_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_freeze_V4.class_,
+        case 0: /* uniques_freeze_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_freeze_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_freeze_V4 - instance */;
-            return _toStringInstanceId_V4(
-                &m->basic.uniques_freeze_V4.instance,
+        case 1: /* uniques_freeze_V4 - item */;
+            return _toStringItemId_V4(
+                &m->basic.uniques_freeze_V4.item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3129,14 +3157,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10760: /* module 42 call 8 */
         switch (itemIdx) {
-        case 0: /* uniques_thaw_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_thaw_V4.class_,
+        case 0: /* uniques_thaw_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_thaw_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_thaw_V4 - instance */;
-            return _toStringInstanceId_V4(
-                &m->basic.uniques_thaw_V4.instance,
+        case 1: /* uniques_thaw_V4 - item */;
+            return _toStringItemId_V4(
+                &m->basic.uniques_thaw_V4.item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3144,9 +3172,9 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10761: /* module 42 call 9 */
         switch (itemIdx) {
-        case 0: /* uniques_freeze_class_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_freeze_class_V4.class_,
+        case 0: /* uniques_freeze_collection_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_freeze_collection_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3154,9 +3182,9 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10762: /* module 42 call 10 */
         switch (itemIdx) {
-        case 0: /* uniques_thaw_class_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_thaw_class_V4.class_,
+        case 0: /* uniques_thaw_collection_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_thaw_collection_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3164,9 +3192,9 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10763: /* module 42 call 11 */
         switch (itemIdx) {
-        case 0: /* uniques_transfer_ownership_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_transfer_ownership_V4.class_,
+        case 0: /* uniques_transfer_ownership_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_transfer_ownership_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* uniques_transfer_ownership_V4 - owner */;
@@ -3179,9 +3207,9 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10764: /* module 42 call 12 */
         switch (itemIdx) {
-        case 0: /* uniques_set_team_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_set_team_V4.class_,
+        case 0: /* uniques_set_team_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_set_team_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 1: /* uniques_set_team_V4 - issuer */;
@@ -3204,14 +3232,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10765: /* module 42 call 13 */
         switch (itemIdx) {
-        case 0: /* uniques_approve_transfer_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_approve_transfer_V4.class_,
+        case 0: /* uniques_approve_transfer_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_approve_transfer_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_approve_transfer_V4 - instance */;
-            return _toStringInstanceId_V4(
-                &m->basic.uniques_approve_transfer_V4.instance,
+        case 1: /* uniques_approve_transfer_V4 - item */;
+            return _toStringItemId_V4(
+                &m->basic.uniques_approve_transfer_V4.item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* uniques_approve_transfer_V4 - delegate */;
@@ -3224,14 +3252,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10766: /* module 42 call 14 */
         switch (itemIdx) {
-        case 0: /* uniques_cancel_approval_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_cancel_approval_V4.class_,
+        case 0: /* uniques_cancel_approval_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_cancel_approval_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_cancel_approval_V4 - instance */;
-            return _toStringInstanceId_V4(
-                &m->basic.uniques_cancel_approval_V4.instance,
+        case 1: /* uniques_cancel_approval_V4 - item */;
+            return _toStringItemId_V4(
+                &m->basic.uniques_cancel_approval_V4.item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* uniques_cancel_approval_V4 - maybe_check_delegate */;
@@ -3244,39 +3272,39 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10767: /* module 42 call 15 */
         switch (itemIdx) {
-        case 0: /* uniques_force_asset_status_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_force_asset_status_V4.class_,
+        case 0: /* uniques_force_item_status_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_force_item_status_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_force_asset_status_V4 - owner */;
+        case 1: /* uniques_force_item_status_V4 - owner */;
             return _toStringLookupasStaticLookupSource_V4(
-                &m->basic.uniques_force_asset_status_V4.owner,
+                &m->basic.uniques_force_item_status_V4.owner,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 2: /* uniques_force_asset_status_V4 - issuer */;
+        case 2: /* uniques_force_item_status_V4 - issuer */;
             return _toStringLookupasStaticLookupSource_V4(
-                &m->basic.uniques_force_asset_status_V4.issuer,
+                &m->basic.uniques_force_item_status_V4.issuer,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 3: /* uniques_force_asset_status_V4 - admin */;
+        case 3: /* uniques_force_item_status_V4 - admin */;
             return _toStringLookupasStaticLookupSource_V4(
-                &m->basic.uniques_force_asset_status_V4.admin,
+                &m->basic.uniques_force_item_status_V4.admin,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 4: /* uniques_force_asset_status_V4 - freezer */;
+        case 4: /* uniques_force_item_status_V4 - freezer */;
             return _toStringLookupasStaticLookupSource_V4(
-                &m->basic.uniques_force_asset_status_V4.freezer,
+                &m->basic.uniques_force_item_status_V4.freezer,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 5: /* uniques_force_asset_status_V4 - free_holding */;
+        case 5: /* uniques_force_item_status_V4 - free_holding */;
             return _toStringbool(
-                &m->basic.uniques_force_asset_status_V4.free_holding,
+                &m->basic.uniques_force_item_status_V4.free_holding,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 6: /* uniques_force_asset_status_V4 - is_frozen */;
+        case 6: /* uniques_force_item_status_V4 - is_frozen */;
             return _toStringbool(
-                &m->basic.uniques_force_asset_status_V4.is_frozen,
+                &m->basic.uniques_force_item_status_V4.is_frozen,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3284,14 +3312,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10768: /* module 42 call 16 */
         switch (itemIdx) {
-        case 0: /* uniques_set_attribute_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_set_attribute_V4.class_,
+        case 0: /* uniques_set_attribute_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_set_attribute_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_set_attribute_V4 - maybe_instance */;
-            return _toStringOptionInstanceId_V4(
-                &m->basic.uniques_set_attribute_V4.maybe_instance,
+        case 1: /* uniques_set_attribute_V4 - maybe_item */;
+            return _toStringOptionItemId_V4(
+                &m->basic.uniques_set_attribute_V4.maybe_item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* uniques_set_attribute_V4 - key */;
@@ -3309,14 +3337,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10769: /* module 42 call 17 */
         switch (itemIdx) {
-        case 0: /* uniques_clear_attribute_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_clear_attribute_V4.class_,
+        case 0: /* uniques_clear_attribute_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_clear_attribute_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_clear_attribute_V4 - maybe_instance */;
-            return _toStringOptionInstanceId_V4(
-                &m->basic.uniques_clear_attribute_V4.maybe_instance,
+        case 1: /* uniques_clear_attribute_V4 - maybe_item */;
+            return _toStringOptionItemId_V4(
+                &m->basic.uniques_clear_attribute_V4.maybe_item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* uniques_clear_attribute_V4 - key */;
@@ -3329,14 +3357,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10770: /* module 42 call 18 */
         switch (itemIdx) {
-        case 0: /* uniques_set_metadata_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_set_metadata_V4.class_,
+        case 0: /* uniques_set_metadata_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_set_metadata_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_set_metadata_V4 - instance */;
-            return _toStringInstanceId_V4(
-                &m->basic.uniques_set_metadata_V4.instance,
+        case 1: /* uniques_set_metadata_V4 - item */;
+            return _toStringItemId_V4(
+                &m->basic.uniques_set_metadata_V4.item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         case 2: /* uniques_set_metadata_V4 - data */;
@@ -3354,14 +3382,14 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10771: /* module 42 call 19 */
         switch (itemIdx) {
-        case 0: /* uniques_clear_metadata_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_clear_metadata_V4.class_,
+        case 0: /* uniques_clear_metadata_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_clear_metadata_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_clear_metadata_V4 - instance */;
-            return _toStringInstanceId_V4(
-                &m->basic.uniques_clear_metadata_V4.instance,
+        case 1: /* uniques_clear_metadata_V4 - item */;
+            return _toStringItemId_V4(
+                &m->basic.uniques_clear_metadata_V4.item,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3369,19 +3397,19 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10772: /* module 42 call 20 */
         switch (itemIdx) {
-        case 0: /* uniques_set_class_metadata_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_set_class_metadata_V4.class_,
+        case 0: /* uniques_set_collection_metadata_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_set_collection_metadata_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 1: /* uniques_set_class_metadata_V4 - data */;
+        case 1: /* uniques_set_collection_metadata_V4 - data */;
             return _toStringBoundedVecu8_V4(
-                &m->basic.uniques_set_class_metadata_V4.data,
+                &m->basic.uniques_set_collection_metadata_V4.data,
                 outValue, outValueLen,
                 pageIdx, pageCount);
-        case 2: /* uniques_set_class_metadata_V4 - is_frozen */;
+        case 2: /* uniques_set_collection_metadata_V4 - is_frozen */;
             return _toStringbool(
-                &m->basic.uniques_set_class_metadata_V4.is_frozen,
+                &m->basic.uniques_set_collection_metadata_V4.is_frozen,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3389,9 +3417,9 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10773: /* module 42 call 21 */
         switch (itemIdx) {
-        case 0: /* uniques_clear_class_metadata_V4 - class_ */;
-            return _toStringClassId_V4(
-                &m->basic.uniques_clear_class_metadata_V4.class_,
+        case 0: /* uniques_clear_collection_metadata_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_clear_collection_metadata_V4.collection,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3399,9 +3427,24 @@ parser_error_t _getMethod_ItemValue_V4(
         }
     case 10774: /* module 42 call 22 */
         switch (itemIdx) {
-        case 0: /* uniques_set_accept_ownership_V4 - maybe_class */;
-            return _toStringOptionClassId_V4(
-                &m->basic.uniques_set_accept_ownership_V4.maybe_class,
+        case 0: /* uniques_set_accept_ownership_V4 - maybe_collection */;
+            return _toStringOptionCollectionId_V4(
+                &m->basic.uniques_set_accept_ownership_V4.maybe_collection,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        default:
+            return parser_no_data;
+        }
+    case 10775: /* module 42 call 23 */
+        switch (itemIdx) {
+        case 0: /* uniques_set_collection_max_supply_V4 - collection */;
+            return _toStringCollectionId_V4(
+                &m->basic.uniques_set_collection_max_supply_V4.collection,
+                outValue, outValueLen,
+                pageIdx, pageCount);
+        case 1: /* uniques_set_collection_max_supply_V4 - max_supply */;
+            return _toStringu32(
+                &m->basic.uniques_set_collection_max_supply_V4.max_supply,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3452,26 +3495,6 @@ parser_error_t _getMethod_ItemValue_V4(
         case 0: /* allocations_batch_V4 - batch */;
             return _toStringVecTupleAccountIdBalanceOf_V4(
                 &m->basic.allocations_batch_V4.batch,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        default:
-            return parser_no_data;
-        }
-    case 13057: /* module 51 call 1 */
-        switch (itemIdx) {
-        case 0: /* allocations_allocate_V4 - to */;
-            return _toStringAccountId_V4(
-                &m->basic.allocations_allocate_V4.to,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 1: /* allocations_allocate_V4 - amount */;
-            return _toStringBalance(
-                &m->basic.allocations_allocate_V4.amount,
-                outValue, outValueLen,
-                pageIdx, pageCount);
-        case 2: /* allocations_allocate_V4 - proof */;
-            return _toStringVecu8(
-                &m->basic.allocations_allocate_V4.proof,
                 outValue, outValueLen,
                 pageIdx, pageCount);
         default:
@@ -3608,6 +3631,7 @@ bool _getMethod_IsNestingSupported_V4(uint8_t moduleIdx, uint8_t callIdx)
     case 5382: // ValidatorsSet:Clear prime
     case 5888: // Session:Set keys
     case 5889: // Session:Purge keys
+    case 10244: // Utility:Force batch
     case 10752: // Uniques:Create
     case 10753: // Uniques:Force create
     case 10754: // Uniques:Destroy
@@ -3617,26 +3641,26 @@ bool _getMethod_IsNestingSupported_V4(uint8_t moduleIdx, uint8_t callIdx)
     case 10758: // Uniques:Redeposit
     case 10759: // Uniques:Freeze
     case 10760: // Uniques:Thaw
-    case 10761: // Uniques:Freeze class
-    case 10762: // Uniques:Thaw class
+    case 10761: // Uniques:Freeze collection
+    case 10762: // Uniques:Thaw collection
     case 10763: // Uniques:Transfer ownership
     case 10764: // Uniques:Set team
     case 10765: // Uniques:Approve transfer
     case 10766: // Uniques:Cancel approval
-    case 10767: // Uniques:Force asset status
+    case 10767: // Uniques:Force item status
     case 10768: // Uniques:Set attribute
     case 10769: // Uniques:Clear attribute
     case 10770: // Uniques:Set metadata
     case 10771: // Uniques:Clear metadata
-    case 10772: // Uniques:Set class metadata
-    case 10773: // Uniques:Clear class metadata
+    case 10772: // Uniques:Set collection metadata
+    case 10773: // Uniques:Clear collection metadata
     case 10774: // Uniques:Set accept ownership
+    case 10775: // Uniques:Set collection max supply
     case 11008: // Preimage:Note preimage
     case 11009: // Preimage:Unnote preimage
     case 11010: // Preimage:Request preimage
     case 11011: // Preimage:Unrequest preimage
     case 13056: // Allocations:Batch
-    case 13057: // Allocations:Allocate
     case 13312: // AllocationsOracles:Add member
     case 13313: // AllocationsOracles:Remove member
     case 13314: // AllocationsOracles:Swap member

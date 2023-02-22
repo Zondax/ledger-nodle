@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2022 Zondax GmbH
+ *  (c) 2019 - 2022 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ typedef enum {
 #define SUPPORTED_TX_VERSION_CURRENT LEDGER_MAJOR_VERSION
 #define SUPPORTED_TX_VERSION_PREVIOUS (LEDGER_MAJOR_VERSION - 1)
 #define SUPPORTED_SPEC_VERSION (LEDGER_MINOR_VERSION + 0)
-#define SUPPORTED_MINIMUM_SPEC_VERSION 1
+#define SUPPORTED_MINIMUM_SPEC_VERSION 12
 
 #define COIN_AMOUNT_DECIMAL_PLACES 11
 

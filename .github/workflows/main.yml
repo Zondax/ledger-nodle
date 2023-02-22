@@ -30,7 +30,6 @@ jobs:
         run: |
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 10
           make deps
-          brew install conan
       - run: cmake -DCMAKE_BUILD_TYPE=Debug . && make
       - run: GTEST_COLOR=1 ASAN_OPTIONS=detect_leaks=0 ctest -VV
 
@@ -106,7 +105,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v2
         with:
-          node-version: '14.17.0'
+          node-version: "14.17.0"
       - name: Install yarn
         run: |
           npm install -g yarn
@@ -138,7 +137,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v2
         with:
-          node-version: '14.17.0'
+          node-version: "14.17.0"
       - name: Install yarn
         run: |
           npm install -g yarn
@@ -155,7 +154,7 @@ jobs:
           cd tests_zemu && yarn testSR25519
 
   build_package_0:
-    needs: [ configure, build, build_ledger, test_zemu, test_zemu_sr25519 ]
+    needs: [configure, build, build_ledger, test_zemu, test_zemu_sr25519]
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     container:
@@ -194,7 +193,7 @@ jobs:
           prerelease: false
 
   build_package_1:
-    needs: [ configure, build, build_ledger, test_zemu, test_zemu_sr25519 ]
+    needs: [configure, build, build_ledger, test_zemu, test_zemu_sr25519]
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     container:
@@ -233,7 +232,7 @@ jobs:
           prerelease: false
 
   build_package_2:
-    needs: [ configure, build, build_ledger, test_zemu, test_zemu_sr25519 ]
+    needs: [configure, build, build_ledger, test_zemu, test_zemu_sr25519]
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     container:

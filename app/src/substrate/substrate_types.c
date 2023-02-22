@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2022 Zondax GmbH
+ *  (c) 2019 - 2022 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -149,6 +149,17 @@ parser_error_t _readCall(parser_context_t* c, pd_Call_t* v)
     return parser_ok;
 }
 
+parser_error_t _readCompactBalanceOf(parser_context_t* c, pd_CompactBalanceOf_t* v)
+{
+    CHECK_INPUT()
+    CHECK_ERROR(_readCompactInt(c, &v->value));
+    return parser_ok;
+}
+
+parser_error_t _readHash(parser_context_t* c, pd_Hash_t* v) {
+    GEN_DEF_READARRAY(32)
+}
+
 parser_error_t _readProposal(parser_context_t* c, pd_Proposal_t* v)
 {
     return _readCall(c, &v->call);
@@ -185,12 +196,17 @@ parser_error_t _readH256(parser_context_t* c, pd_H256_t* v) {
     GEN_DEF_READARRAY(32)
 }
 
-parser_error_t _readHash(parser_context_t* c, pd_Hash_t* v) {
-    GEN_DEF_READARRAY(32)
-}
-
 parser_error_t _readVecu8(parser_context_t* c, pd_Vecu8_t* v) {
     GEN_DEF_READVECTOR(u8)
+}
+
+parser_error_t _readOptionCompactBalanceOf(parser_context_t* c, pd_OptionCompactBalanceOf_t* v)
+{
+    CHECK_ERROR(_readUInt8(c, &v->some))
+    if (v->some > 0) {
+        CHECK_ERROR(_readCompactBalanceOf(c, &v->contained))
+    }
+    return parser_ok;
 }
 
 ///////////////////////////////////
@@ -450,6 +466,26 @@ parser_error_t _toStringCall(
     return parser_display_idx_out_of_range;
 }
 
+parser_error_t _toStringCompactBalanceOf(
+    const pd_CompactBalanceOf_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CHECK_ERROR(_toStringCompactInt(&v->value, COIN_AMOUNT_DECIMAL_PLACES, true, "", COIN_TICKER, outValue, outValueLen, pageIdx, pageCount))
+    return parser_ok;
+}
+
+parser_error_t _toStringHash(
+    const pd_Hash_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount) {
+    GEN_DEF_TOSTRING_ARRAY(32)
+}
+
 parser_error_t _toStringProposal(
     const pd_Proposal_t* v,
     char* outValue,
@@ -530,15 +566,6 @@ parser_error_t _toStringH256(
     GEN_DEF_TOSTRING_ARRAY(32);
 }
 
-parser_error_t _toStringHash(
-    const pd_Hash_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount) {
-    GEN_DEF_TOSTRING_ARRAY(32)
-}
-
 parser_error_t _toStringVecu8(
     const pd_Vecu8_t* v,
     char* outValue,
@@ -547,6 +574,27 @@ parser_error_t _toStringVecu8(
     uint8_t* pageCount)
 {
     GEN_DEF_TOSTRING_VECTOR(u8);
+}
+
+parser_error_t _toStringOptionCompactBalanceOf(
+    const pd_OptionCompactBalanceOf_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+
+    *pageCount = 1;
+    if (v->some > 0) {
+        CHECK_ERROR(_toStringCompactBalanceOf(
+            &v->contained,
+            outValue, outValueLen,
+            pageIdx, pageCount));
+    } else {
+        snprintf(outValue, outValueLen, "None");
+    }
+    return parser_ok;
 }
 
 ///////////////////////////////////

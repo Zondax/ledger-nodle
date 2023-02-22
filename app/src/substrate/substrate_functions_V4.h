@@ -1,5 +1,5 @@
 /*******************************************************************************
- *  (c) 2019 - 2022 Zondax GmbH
+ *  (c) 2019 - 2022 Zondax AG
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -28,24 +28,24 @@ extern "C" {
 // Read functions
 parser_error_t _readAccountId_V4(parser_context_t* c, pd_AccountId_V4_t* v);
 parser_error_t _readBoundedVecu8_V4(parser_context_t* c, pd_BoundedVecu8_V4_t* v);
-parser_error_t _readClassId_V4(parser_context_t* c, pd_ClassId_V4_t* v);
+parser_error_t _readCollectionId_V4(parser_context_t* c, pd_CollectionId_V4_t* v);
 parser_error_t _readCompactAccountIndex_V4(parser_context_t* c, pd_CompactAccountIndex_V4_t* v);
 parser_error_t _readDestroyWitness_V4(parser_context_t* c, pd_DestroyWitness_V4_t* v);
-parser_error_t _readInstanceId_V4(parser_context_t* c, pd_InstanceId_V4_t* v);
+parser_error_t _readItemId_V4(parser_context_t* c, pd_ItemId_V4_t* v);
 parser_error_t _readKeys_V4(parser_context_t* c, pd_Keys_V4_t* v);
 parser_error_t _readLookupasStaticLookupSource_V4(parser_context_t* c, pd_LookupasStaticLookupSource_V4_t* v);
 parser_error_t _readMemberCount_V4(parser_context_t* c, pd_MemberCount_V4_t* v);
 parser_error_t _readOpaqueCall_V4(parser_context_t* c, pd_OpaqueCall_V4_t* v);
 parser_error_t _readOptionAccountId_V4(parser_context_t* c, pd_OptionAccountId_V4_t* v);
-parser_error_t _readOptionClassId_V4(parser_context_t* c, pd_OptionClassId_V4_t* v);
-parser_error_t _readOptionInstanceId_V4(parser_context_t* c, pd_OptionInstanceId_V4_t* v);
+parser_error_t _readOptionCollectionId_V4(parser_context_t* c, pd_OptionCollectionId_V4_t* v);
+parser_error_t _readOptionItemId_V4(parser_context_t* c, pd_OptionItemId_V4_t* v);
 parser_error_t _readOptionLookupasStaticLookupSource_V4(parser_context_t* c, pd_OptionLookupasStaticLookupSource_V4_t* v);
 parser_error_t _readOptionTimepoint_V4(parser_context_t* c, pd_OptionTimepoint_V4_t* v);
 parser_error_t _readPerbill_V4(parser_context_t* c, pd_Perbill_V4_t* v);
 parser_error_t _readTimepoint_V4(parser_context_t* c, pd_Timepoint_V4_t* v);
 parser_error_t _readTupleAccountIdBalanceOf_V4(parser_context_t* c, pd_TupleAccountIdBalanceOf_V4_t* v);
 parser_error_t _readVecAccountId_V4(parser_context_t* c, pd_VecAccountId_V4_t* v);
-parser_error_t _readVecInstanceId_V4(parser_context_t* c, pd_VecInstanceId_V4_t* v);
+parser_error_t _readVecItemId_V4(parser_context_t* c, pd_VecItemId_V4_t* v);
 parser_error_t _readVecTupleAccountIdBalanceOf_V4(parser_context_t* c, pd_VecTupleAccountIdBalanceOf_V4_t* v);
 parser_error_t _readVestingScheduleOf_V4(parser_context_t* c, pd_VestingScheduleOf_V4_t* v);
 parser_error_t _readWeight_V4(parser_context_t* c, pd_Weight_V4_t* v);
@@ -65,8 +65,8 @@ parser_error_t _toStringBoundedVecu8_V4(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringClassId_V4(
-    const pd_ClassId_V4_t* v,
+parser_error_t _toStringCollectionId_V4(
+    const pd_CollectionId_V4_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -86,8 +86,8 @@ parser_error_t _toStringDestroyWitness_V4(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringInstanceId_V4(
-    const pd_InstanceId_V4_t* v,
+parser_error_t _toStringItemId_V4(
+    const pd_ItemId_V4_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -128,15 +128,15 @@ parser_error_t _toStringOptionAccountId_V4(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringOptionClassId_V4(
-    const pd_OptionClassId_V4_t* v,
+parser_error_t _toStringOptionCollectionId_V4(
+    const pd_OptionCollectionId_V4_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringOptionInstanceId_V4(
-    const pd_OptionInstanceId_V4_t* v,
+parser_error_t _toStringOptionItemId_V4(
+    const pd_OptionItemId_V4_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -184,8 +184,8 @@ parser_error_t _toStringVecAccountId_V4(
     uint8_t pageIdx,
     uint8_t* pageCount);
 
-parser_error_t _toStringVecInstanceId_V4(
-    const pd_VecInstanceId_V4_t* v,
+parser_error_t _toStringVecItemId_V4(
+    const pd_VecItemId_V4_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,

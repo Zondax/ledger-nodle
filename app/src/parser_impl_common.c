@@ -1,5 +1,5 @@
 /*******************************************************************************
-*  (c) 2019 - 2022  Zondax GmbH
+*  (c) 2019 - 2022  Zondax AG
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -90,8 +90,6 @@ const char *parser_getErrorDescription(parser_error_t err) {
             return "Max nested calls reached";
         case parser_tx_call_vec_too_large:
             return "Call vector exceeds limit";
-        case parser_junction_limit:
-            return "Max junctions reached";
         default:
             return "Unrecognized error code";
     }
