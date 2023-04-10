@@ -22,6 +22,7 @@
 #include <os_io_seproxyhal.h>
 #include "coin.h"
 #include "zxerror.h"
+#include "zxmacros.h"
 
 extern uint16_t action_addrResponseLen;
 
@@ -83,6 +84,7 @@ __Z_INLINE key_kind_e get_key_type(uint8_t num) {
     }
     return 0xff;
 #else
+    UNUSED(num);
     return key_ed25519;
 #endif
 }
