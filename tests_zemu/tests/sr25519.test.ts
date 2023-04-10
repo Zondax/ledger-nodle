@@ -37,7 +37,7 @@ const defaultOptions = {
 jest.setTimeout(180000)
 
 describe('SR25519', function () {
-  test('get address sr25519', async function () {
+  test.concurrent('get address sr25519', async function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
@@ -60,7 +60,7 @@ describe('SR25519', function () {
     }
   })
 
-  test('show address sr25519', async function () {
+  test.concurrent('show address sr25519', async function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions, model: 'nanos' })
@@ -87,7 +87,7 @@ describe('SR25519', function () {
     }
   })
 
-  test('show address - reject sr25519', async function () {
+  test.concurrent('show address - reject sr25519', async function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
@@ -108,7 +108,7 @@ describe('SR25519', function () {
     }
   })
 
-  test('sign basic normal', async function () {
+  test.concurrent('sign basic normal', async function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
@@ -126,7 +126,7 @@ describe('SR25519', function () {
       const signatureRequest = app.sign(pathAccount, pathChange, pathIndex, txBlob, 1)
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
-      await sim.compareSnapshotsAndApprove('.', 's-sign_basic_normal')
+      await sim.compareSnapshotsAndApprove('.', 's-sign_basic_normal_sr25519')
 
       const signatureResponse = await signatureRequest
       console.log(signatureResponse)
@@ -142,14 +142,14 @@ describe('SR25519', function () {
         prehash = Buffer.from(blake2bFinal(context))
       }
       const signingcontext = Buffer.from([])
-      const valid = addon.schnorrkel_verify(pubKey, signingcontext, prehash, signatureResponse.signature.slice(1))
+      const valid = addon.schnorrkel_verify(pubKey, signingcontext, prehash, signatureResponse.signature.subarray(1))
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test('sign basic expert', async function () {
+  test.concurrent('sign basic expert', async function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
@@ -173,7 +173,7 @@ describe('SR25519', function () {
 
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
-      await sim.compareSnapshotsAndApprove('.', 's-sign_basic_expert')
+      await sim.compareSnapshotsAndApprove('.', 's-sign_basic_expert_sr25519')
 
       const signatureResponse = await signatureRequest
       console.log(signatureResponse)
@@ -189,14 +189,14 @@ describe('SR25519', function () {
         prehash = Buffer.from(blake2bFinal(context))
       }
       const signingcontext = Buffer.from([])
-      const valid = addon.schnorrkel_verify(pubKey, signingcontext, prehash, signatureResponse.signature.slice(1))
+      const valid = addon.schnorrkel_verify(pubKey, signingcontext, prehash, signatureResponse.signature.subarray(1))
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
     }
   })
 
-  test('sign basic expert - accept shortcut', async function () {
+  test.concurrent('sign basic expert - accept shortcut', async function () {
     const sim = new Zemu(APP_PATH)
     try {
       await sim.start({ ...defaultOptions })
@@ -241,7 +241,7 @@ describe('SR25519', function () {
         prehash = Buffer.from(blake2bFinal(context))
       }
       const signingcontext = Buffer.from([])
-      const valid = addon.schnorrkel_verify(pubKey, signingcontext, prehash, signatureResponse.signature.slice(1))
+      const valid = addon.schnorrkel_verify(pubKey, signingcontext, prehash, signatureResponse.signature.subarray(1))
       expect(valid).toEqual(true)
     } finally {
       await sim.close()
