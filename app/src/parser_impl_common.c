@@ -1,5 +1,5 @@
 /*******************************************************************************
-*  (c) 2019 - 2022  Zondax AG
+*  (c) 2019 - 2023  Zondax AG
 *
 *  Licensed under the Apache License, Version 2.0 (the "License");
 *  you may not use this file except in compliance with the License.
@@ -90,6 +90,15 @@ const char *parser_getErrorDescription(parser_error_t err) {
             return "Max nested calls reached";
         case parser_tx_call_vec_too_large:
             return "Call vector exceeds limit";
+        // Swap specific.
+        case parser_swap_tx_wrong_method:
+            return "Swap txn wrong method";
+        case parser_swap_tx_wrong_method_args_num:
+            return "Swap txn wrong method args count";
+        case parser_swap_tx_wrong_dest_addr:
+            return "Swap txn wrong destination addr";
+        case parser_swap_tx_wrong_amount:
+            return "Swap txn wrong amount";
         default:
             return "Unrecognized error code";
     }
@@ -190,8 +199,8 @@ parser_error_t _getValue(const compactInt_t *c, uint64_t *v) {
 parser_error_t _toStringCompactInt(const compactInt_t *c,
                                    uint8_t decimalPlaces,
                                    bool trimTrailingZeros,
-                                   char postfix[],
-                                   char prefix[],
+                                   const char postfix[],
+                                   const char prefix[],
                                    char *outValue, uint16_t outValueLen,
                                    uint8_t pageIdx, uint8_t *pageCount) {
     char bufferUI[200];
