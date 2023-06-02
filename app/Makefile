@@ -91,7 +91,7 @@ endif
 include $(CURDIR)/../deps/ledger-zxlib/makefiles/Makefile.platform
 LDFLAGS += -z muldefs
 
-ifdef SUPPORT_SR25519
+ifeq ($(SUPPORT_SR25519),1)
 APP_CUSTOM_LINK_DEPENDENCIES = rust
 LDLIBS += -Lrust/target/thumbv6m-none-eabi/release -lrslib
 APP_SOURCE_PATH += $(CURDIR)/rust/include
