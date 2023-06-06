@@ -28,7 +28,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-# Nodle 6.19.x
+# Nodle 7.21.x
 
 ## System
 
@@ -144,12 +144,6 @@ Please:
 | Register as candidate  |        | :heavy_check_mark: | :heavy_check_mark: |         |                          |
 | Leave intent           |        | :heavy_check_mark: | :heavy_check_mark: |         |                          |
 
-## Authorship
-
-| Name       | Nano S | Nano S XL | Nano SP/X | Nesting | Arguments                  |
-| ---------- | ------ | --------- | --------- | ------- | -------------------------- |
-| Set uncles |        |           |           |         | `VecHeader`new_uncles<br/> |
-
 ## Session
 
 | Name       | Nano S             | Nano S XL          | Nano SP/X          | Nesting | Arguments                        |
@@ -159,12 +153,12 @@ Please:
 
 ## ParachainSystem
 
-| Name                     | Nano S | Nano S XL | Nano SP/X | Nesting | Arguments                        |
-| ------------------------ | ------ | --------- | --------- | ------- | -------------------------------- |
-| Set validation data      |        |           |           |         | `ParachainInherentData`data<br/> |
-| Sudo send upward message |        |           |           |         | `UpwardMessage`message<br/>      |
-| Authorize upgrade        |        |           |           |         | `Hash`code_hash<br/>             |
-| Enact authorized upgrade |        |           |           |         | `Vecu8`code<br/>                 |
+| Name                     | Nano S | Nano S XL | Nano SP/X | Nesting | Arguments                                    |
+| ------------------------ | ------ | --------- | --------- | ------- | -------------------------------------------- |
+| Set validation data      |        |           |           |         | `ParachainInherentData`data<br/>             |
+| Sudo send upward message |        |           |           |         | `UpwardMessage`message<br/>                  |
+| Authorize upgrade        |        |           |           |         | `Hash`code_hash<br/>`bool`check_version<br/> |
+| Enact authorized upgrade |        |           |           |         | `Vecu8`code<br/>                             |
 
 ## ParachainInfo
 
@@ -178,23 +172,23 @@ Please:
 
 ## DmpQueue
 
-| Name               | Nano S | Nano S XL | Nano SP/X | Nesting | Arguments                                               |
-| ------------------ | ------ | --------- | --------- | ------- | ------------------------------------------------------- |
-| Service overweight |        |           |           |         | `OverweightIndex`index<br/>`XcmWeight`weight_limit<br/> |
+| Name               | Nano S | Nano S XL | Nano SP/X | Nesting | Arguments                                            |
+| ------------------ | ------ | --------- | --------- | ------- | ---------------------------------------------------- |
+| Service overweight |        |           |           |         | `OverweightIndex`index<br/>`Weight`weight_limit<br/> |
 
 ## XcmpQueue
 
-| Name                              | Nano S | Nano S XL | Nano SP/X | Nesting | Arguments                                               |
-| --------------------------------- | ------ | --------- | --------- | ------- | ------------------------------------------------------- |
-| Service overweight                |        |           |           |         | `OverweightIndex`index<br/>`XcmWeight`weight_limit<br/> |
-| Suspend xcm execution             |        |           |           |         |                                                         |
-| Resume xcm execution              |        |           |           |         |                                                         |
-| Update suspend threshold          |        |           |           |         | `u32`new\_<br/>                                         |
-| Update drop threshold             |        |           |           |         | `u32`new\_<br/>                                         |
-| Update resume threshold           |        |           |           |         | `u32`new\_<br/>                                         |
-| Update threshold weight           |        |           |           |         | `XcmWeight`new\_<br/>                                   |
-| Update weight restrict decay      |        |           |           |         | `XcmWeight`new\_<br/>                                   |
-| Update xcmp max individual weight |        |           |           |         | `XcmWeight`new\_<br/>                                   |
+| Name                              | Nano S | Nano S XL | Nano SP/X | Nesting | Arguments                                            |
+| --------------------------------- | ------ | --------- | --------- | ------- | ---------------------------------------------------- |
+| Service overweight                |        |           |           |         | `OverweightIndex`index<br/>`Weight`weight_limit<br/> |
+| Suspend xcm execution             |        |           |           |         |                                                      |
+| Resume xcm execution              |        |           |           |         |                                                      |
+| Update suspend threshold          |        |           |           |         | `u32`new\_<br/>                                      |
+| Update drop threshold             |        |           |           |         | `u32`new\_<br/>                                      |
+| Update resume threshold           |        |           |           |         | `u32`new\_<br/>                                      |
+| Update threshold weight           |        |           |           |         | `Weight`new\_<br/>                                   |
+| Update weight restrict decay      |        |           |           |         | `Weight`new\_<br/>                                   |
+| Update xcmp max individual weight |        |           |           |         | `Weight`new\_<br/>                                   |
 
 ## PolkadotXcm
 
@@ -203,7 +197,7 @@ Please:
 | Send                             |        |           |                    |         | `BoxVersionedMultiLocation`dest<br/>`BoxVersionedXcmTuple`message<br/>                                                                                                    |
 | Teleport assets                  |        |           | :heavy_check_mark: |         | `BoxVersionedMultiLocation`dest<br/>`BoxVersionedMultiLocation`beneficiary<br/>`BoxVersionedMultiAssets`assets<br/>`u32`fee_asset_item<br/>                               |
 | Reserve transfer assets          |        |           | :heavy_check_mark: |         | `BoxVersionedMultiLocation`dest<br/>`BoxVersionedMultiLocation`beneficiary<br/>`BoxVersionedMultiAssets`assets<br/>`u32`fee_asset_item<br/>                               |
-| Execute                          |        |           |                    |         | `BoxVersionedXcmTasSysConfigRuntimeCall`message<br/>`XcmWeight`max_weight<br/>                                                                                            |
+| Execute                          |        |           |                    |         | `BoxVersionedXcmTasSysConfigRuntimeCall`message<br/>`Weight`max_weight<br/>                                                                                               |
 | Force xcm version                |        |           |                    |         | `BoxMultiLocation`location<br/>`XcmVersion`xcm_version<br/>                                                                                                               |
 | Force default xcm version        |        |           |                    |         | `OptionXcmVersion`maybe_xcm_version<br/>                                                                                                                                  |
 | Force subscribe version notify   |        |           |                    |         | `BoxVersionedMultiLocation`location<br/>                                                                                                                                  |
