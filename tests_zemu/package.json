@@ -14,11 +14,11 @@
     "Ledger"
   ],
   "scripts": {
-    "test": "ts-node tests/pullImageKillOld.ts && jest"
+    "test": "ts-node tests/pullImageKillOld.ts && jest --maxConcurrency 2"
   },
   "dependencies": {
     "@zondax/ledger-substrate": "^0.40.1",
-    "@zondax/zemu": "^0.38.0"
+    "@zondax/zemu": "^0.42.1"
   },
   "devDependencies": {
     "@types/jest": "^29.2.3",
