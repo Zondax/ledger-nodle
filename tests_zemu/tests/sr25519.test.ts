@@ -34,6 +34,9 @@ const defaultOptions = {
   X11: false,
 }
 
+const expected_address = '4iTWAfcPNpRo6Pw5DmJV97huZyNkgcUiF8ub82JaVaMsqZzb'
+const expected_pk = '3accc1b082adcabe0d74c809e4d6263cbf192e361be9b9217ada061731c23b47'
+
 jest.setTimeout(180000)
 
 describe('SR25519', function () {
@@ -49,9 +52,6 @@ describe('SR25519', function () {
 
       expect(resp.return_code).toEqual(0x9000)
       expect(resp.error_message).toEqual('No errors')
-
-      const expected_address = '4iTWAfcPNpRo6Pw5DmJV97huZyNkgcUiF8ub82JaVaMsqZzb'
-      const expected_pk = '3accc1b082adcabe0d74c809e4d6263cbf192e361be9b9217ada061731c23b47'
 
       expect(resp.address).toEqual(expected_address)
       expect(resp.pubKey).toEqual(expected_pk)
@@ -76,9 +76,6 @@ describe('SR25519', function () {
 
       expect(resp.return_code).toEqual(0x9000)
       expect(resp.error_message).toEqual('No errors')
-
-      const expected_address = '4iTWAfcPNpRo6Pw5DmJV97huZyNkgcUiF8ub82JaVaMsqZzb'
-      const expected_pk = '3accc1b082adcabe0d74c809e4d6263cbf192e361be9b9217ada061731c23b47'
 
       expect(resp.address).toEqual(expected_address)
       expect(resp.pubKey).toEqual(expected_pk)
