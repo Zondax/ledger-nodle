@@ -917,13 +917,6 @@ parser_error_t _readItemId(parser_context_t* c, pd_ItemId_t* v)
     return parser_ok;
 }
 
-parser_error_t _readItemPrice(parser_context_t* c, pd_ItemPrice_t* v)
-{
-    CHECK_INPUT()
-    CHECK_ERROR(_readBalance(c, &v->value))
-    return parser_ok;
-}
-
 parser_error_t _readTimepoint(parser_context_t* c, pd_Timepoint_t* v)
 {
     CHECK_ERROR(_readBlockNumber(c, &v->height))
@@ -1183,12 +1176,12 @@ parser_error_t _readOptionAccountIdLookupOfT(parser_context_t* c, pd_OptionAccou
     return parser_ok;
 }
 
-parser_error_t _readOptionItemPrice(parser_context_t* c, pd_OptionItemPrice_t* v)
+parser_error_t _readOptionBalanceOf(parser_context_t* c, pd_OptionBalanceOf_t* v)
 {
     CHECK_INPUT()
     CHECK_ERROR(_readUInt8(c, &v->some))
     if (v->some > 0) {
-        CHECK_ERROR(_readItemPrice(c, &v->contained))
+        CHECK_ERROR(_readBalanceOf(c, &v->contained))
     }
     return parser_ok;
 }
@@ -1402,7 +1395,7 @@ parser_error_t _toStringByFork(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -1449,7 +1442,7 @@ parser_error_t _toStringFraction(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -1694,7 +1687,7 @@ parser_error_t _toStringAccountId32V2(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -1731,7 +1724,7 @@ parser_error_t _toStringAccountId32V3(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -1768,7 +1761,7 @@ parser_error_t _toStringAccountIndex64V2(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -1805,7 +1798,7 @@ parser_error_t _toStringAccountIndex64V3(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -1842,7 +1835,7 @@ parser_error_t _toStringAccountKey20V2(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -1879,7 +1872,7 @@ parser_error_t _toStringAccountKey20V3(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -1916,7 +1909,7 @@ parser_error_t _toStringGeneralKeyV3(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -1953,7 +1946,7 @@ parser_error_t _toStringPluralityV2(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -1990,7 +1983,7 @@ parser_error_t _toStringPluralityV3(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2115,7 +2108,7 @@ parser_error_t _toStringJunctionV2X1(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2146,7 +2139,7 @@ parser_error_t _toStringJunctionV2X2(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2184,7 +2177,7 @@ parser_error_t _toStringJunctionV2X3(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2229,7 +2222,7 @@ parser_error_t _toStringJunctionV2X4(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2281,7 +2274,7 @@ parser_error_t _toStringJunctionV2X5(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2340,7 +2333,7 @@ parser_error_t _toStringJunctionV2X6(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2406,7 +2399,7 @@ parser_error_t _toStringJunctionV2X7(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2479,7 +2472,7 @@ parser_error_t _toStringJunctionV2X8(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2551,7 +2544,7 @@ parser_error_t _toStringJunctionV3X1(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2582,7 +2575,7 @@ parser_error_t _toStringJunctionV3X2(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2620,7 +2613,7 @@ parser_error_t _toStringJunctionV3X3(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2665,7 +2658,7 @@ parser_error_t _toStringJunctionV3X4(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2717,7 +2710,7 @@ parser_error_t _toStringJunctionV3X5(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2776,7 +2769,7 @@ parser_error_t _toStringJunctionV3X6(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2842,7 +2835,7 @@ parser_error_t _toStringJunctionV3X7(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -2915,7 +2908,7 @@ parser_error_t _toStringJunctionV3X8(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -3157,7 +3150,7 @@ parser_error_t _toStringMultiLocationV2(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -3194,7 +3187,7 @@ parser_error_t _toStringMultiLocationV3(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -3386,7 +3379,7 @@ parser_error_t _toStringMultiAssetV2(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -3423,7 +3416,7 @@ parser_error_t _toStringMultiAssetV3(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -3594,18 +3587,6 @@ parser_error_t _toStringItemId(
     return _toStringu32(&v->value, outValue, outValueLen, pageIdx, pageCount);
 }
 
-parser_error_t _toStringItemPrice(
-    const pd_ItemPrice_t* v,
-    char* outValue,
-    uint16_t outValueLen,
-    uint8_t pageIdx,
-    uint8_t* pageCount)
-{
-    CLEAN_AND_CHECK()
-    CHECK_ERROR(_toStringBalance(&v->value, outValue, outValueLen, pageIdx, pageCount))
-    return parser_ok;
-}
-
 parser_error_t _toStringTimepoint(
     const pd_Timepoint_t* v,
     char* outValue,
@@ -3625,7 +3606,7 @@ parser_error_t _toStringTimepoint(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -3662,7 +3643,7 @@ parser_error_t _toStringTupleAccountIdBalanceOf(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -3699,7 +3680,7 @@ parser_error_t _toStringWeight(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -3813,7 +3794,7 @@ parser_error_t _toStringDestroyWitness(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -3961,7 +3942,7 @@ parser_error_t _toStringVestingScheduleOf(
         *pageCount += pages[i];
     }
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -4052,11 +4033,11 @@ parser_error_t _toStringDeterminism(
     CLEAN_AND_CHECK()
     UNUSED(pageIdx);
     switch (v->value) {
-    case 0: // Deterministic
-        snprintf(outValue, outValueLen, "Deterministic");
+    case 0: // Enforced
+        snprintf(outValue, outValueLen, "Enforced");
         break;
-    case 1: // AllowIndeterminism
-        snprintf(outValue, outValueLen, "AllowIndeterminism");
+    case 1: // Relaxed
+        snprintf(outValue, outValueLen, "Relaxed");
         break;
     default:
         return parser_unexpected_value;
@@ -4195,8 +4176,8 @@ parser_error_t _toStringOptionAccountIdLookupOfT(
     return parser_ok;
 }
 
-parser_error_t _toStringOptionItemPrice(
-    const pd_OptionItemPrice_t* v,
+parser_error_t _toStringOptionBalanceOf(
+    const pd_OptionBalanceOf_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -4206,7 +4187,7 @@ parser_error_t _toStringOptionItemPrice(
 
     *pageCount = 1;
     if (v->some > 0) {
-        CHECK_ERROR(_toStringItemPrice(
+        CHECK_ERROR(_toStringBalanceOf(
             &v->contained,
             outValue, outValueLen,
             pageIdx, pageCount));
