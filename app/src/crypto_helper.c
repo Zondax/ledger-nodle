@@ -73,8 +73,8 @@ uint16_t crypto_SS58EncodePubkey(uint8_t *buffer, uint16_t buffer_len,
     }
     MEMZERO(buffer, buffer_len);
 
-    uint8_t hash[64];
-    uint8_t unencoded[36];
+    uint8_t hash[64] = {0};
+    uint8_t unencoded[36] = {0};
 
     const uint8_t prefixSize = crypto_SS58CalculatePrefix(addressType, unencoded);
     if (prefixSize == 0) {
@@ -83,7 +83,7 @@ uint16_t crypto_SS58EncodePubkey(uint8_t *buffer, uint16_t buffer_len,
 
     memcpy(unencoded + prefixSize, pubkey, 32);           // account id
     if (ss58hash((uint8_t *) unencoded, 32 + prefixSize, hash, 64) != CX_OK) {
-        MEMZERO(buffer, buffer_len);
+        MEMZERO(unencoded, sizeof(unencoded));
         return 0;
     }
     unencoded[32 + prefixSize] = hash[0];
@@ -91,7 +91,7 @@ uint16_t crypto_SS58EncodePubkey(uint8_t *buffer, uint16_t buffer_len,
 
     size_t outLen = buffer_len;
     if (encode_base58(unencoded, 34 + prefixSize, buffer, &outLen) != 0) {
-        MEMZERO(buffer, buffer_len);
+        MEMZERO(unencoded, sizeof(unencoded));
         return 0;
     }
 
