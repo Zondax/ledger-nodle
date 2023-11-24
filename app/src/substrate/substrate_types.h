@@ -526,6 +526,10 @@ typedef struct {
 } pd_ItemId_t;
 
 typedef struct {
+    pd_Balance_t value;
+} pd_ItemPrice_t;
+
+typedef struct {
     pd_BlockNumber_t height;
     uint32_t index;
 } pd_Timepoint_t;
@@ -603,8 +607,8 @@ typedef struct {
 
 typedef struct {
     uint8_t some;
-    pd_BalanceOf_t contained;
-} pd_OptionBalanceOf_t;
+    pd_ItemPrice_t contained;
+} pd_OptionItemPrice_t;
 
 typedef struct {
     uint8_t some;
