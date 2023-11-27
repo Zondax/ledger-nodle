@@ -28,7 +28,7 @@ Please:
 - **Do not use in production**
 - **Do not use a Ledger device with funds for development purposes.**
 - **Have a separate and marked device that is used ONLY for development and testing**
-# Nodle 8.23.x
+# Nodle 9.25.x
 
 ## System
 
@@ -148,10 +148,10 @@ Please:
 
 ## Session
 
-| Name       | Nano S             | Nano S XL          | Nano SP/X - Stax   | Nesting | Arguments                        |
-| ---------- | ------------------ | ------------------ | ------------------ | ------- | -------------------------------- |
-| Set keys   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |         | `Keys`keys<br/>`Bytes`proof<br/> |
-| Purge keys | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |         |                                  |
+| Name       | Nano S             | Nano S XL          | Nano SP/X - Stax   | Nesting            | Arguments                        |
+| ---------- | ------------------ | ------------------ | ------------------ | ------------------ | -------------------------------- |
+| Set keys   | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | `Keys`keys<br/>`Bytes`proof<br/> |
+| Purge keys | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |                                  |
 
 ## ParachainSystem
 
@@ -241,37 +241,34 @@ Please:
 
 ## Uniques
 
-| Name                            | Nano S | Nano S XL          | Nano SP/X - Stax   | Nesting | Arguments                                                                                                                                                                                           |
-| ------------------------------- | ------ | ------------------ | ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create                          |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`admin<br/>                                                                                                                                         |
-| Force create                    |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`owner<br/>`bool`free_holding<br/>                                                                                                                  |
-| Destroy                         |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`DestroyWitness`witness<br/>                                                                                                                                           |
-| Mint                            |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`AccountIdLookupOfT`owner<br/>                                                                                                                        |
-| Burn                            |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`OptionAccountIdLookupOfT`check_owner<br/>                                                                                                            |
-| Transfer                        |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`AccountIdLookupOfT`dest<br/>                                                                                                                         |
-| Redeposit                       |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`VecItemId`items<br/>                                                                                                                                                  |
-| Freeze                          |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>                                                                                                                                                      |
-| Thaw                            |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>                                                                                                                                                      |
-| Freeze collection               |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>                                                                                                                                                                       |
-| Thaw collection                 |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>                                                                                                                                                                       |
-| Transfer ownership              |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`owner<br/>                                                                                                                                         |
-| Set team                        |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`issuer<br/>`AccountIdLookupOfT`admin<br/>`AccountIdLookupOfT`freezer<br/>                                                                          |
-| Approve transfer                |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`AccountIdLookupOfT`delegate<br/>                                                                                                                     |
-| Cancel approval                 |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`OptionAccountIdLookupOfT`maybe_check_delegate<br/>                                                                                                   |
-| Force item status               |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`owner<br/>`AccountIdLookupOfT`issuer<br/>`AccountIdLookupOfT`admin<br/>`AccountIdLookupOfT`freezer<br/>`bool`free_holding<br/>`bool`is_frozen<br/> |
-| Set attribute                   |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`OptionItemId`maybe_item<br/>`BoundedVecu8`key<br/>`BoundedVecu8`value<br/>                                                                                            |
-| Clear attribute                 |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`OptionItemId`maybe_item<br/>`BoundedVecu8`key<br/>                                                                                                                    |
-| Set metadata                    |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`BoundedVecu8`data<br/>`bool`is_frozen<br/>                                                                                                           |
-| Clear metadata                  |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>                                                                                                                                                      |
-| Set collection metadata         |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`BoundedVecu8`data<br/>`bool`is_frozen<br/>                                                                                                                            |
-| Clear collection metadata       |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>                                                                                                                                                                       |
-| Set accept ownership            |        | :heavy_check_mark: | :heavy_check_mark: |         | `OptionCollectionId`maybe_collection<br/>                                                                                                                                                           |
-| Set collection max supply       |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`u32`max_supply<br/>                                                                                                                                                   |
-| Set price                       |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`OptionBalanceOf`price<br/>`OptionAccountIdLookupOfT`whitelisted_buyer<br/>                                                                           |
-| Buy item                        |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`BalanceOf`bid_price<br/>                                                                                                                             |
-| Create with extra deposit limit |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`admin<br/>`BalanceOf`limit<br/>                                                                                                                    |
-| Mint with extra deposit         |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`AccountIdLookupOfT`owner<br/>`BalanceOf`deposit<br/>                                                                                                 |
-| Update extra deposit limit      |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`BalanceOf`limit<br/>                                                                                                                                                  |
+| Name                      | Nano S | Nano S XL          | Nano SP/X - Stax   | Nesting | Arguments                                                                                                                                                                                           |
+| ------------------------- | ------ | ------------------ | ------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Create                    |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`admin<br/>                                                                                                                                         |
+| Force create              |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`owner<br/>`bool`free_holding<br/>                                                                                                                  |
+| Destroy                   |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`DestroyWitness`witness<br/>                                                                                                                                           |
+| Mint                      |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`AccountIdLookupOfT`owner<br/>                                                                                                                        |
+| Burn                      |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`OptionAccountIdLookupOfT`check_owner<br/>                                                                                                            |
+| Transfer                  |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`AccountIdLookupOfT`dest<br/>                                                                                                                         |
+| Redeposit                 |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`VecItemId`items<br/>                                                                                                                                                  |
+| Freeze                    |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>                                                                                                                                                      |
+| Thaw                      |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>                                                                                                                                                      |
+| Freeze collection         |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>                                                                                                                                                                       |
+| Thaw collection           |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>                                                                                                                                                                       |
+| Transfer ownership        |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`owner<br/>                                                                                                                                         |
+| Set team                  |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`issuer<br/>`AccountIdLookupOfT`admin<br/>`AccountIdLookupOfT`freezer<br/>                                                                          |
+| Approve transfer          |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`AccountIdLookupOfT`delegate<br/>                                                                                                                     |
+| Cancel approval           |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`OptionAccountIdLookupOfT`maybe_check_delegate<br/>                                                                                                   |
+| Force item status         |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`AccountIdLookupOfT`owner<br/>`AccountIdLookupOfT`issuer<br/>`AccountIdLookupOfT`admin<br/>`AccountIdLookupOfT`freezer<br/>`bool`free_holding<br/>`bool`is_frozen<br/> |
+| Set attribute             |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`OptionItemId`maybe_item<br/>`BoundedVecu8`key<br/>`BoundedVecu8`value<br/>                                                                                            |
+| Clear attribute           |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`OptionItemId`maybe_item<br/>`BoundedVecu8`key<br/>                                                                                                                    |
+| Set metadata              |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`BoundedVecu8`data<br/>`bool`is_frozen<br/>                                                                                                           |
+| Clear metadata            |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>                                                                                                                                                      |
+| Set collection metadata   |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`BoundedVecu8`data<br/>`bool`is_frozen<br/>                                                                                                                            |
+| Clear collection metadata |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>                                                                                                                                                                       |
+| Set accept ownership      |        | :heavy_check_mark: | :heavy_check_mark: |         | `OptionCollectionId`maybe_collection<br/>                                                                                                                                                           |
+| Set collection max supply |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`u32`max_supply<br/>                                                                                                                                                   |
+| Set price                 |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`OptionItemPrice`price<br/>`OptionAccountIdLookupOfT`whitelisted_buyer<br/>                                                                           |
+| Buy item                  |        | :heavy_check_mark: | :heavy_check_mark: |         | `CollectionId`collection<br/>`ItemId`item<br/>`ItemPrice`bid_price<br/>                                                                                                                             |
 
 ## Preimage
 
@@ -281,6 +278,19 @@ Please:
 | Unnote preimage    |        | :heavy_check_mark: | :heavy_check_mark: |         | `Hash`hash<br/>   |
 | Request preimage   |        | :heavy_check_mark: | :heavy_check_mark: |         | `Hash`hash<br/>   |
 | Unrequest preimage |        | :heavy_check_mark: | :heavy_check_mark: |         | `Hash`hash<br/>   |
+
+## Sponsorship
+
+| Name                    | Nano S | Nano S XL | Nano SP/X - Stax | Nesting | Arguments                                                                                               |
+| ----------------------- | ------ | --------- | ---------------- | ------- | ------------------------------------------------------------------------------------------------------- |
+| Create pot              |        |           |                  |         | `PotId`pot<br/>`SponsorshipType`sponsorship_type<br/>`Balance`fee_quota<br/>`Balance`reserve_quota<br/> |
+| Remove pot              |        |           |                  |         | `PotId`pot<br/>                                                                                         |
+| Register users          |        |           |                  |         | `PotId`pot<br/>`VecAccountId`users<br/>`Balance`common_fee_quota<br/>`Balance`common_reserve_quota<br/> |
+| Remove users            |        |           |                  |         | `PotId`pot<br/>`VecAccountId`users<br/>                                                                 |
+| Sponsor for             |        |           |                  |         | `PotId`pot<br/>`Call`call<br/>                                                                          |
+| Update pot limits       |        |           |                  |         | `PotId`pot<br/>`Balance`new_fee_quota<br/>`Balance`new_reserve_quota<br/>                               |
+| Update users limits     |        |           |                  |         | `PotId`pot<br/>`Balance`new_fee_quota<br/>`Balance`new_reserve_quota<br/>`VecAccountId`users<br/>       |
+| Update sponsorship type |        |           |                  |         | `PotId`pot<br/>`SponsorshipType`sponsorship_type<br/>                                                   |
 
 ## Allocations
 

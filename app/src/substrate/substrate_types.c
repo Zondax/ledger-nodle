@@ -917,6 +917,13 @@ parser_error_t _readItemId(parser_context_t* c, pd_ItemId_t* v)
     return parser_ok;
 }
 
+parser_error_t _readItemPrice(parser_context_t* c, pd_ItemPrice_t* v)
+{
+    CHECK_INPUT()
+    CHECK_ERROR(_readBalance(c, &v->value))
+    return parser_ok;
+}
+
 parser_error_t _readTimepoint(parser_context_t* c, pd_Timepoint_t* v)
 {
     CHECK_ERROR(_readBlockNumber(c, &v->height))
@@ -1176,12 +1183,12 @@ parser_error_t _readOptionAccountIdLookupOfT(parser_context_t* c, pd_OptionAccou
     return parser_ok;
 }
 
-parser_error_t _readOptionBalanceOf(parser_context_t* c, pd_OptionBalanceOf_t* v)
+parser_error_t _readOptionItemPrice(parser_context_t* c, pd_OptionItemPrice_t* v)
 {
     CHECK_INPUT()
     CHECK_ERROR(_readUInt8(c, &v->some))
     if (v->some > 0) {
-        CHECK_ERROR(_readBalanceOf(c, &v->contained))
+        CHECK_ERROR(_readItemPrice(c, &v->contained))
     }
     return parser_ok;
 }
@@ -3525,7 +3532,7 @@ parser_error_t _toStringCall(
 
     pageIdx--;
 
-    if (pageIdx > *pageCount) {
+    if (pageIdx >= *pageCount) {
         return parser_display_idx_out_of_range;
     }
 
@@ -3585,6 +3592,18 @@ parser_error_t _toStringItemId(
     uint8_t* pageCount)
 {
     return _toStringu32(&v->value, outValue, outValueLen, pageIdx, pageCount);
+}
+
+parser_error_t _toStringItemPrice(
+    const pd_ItemPrice_t* v,
+    char* outValue,
+    uint16_t outValueLen,
+    uint8_t pageIdx,
+    uint8_t* pageCount)
+{
+    CLEAN_AND_CHECK()
+    CHECK_ERROR(_toStringBalance(&v->value, outValue, outValueLen, pageIdx, pageCount))
+    return parser_ok;
 }
 
 parser_error_t _toStringTimepoint(
@@ -4176,8 +4195,8 @@ parser_error_t _toStringOptionAccountIdLookupOfT(
     return parser_ok;
 }
 
-parser_error_t _toStringOptionBalanceOf(
-    const pd_OptionBalanceOf_t* v,
+parser_error_t _toStringOptionItemPrice(
+    const pd_OptionItemPrice_t* v,
     char* outValue,
     uint16_t outValueLen,
     uint8_t pageIdx,
@@ -4187,7 +4206,7 @@ parser_error_t _toStringOptionBalanceOf(
 
     *pageCount = 1;
     if (v->some > 0) {
-        CHECK_ERROR(_toStringBalanceOf(
+        CHECK_ERROR(_toStringItemPrice(
             &v->contained,
             outValue, outValueLen,
             pageIdx, pageCount));

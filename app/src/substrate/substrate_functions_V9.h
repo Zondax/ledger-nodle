@@ -20,12 +20,12 @@ extern "C" {
 #endif
 
 #include "parser_common.h"
-#include "substrate_methods_V8.h"
-#include "substrate_types_V8.h"
+#include "substrate_methods_V9.h"
+#include "substrate_types_V9.h"
 #include <stddef.h>
 #include <stdint.h>
 
-// Versioned types functions for tx version V8
+// Versioned types functions for tx version V9
 
 #ifdef __cplusplus
 }
